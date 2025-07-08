@@ -1,0 +1,12 @@
+[project]
+name = "rag-demo-suite"
+version = "0.1.0"
+
+[tool.setuptools.packages.find]
+include = ["agents*"]
+
+[tool.langchain]
+type = "langgraph"
+
+[project.optional-dependencies]
+dev = ["pytest", "mypy", "ruff"] 

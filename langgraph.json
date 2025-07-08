@@ -1,0 +1,9 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "suns_superfan": "agents.suns_superfan:graph",
+    "sports_intel": "agents.sports_intel:graph",
+    "venue_optimizer": "agents.venue_optimizer:graph"
+  },
+  "env": ".env"
+} 
