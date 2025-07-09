@@ -68,7 +68,7 @@ interface Message {
   timestamp: Date
 }
 
-// Premium fitness supplement products - APEX Branded Line
+// Premium fitness supplement products - APEX Branded Black Bottles
 const products: Product[] = [
   {
     id: '1',
@@ -87,7 +87,7 @@ const products: Product[] = [
     name: 'Ignite Pre-Workout',
     price: 49,
     originalPrice: 59,
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1607538756968-7fe5b5cf49ea?ixlib=rb-4.0.3&w=500&h=500&fit=crop',
     category: 'Pre-Workout',
     description: 'Clean energy, laser focus, explosive pumps. No crash.',
     rating: 4.8,
@@ -98,7 +98,7 @@ const products: Product[] = [
     id: '3',
     name: 'Creatine HCL Pro',
     price: 39,
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&w=500&h=500&fit=crop',
     category: 'Performance',
     description: 'Superior absorption, strength gains, no bloating',
     rating: 4.9,
@@ -109,7 +109,7 @@ const products: Product[] = [
     id: '4',
     name: 'Recovery BCAA+',
     price: 42,
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1541590030789-c4172e1c6a86?ixlib=rb-4.0.3&w=500&h=500&fit=crop',
     category: 'Recovery',
     description: '2:1:1 BCAA ratio + electrolytes for optimal recovery',
     rating: 4.7,
@@ -119,7 +119,7 @@ const products: Product[] = [
     id: '5',
     name: 'Burn Elite',
     price: 59,
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&w=500&h=500&fit=crop&blur=1',
     category: 'Fat Loss',
     description: 'Advanced thermogenic formula, appetite control, energy boost',
     rating: 4.6,
@@ -130,7 +130,7 @@ const products: Product[] = [
     id: '6',
     name: 'Night Recovery Pro',
     price: 45,
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1607538756968-7fe5b5cf49ea?ixlib=rb-4.0.3&w=500&h=500&fit=crop&blur=2',
     category: 'Recovery',
     description: 'Deep sleep support, muscle recovery, growth hormone optimization',
     rating: 4.8,
@@ -140,7 +140,7 @@ const products: Product[] = [
     id: '7',
     name: 'Peak Multivitamin',
     price: 35,
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&w=500&h=500&fit=crop&blur=1',
     category: 'Health',
     description: 'Elite athlete formulation, bioavailable nutrients',
     rating: 4.7,
@@ -150,7 +150,7 @@ const products: Product[] = [
     id: '8',
     name: 'Collagen Matrix',
     price: 52,
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1541590030789-c4172e1c6a86?ixlib=rb-4.0.3&w=500&h=500&fit=crop&blur=1',
     category: 'Recovery',
     description: 'Type I, II, III collagen for joints, skin, and recovery',
     rating: 4.6,
@@ -634,7 +634,7 @@ export default function Home() {
             <div className="text-center group cursor-pointer">
               <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-black rounded-xl mb-4 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
                 <img
-                  src="https://images.unsplash.com/photo-1556228578-dd2fa3d03b24?w=300&h=300&fit=crop"
+                  src="https://images.unsplash.com/photo-1556228578-dd2fa3d03b24?ixlib=rb-4.0.3&w=300&h=300&fit=crop"
                   alt="Collagen Support"
                   className="w-full h-full object-cover"
                 />
