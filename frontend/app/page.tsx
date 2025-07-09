@@ -634,7 +634,7 @@ export default function Home() {
             <div className="text-center group cursor-pointer">
               <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-black rounded-xl mb-4 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
                 <img
-                  src="https://images.unsplash.com/photo-1556228578-dd2fa3d03b24?ixlib=rb-4.0.3&w=300&h=300&fit=crop"
+                  src="/images/collagen-support.png"
                   alt="Collagen Support"
                   className="w-full h-full object-cover"
                 />
