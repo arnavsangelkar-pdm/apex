@@ -35,7 +35,9 @@ import {
   Facebook,
   Twitter,
   Instagram,
-  Youtube
+  Youtube,
+  Flame,
+  Activity
 } from 'lucide-react'
 
 // Configure axios
@@ -66,97 +68,97 @@ interface Message {
   timestamp: Date
 }
 
-// Mock products with realistic supplement images
+// Premium fitness supplement products
 const products: Product[] = [
   {
     id: '1',
-    name: 'Whey Protein Isolate',
-    price: 49,
-    originalPrice: 59,
-    image: 'https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=400',
+    name: 'Elite Whey Isolate',
+    price: 69,
+    originalPrice: 79,
+    image: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=500&h=500&fit=crop',
     category: 'Protein',
-    description: '25g high-quality protein per serving, fast absorption',
-    rating: 4.8,
-    reviews: 1247,
+    description: '25g ultra-pure whey protein isolate, zero sugar, rapid absorption',
+    rating: 4.9,
+    reviews: 2847,
     bestseller: true
   },
   {
     id: '2',
-    name: 'Creatine Monohydrate',
-    price: 29,
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',
-    category: 'Performance',
-    description: '5g pure creatine for strength and power',
-    rating: 4.9,
-    reviews: 892,
+    name: 'Ignite Pre-Workout',
+    price: 49,
+    originalPrice: 59,
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop',
+    category: 'Pre-Workout',
+    description: 'Clean energy, laser focus, explosive pumps. No crash.',
+    rating: 4.8,
+    reviews: 1892,
     bestseller: true
   },
   {
     id: '3',
-    name: 'Pre-Workout Complex',
+    name: 'Creatine HCL Pro',
     price: 39,
-    originalPrice: 45,
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400',
-    category: 'Energy',
-    description: 'Energy, focus, and pump formula',
-    rating: 4.7,
-    reviews: 634,
+    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&h=500&fit=crop',
+    category: 'Performance',
+    description: 'Superior absorption, strength gains, no bloating',
+    rating: 4.9,
+    reviews: 1634,
     new: true
   },
   {
     id: '4',
-    name: 'BCAA Recovery',
-    price: 35,
-    image: 'https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=400',
+    name: 'Recovery BCAA+',
+    price: 42,
+    image: 'https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=500&h=500&fit=crop',
     category: 'Recovery',
-    description: '2:1:1 ratio for muscle preservation',
-    rating: 4.6,
-    reviews: 478
+    description: '2:1:1 BCAA ratio + electrolytes for optimal recovery',
+    rating: 4.7,
+    reviews: 978
   },
   {
     id: '5',
-    name: 'Fat Burner Pro',
-    price: 42,
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',
-    category: 'Weight Loss',
-    description: 'Thermogenic fat burning formula',
-    rating: 4.5,
-    reviews: 356,
+    name: 'Burn Elite',
+    price: 59,
+    image: 'https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=500&h=500&fit=crop',
+    category: 'Fat Loss',
+    description: 'Advanced thermogenic formula, appetite control, energy boost',
+    rating: 4.6,
+    reviews: 756,
     new: true
   },
   {
     id: '6',
-    name: 'Sleep Recovery',
-    price: 38,
-    image: 'https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400',
+    name: 'Night Recovery Pro',
+    price: 45,
+    image: 'https://images.unsplash.com/photo-1550572017-7a24be3feb1e?w=500&h=500&fit=crop',
     category: 'Recovery',
-    description: 'Melatonin and ZMA for better sleep',
-    rating: 4.7,
-    reviews: 267
+    description: 'Deep sleep support, muscle recovery, growth hormone optimization',
+    rating: 4.8,
+    reviews: 567
   },
   {
     id: '7',
-    name: 'Multivitamin Elite',
-    price: 25,
-    image: 'https://images.unsplash.com/photo-1550572017-7a24be3feb1e?w=400',
+    name: 'Peak Multivitamin',
+    price: 35,
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&h=500&fit=crop',
     category: 'Health',
-    description: 'Athlete-formulated daily foundation',
-    rating: 4.8,
-    reviews: 543
+    description: 'Elite athlete formulation, bioavailable nutrients',
+    rating: 4.7,
+    reviews: 1243
   },
   {
     id: '8',
-    name: 'Collagen Protein',
-    price: 45,
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400',
+    name: 'Collagen Matrix',
+    price: 52,
+    image: 'https://images.unsplash.com/photo-1556228578-dd2fa3d03b24?w=500&h=500&fit=crop',
     category: 'Recovery',
-    description: 'Joint health and skin support',
+    description: 'Type I, II, III collagen for joints, skin, and recovery',
     rating: 4.6,
-    reviews: 423
+    reviews: 823
   }
 ]
 
-const categories = ['All', 'Protein', 'Performance', 'Energy', 'Recovery', 'Weight Loss', 'Health']
+const categories = ['All', 'Protein', 'Pre-Workout', 'Performance', 'Recovery', 'Fat Loss', 'Health']
 
 export default function Home() {
   // Hydration fix - prevent SSR/client mismatch
@@ -362,32 +364,32 @@ export default function Home() {
   // Don't render until mounted to prevent hydration errors
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-black">
         <div className="animate-pulse">
-          <div className="h-16 bg-white shadow-sm"></div>
-          <div className="h-96 bg-gradient-to-br from-blue-600 to-green-600"></div>
-          <div className="h-64 bg-white"></div>
+          <div className="h-16 bg-gray-900"></div>
+          <div className="h-96 bg-gray-800"></div>
+          <div className="h-64 bg-gray-900"></div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-black shadow-lg sticky top-0 z-50 border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center">
-                <Dumbbell className="h-6 w-6 text-white" />
+              <div className="w-10 h-10 bg-gradient-to-br from-gray-800 to-black rounded-full flex items-center justify-center border border-green-400">
+                <Dumbbell className="h-6 w-6 text-green-400" />
               </div>
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                  NutraFuel
+                <h1 className="text-xl font-bold text-white">
+                  APEX
                 </h1>
-                <p className="text-xs text-gray-500">Fuel Your Potential</p>
+                <p className="text-xs text-green-400">Next Generation Fitness</p>
               </div>
             </div>
 
@@ -397,8 +399,8 @@ export default function Home() {
                 <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Ask AI: 'protein for muscle building' or search products..."
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Ask AI: 'best pre-workout for energy' or search products..."
+                  className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={(e) => {
@@ -417,7 +419,7 @@ export default function Home() {
               <button
                 onClick={toggleVoice}
                 className={`p-2 rounded-full transition-colors ${
-                  isListening ? 'bg-red-100 text-red-600' : 'hover:bg-gray-100'
+                  isListening ? 'bg-red-900 text-red-400' : 'text-gray-400 hover:text-green-400 hover:bg-gray-800'
                 }`}
               >
                 {isListening ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
@@ -425,8 +427,8 @@ export default function Home() {
 
               {/* AI Search */}
               <button
-                onClick={() => {setShowSearchModal(true); performIntelligentSearch(searchQuery || "general supplements")}}
-                className="hidden md:flex items-center space-x-2 px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors"
+                onClick={() => {setShowSearchModal(true); performIntelligentSearch(searchQuery || "elite supplements")}}
+                className="hidden md:flex items-center space-x-2 px-4 py-2 text-gray-400 hover:text-green-400 transition-colors"
               >
                 <MessageCircle className="h-5 w-5" />
                 <span>AI Search</span>
@@ -435,11 +437,11 @@ export default function Home() {
               {/* Cart */}
               <button
                 onClick={() => setShowCart(true)}
-                className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
+                className="relative p-2 text-gray-400 hover:text-green-400 hover:bg-gray-800 rounded-full transition-colors"
               >
                 <ShoppingCart className="h-6 w-6" />
                 {cartItemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-green-400 text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                     {cartItemCount}
                   </span>
                 )}
@@ -448,7 +450,7 @@ export default function Home() {
               {/* Admin Button */}
               <button
                 onClick={() => window.open('/admin', '_blank')}
-                className="hidden md:flex items-center space-x-2 px-4 py-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition-colors"
+                className="hidden md:flex items-center space-x-2 px-4 py-2 bg-green-400 text-black rounded-full hover:bg-green-300 transition-colors font-semibold"
               >
                 <Settings className="h-4 w-4" />
                 <span>Admin</span>
@@ -457,7 +459,7 @@ export default function Home() {
               {/* Mobile Menu */}
               <button
                 onClick={() => setShowMobileMenu(!showMobileMenu)}
-                className="md:hidden p-2 hover:bg-gray-100 rounded-full"
+                className="md:hidden p-2 text-gray-400 hover:text-green-400 hover:bg-gray-800 rounded-full"
               >
                 <Menu className="h-6 w-6" />
               </button>
@@ -467,24 +469,24 @@ export default function Home() {
 
         {/* Mobile Menu */}
         {showMobileMenu && (
-          <div className="md:hidden border-t border-gray-200 bg-white">
+          <div className="md:hidden border-t border-gray-800 bg-black">
             <div className="px-4 py-2 space-y-2">
               <input
                 type="text"
-                placeholder="Search supplements..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Search elite supplements..."
+                className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button
-                onClick={() => {setShowSearchModal(true); performIntelligentSearch(searchQuery || "general supplements")}}
-                className="w-full text-left px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
+                onClick={() => {setShowSearchModal(true); performIntelligentSearch(searchQuery || "elite supplements")}}
+                className="w-full text-left px-3 py-2 text-gray-400 hover:text-green-400 hover:bg-gray-800 rounded-lg"
               >
                 🤖 AI Search
               </button>
               <button
                 onClick={() => window.open('/admin', '_blank')}
-                className="w-full text-left px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
+                className="w-full text-left px-3 py-2 text-gray-400 hover:text-green-400 hover:bg-gray-800 rounded-lg"
               >
                 ⚙️ Admin
               </button>
@@ -494,49 +496,84 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 via-green-600 to-blue-800 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-black text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-900 to-black opacity-90"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                Fuel Your
-                <br />
-                <span className="text-yellow-300">Potential</span>
-              </h2>
-              <p className="text-xl text-blue-100 mb-8 max-w-lg">
-                Premium sports nutrition powered by AI. Get personalized supplement recommendations 
-                and achieve your performance goals faster.
-              </p>
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2">
+                  <Flame className="h-6 w-6 text-green-400" />
+                  <span className="text-green-400 font-semibold tracking-wide">ELITE PERFORMANCE</span>
+                </div>
+                <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+                  Reach Your
+                  <span className="block text-green-400">APEX</span>
+                </h1>
+                <p className="text-xl text-gray-300 leading-relaxed">
+                  Next Generation Fitness supplements engineered for elite athletes and serious performers. 
+                  Unleash your potential with our scientifically-backed formulations.
+                </p>
+              </div>
+              
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
-                  onClick={() => {setShowSearchModal(true); performIntelligentSearch("supplement stack recommendations")}}
-                  className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2"
+                  onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-green-400 text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-green-300 transition-colors flex items-center justify-center space-x-2"
                 >
-                  <Search className="h-5 w-5" />
-                  <span>Find My Stack</span>
+                  <span>Shop Elite Products</span>
+                  <ArrowRight className="h-5 w-5" />
                 </button>
                 <button
-                  onClick={() => document.getElementById('products')?.scrollIntoView()}
-                  className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors flex items-center justify-center space-x-2"
+                  onClick={() => {setShowSearchModal(true); performIntelligentSearch("best supplements for athletic performance")}}
+                  className="border-2 border-green-400 text-green-400 px-8 py-4 rounded-full font-bold text-lg hover:bg-green-400 hover:text-black transition-colors flex items-center justify-center space-x-2"
                 >
-                  <Package className="h-5 w-5" />
-                  <span>Shop Now</span>
+                  <MessageCircle className="h-5 w-5" />
+                  <span>Get AI Recommendations</span>
                 </button>
               </div>
+
+              <div className="flex items-center space-x-8 text-sm text-gray-400">
+                <div className="flex items-center space-x-2">
+                  <Shield className="h-5 w-5 text-green-400" />
+                  <span>Lab Tested</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Award className="h-5 w-5 text-green-400" />
+                  <span>Pro Approved</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Zap className="h-5 w-5 text-green-400" />
+                  <span>Elite Grade</span>
+                </div>
+              </div>
             </div>
+            
             <div className="relative">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center">
-                <Award className="h-24 w-24 mx-auto mb-4 text-yellow-300" />
-                <h3 className="text-2xl font-bold mb-2">Performance Proven</h3>
-                <p className="text-blue-100">Join 50,000+ athletes achieving their goals</p>
-                <div className="grid grid-cols-2 gap-4 mt-6 text-sm">
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-300">94%</div>
-                    <div className="text-blue-200">Satisfaction Rate</div>
+              <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-transparent rounded-3xl"></div>
+              <img
+                src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&h=600&fit=crop"
+                alt="Elite Athlete Training"
+                className="w-full h-96 object-cover rounded-3xl shadow-2xl"
+              />
+              <div className="absolute bottom-6 left-6 right-6 bg-black/80 backdrop-blur-sm rounded-xl p-4">
+                <h3 className="text-lg font-bold text-white mb-2">Why Elite Athletes Choose APEX</h3>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="text-green-400">
+                    <div className="font-bold">99.9%</div>
+                    <div className="text-gray-300">Purity Rating</div>
                   </div>
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-300">4.8★</div>
-                    <div className="text-blue-200">Average Rating</div>
+                  <div className="text-green-400">
+                    <div className="font-bold">24/7</div>
+                    <div className="text-gray-300">AI Support</div>
+                  </div>
+                  <div className="text-green-400">
+                    <div className="font-bold">Pro</div>
+                    <div className="text-gray-300">Formulations</div>
+                  </div>
+                  <div className="text-green-400">
+                    <div className="font-bold">Elite</div>
+                    <div className="text-gray-300">Performance</div>
                   </div>
                 </div>
               </div>
@@ -545,72 +582,84 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Assistants Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
+      {/* AI Agents Section */}
+      <section className="py-16 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-800 mb-4">Your AI-Powered Nutrition Team</h3>
-            <p className="text-gray-600 text-lg">Expert guidance whenever you need it</p>
+            <h2 className="text-3xl font-bold text-white mb-4">AI-Powered Fitness Intelligence</h2>
+            <p className="text-xl text-gray-400">Get personalized advice from our expert AI agents</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div 
-              onClick={() => {setShowSearchModal(true); performIntelligentSearch("smart product recommendations")}}
-              className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 cursor-pointer hover:shadow-lg transition-all duration-300 group"
-            >
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Search className="h-6 w-6 text-white" />
+            {/* Intelligent Search */}
+            <div className="bg-black p-6 rounded-xl border border-gray-800 hover:border-green-400/50 transition-colors">
+              <div className="w-12 h-12 bg-green-400/10 rounded-lg flex items-center justify-center mb-4">
+                <Search className="h-6 w-6 text-green-400" />
               </div>
-              <h4 className="text-lg font-semibold mb-2">Smart Search</h4>
-              <p className="text-gray-600 text-sm mb-3">Find the perfect supplement stack for your goals</p>
-              <div className="text-blue-600 text-sm font-medium">Try: "Stack for muscle and fat loss" →</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Smart Search</h3>
+              <p className="text-gray-400 text-sm mb-4">AI-powered product recommendations based on your goals</p>
+              <button
+                onClick={() => {setShowSearchModal(true); performIntelligentSearch("best supplements for my fitness goals")}}
+                className="w-full bg-green-400/10 text-green-400 py-2 rounded-lg hover:bg-green-400/20 transition-colors"
+              >
+                Ask AI
+              </button>
             </div>
 
-            <div 
-              onClick={() => startAgentChat('customer_service', 'Customer Service')}
-              className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 cursor-pointer hover:shadow-lg transition-all duration-300 group"
-            >
-              <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <MessageCircle className="h-6 w-6 text-white" />
+            {/* Customer Service */}
+            <div className="bg-black p-6 rounded-xl border border-gray-800 hover:border-green-400/50 transition-colors">
+              <div className="w-12 h-12 bg-green-400/10 rounded-lg flex items-center justify-center mb-4">
+                <MessageCircle className="h-6 w-6 text-green-400" />
               </div>
-              <h4 className="text-lg font-semibold mb-2">Customer Support</h4>
-              <p className="text-gray-600 text-sm mb-3">Order tracking, returns, and support</p>
-              <div className="text-green-600 text-sm font-medium">Order #1439221 status →</div>
+              <h3 className="text-lg font-semibold text-white mb-2">24/7 Support</h3>
+              <p className="text-gray-400 text-sm mb-4">Instant answers to your questions about orders and products</p>
+              <button
+                onClick={() => startAgentChat('customer_service', '24/7 Support')}
+                className="w-full bg-green-400/10 text-green-400 py-2 rounded-lg hover:bg-green-400/20 transition-colors"
+              >
+                Get Help
+              </button>
             </div>
 
-            <div 
-              onClick={() => startAgentChat('rachel_nutrition', 'Rachel - Nutrition Coach')}
-              className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl p-6 cursor-pointer hover:shadow-lg transition-all duration-300 group"
-            >
-              <div className="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <ChefHat className="h-6 w-6 text-white" />
+            {/* Rachel Nutrition */}
+            <div className="bg-black p-6 rounded-xl border border-gray-800 hover:border-green-400/50 transition-colors">
+              <div className="w-12 h-12 bg-green-400/10 rounded-lg flex items-center justify-center mb-4">
+                <ChefHat className="h-6 w-6 text-green-400" />
               </div>
-              <h4 className="text-lg font-semibold mb-2">Hey Rachel</h4>
-              <p className="text-gray-600 text-sm mb-3">Nutrition and meal planning guidance</p>
-              <div className="text-pink-600 text-sm font-medium">"What should I eat tonight?" →</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Rachel - Nutrition Expert</h3>
+              <p className="text-gray-400 text-sm mb-4">Personalized nutrition guidance for peak performance</p>
+              <button
+                onClick={() => startAgentChat('rachel_nutrition', 'Rachel - Nutrition Expert')}
+                className="w-full bg-green-400/10 text-green-400 py-2 rounded-lg hover:bg-green-400/20 transition-colors"
+              >
+                Get Advice
+              </button>
             </div>
 
-            <div 
-              onClick={() => startAgentChat('ramy_lifestyle', 'Ramy - Lifestyle Coach')}
-              className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 cursor-pointer hover:shadow-lg transition-all duration-300 group"
-            >
-              <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <ShoppingBag className="h-6 w-6 text-white" />
+            {/* Ramy Lifestyle */}
+            <div className="bg-black p-6 rounded-xl border border-gray-800 hover:border-green-400/50 transition-colors">
+              <div className="w-12 h-12 bg-green-400/10 rounded-lg flex items-center justify-center mb-4">
+                <Activity className="h-6 w-6 text-green-400" />
               </div>
-              <h4 className="text-lg font-semibold mb-2">Hey Ramy</h4>
-              <p className="text-gray-600 text-sm mb-3">Style and lifestyle advice</p>
-              <div className="text-purple-600 text-sm font-medium">"What to wear this weekend?" →</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Ramy - Lifestyle Coach</h3>
+              <p className="text-gray-400 text-sm mb-4">Holistic fitness and lifestyle optimization strategies</p>
+              <button
+                onClick={() => startAgentChat('ramy_lifestyle', 'Ramy - Lifestyle Coach')}
+                className="w-full bg-green-400/10 text-green-400 py-2 rounded-lg hover:bg-green-400/20 transition-colors"
+              >
+                Start Coaching
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Products Section */}
-      <section id="products" className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
+      <section id="products" className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-800 mb-4">Premium Supplements</h3>
-            <p className="text-gray-600 text-lg">Third-party tested, science-backed nutrition</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Elite Performance Supplements</h2>
+            <p className="text-xl text-gray-600">Scientifically formulated for serious athletes</p>
           </div>
 
           {/* Category Filter */}
@@ -619,10 +668,10 @@ export default function Home() {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-full transition-colors ${
                   selectedCategory === category
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-600 hover:bg-blue-50'
+                    ? 'bg-black text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
               >
                 {category}
@@ -633,57 +682,59 @@ export default function Home() {
           {/* Products Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredProducts.map(product => (
-              <div key={product.id} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden group">
+              <div key={product.id} className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="relative">
-                  <img 
-                    src={product.image} 
+                  <img
+                    src={product.image}
                     alt={product.name}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-48 object-cover"
                   />
                   {product.bestseller && (
-                    <span className="absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">
-                      Bestseller
+                    <span className="absolute top-2 left-2 bg-green-400 text-black px-2 py-1 rounded-full text-xs font-bold">
+                      BESTSELLER
                     </span>
                   )}
                   {product.new && (
-                    <span className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
-                      New
+                    <span className="absolute top-2 right-2 bg-black text-white px-2 py-1 rounded-full text-xs font-bold">
+                      NEW
                     </span>
                   )}
-                  <button className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors">
-                    <Heart className="h-4 w-4" />
-                  </button>
                 </div>
                 
-                <div className="p-6">
-                  <div className="text-sm text-gray-500 mb-1">{product.category}</div>
-                  <h4 className="font-semibold mb-2 group-hover:text-blue-600 transition-colors">{product.name}</h4>
+                <div className="p-4">
+                  <h3 className="font-bold text-lg text-gray-900 mb-2">{product.name}</h3>
                   <p className="text-gray-600 text-sm mb-3">{product.description}</p>
                   
-                  <div className="flex items-center gap-2 mb-3">
+                  <div className="flex items-center mb-3">
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          className={`h-4 w-4 ${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                        <Star
+                          key={i}
+                          className={`h-4 w-4 ${
+                            i < Math.floor(product.rating)
+                              ? 'text-green-400 fill-current'
+                              : 'text-gray-300'
+                          }`}
                         />
                       ))}
                     </div>
-                    <span className="text-sm text-gray-500">({product.reviews})</span>
+                    <span className="text-sm text-gray-500 ml-2">
+                      {product.rating} ({product.reviews} reviews)
+                    </span>
                   </div>
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-blue-600">${product.price}</span>
+                      <span className="text-2xl font-bold text-gray-900">${product.price}</span>
                       {product.originalPrice && (
                         <span className="text-sm text-gray-500 line-through">${product.originalPrice}</span>
                       )}
                     </div>
                     <button
                       onClick={() => addToCart(product)}
-                      className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors flex items-center space-x-1"
+                      className="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition-colors flex items-center space-x-2"
                     >
-                      <Plus className="h-4 w-4" />
+                      <ShoppingCart className="h-4 w-4" />
                       <span>Add</span>
                     </button>
                   </div>
@@ -695,123 +746,124 @@ export default function Home() {
       </section>
 
       {/* Trust Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-16 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-800 mb-4">Why Athletes Trust NutraFuel</h3>
+            <h3 className="text-3xl font-bold text-white mb-4">Why Elite Athletes Choose APEX</h3>
+            <p className="text-xl text-gray-400">Uncompromising quality for peak performance</p>
           </div>
           
           <div className="grid md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8 text-green-600" />
+              <div className="w-16 h-16 bg-green-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="h-8 w-8 text-green-400" />
               </div>
-              <h4 className="font-semibold mb-2">Third-Party Tested</h4>
-              <p className="text-gray-600 text-sm">Independently verified for purity and potency</p>
+              <h4 className="font-semibold mb-2 text-white">Lab Tested</h4>
+              <p className="text-gray-400 text-sm">Independently verified for elite purity standards</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Zap className="h-8 w-8 text-blue-600" />
+              <div className="w-16 h-16 bg-green-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Zap className="h-8 w-8 text-green-400" />
               </div>
-              <h4 className="font-semibold mb-2">AI-Powered</h4>
-              <p className="text-gray-600 text-sm">Personalized recommendations for your goals</p>
+              <h4 className="font-semibold mb-2 text-white">AI-Powered</h4>
+              <p className="text-gray-400 text-sm">Next-gen personalization for your goals</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Truck className="h-8 w-8 text-yellow-600" />
+              <div className="w-16 h-16 bg-green-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Truck className="h-8 w-8 text-green-400" />
               </div>
-              <h4 className="font-semibold mb-2">Free Shipping</h4>
-              <p className="text-gray-600 text-sm">Free delivery on orders over $75</p>
+              <h4 className="font-semibold mb-2 text-white">Elite Delivery</h4>
+              <p className="text-gray-400 text-sm">Free expedited shipping on orders over $99</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="h-8 w-8 text-purple-600" />
+              <div className="w-16 h-16 bg-green-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="h-8 w-8 text-green-400" />
               </div>
-              <h4 className="font-semibold mb-2">30-Day Guarantee</h4>
-              <p className="text-gray-600 text-sm">Money-back guarantee on all products</p>
+              <h4 className="font-semibold mb-2 text-white">Performance Guarantee</h4>
+              <p className="text-gray-400 text-sm">Elite-level results or your money back</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
+      <footer className="bg-black text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center">
-                  <Dumbbell className="h-6 w-6 text-white" />
+                <div className="w-10 h-10 bg-gradient-to-br from-gray-800 to-black rounded-full flex items-center justify-center border border-green-400">
+                  <Dumbbell className="h-6 w-6 text-green-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">NutraFuel</h3>
-                  <p className="text-sm text-gray-400">Fuel Your Potential</p>
+                  <h3 className="text-xl font-bold">APEX</h3>
+                  <p className="text-sm text-green-400">Next Generation Fitness</p>
                 </div>
               </div>
               <p className="text-gray-400 mb-4">
-                Premium sports nutrition powered by AI technology. 
-                Trusted by 50,000+ athletes worldwide.
+                Elite performance supplements engineered for serious athletes. 
+                Trusted by 100,000+ elite performers worldwide.
               </p>
               <div className="flex space-x-4">
-                <Facebook className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
-                <Twitter className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
-                <Instagram className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
-                <Youtube className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
+                <Facebook className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
+                <Twitter className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
+                <Instagram className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
+                <Youtube className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
               </div>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Products</h4>
+              <h4 className="font-semibold mb-4">Elite Products</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">Protein Supplements</a></li>
-                <li><a href="#" className="hover:text-white">Pre-Workout</a></li>
-                <li><a href="#" className="hover:text-white">Creatine</a></li>
-                <li><a href="#" className="hover:text-white">Recovery</a></li>
-                <li><a href="#" className="hover:text-white">Fat Burners</a></li>
-                <li><a href="#" className="hover:text-white">Vitamins</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">Elite Protein</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">Ignite Pre-Workout</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">Creatine HCL Pro</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">Recovery Stack</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">Burn Elite</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">Peak Vitamins</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Support</h4>
+              <h4 className="font-semibold mb-4">Elite Support</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">Contact Us</a></li>
-                <li><a href="#" className="hover:text-white">Track Order</a></li>
-                <li><a href="#" className="hover:text-white">Returns</a></li>
-                <li><a href="#" className="hover:text-white">FAQ</a></li>
-                <li><a href="#" className="hover:text-white">AI Assistant</a></li>
-                <li><a href="#" className="hover:text-white">Nutrition Guide</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">Elite Support</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">Track Order</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">Returns</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">FAQ</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">AI Assistant</a></li>
+                <li><a href="#" className="hover:text-green-400 transition-colors">Performance Guide</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Contact Info</h4>
+              <h4 className="font-semibold mb-4">Contact APEX</h4>
               <div className="space-y-3 text-gray-400">
                 <div className="flex items-center space-x-2">
                   <Phone className="h-4 w-4" />
-                  <span>1-800-NUTRAFUEL</span>
+                  <span>1-800-APEX-PRO</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="h-4 w-4" />
-                  <span>support@nutrafuel.com</span>
+                  <span>elite@apex-fitness.com</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <MapPin className="h-4 w-4" />
-                  <span>Austin, TX 78701</span>
+                  <span>Los Angeles, CA 90210</span>
                 </div>
               </div>
               <div className="mt-6">
-                <h5 className="font-semibold mb-2">Subscribe to Updates</h5>
+                <h5 className="font-semibold mb-2">Elite Updates</h5>
                 <div className="flex">
                   <input 
                     type="email" 
                     placeholder="Enter email"
-                    className="px-3 py-2 bg-gray-800 text-white rounded-l-lg flex-1 focus:outline-none"
+                    className="px-3 py-2 bg-gray-800 text-white rounded-l-lg flex-1 focus:outline-none border border-gray-700"
                   />
-                  <button className="bg-blue-600 px-4 py-2 rounded-r-lg hover:bg-blue-700">
+                  <button className="bg-green-400 text-black px-4 py-2 rounded-r-lg hover:bg-green-300 transition-colors">
                     <Send className="h-4 w-4" />
                   </button>
                 </div>
@@ -820,7 +872,7 @@ export default function Home() {
           </div>
           
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 NutraFuel. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>&copy; 2024 APEX Fitness. All rights reserved. | Privacy Policy | Terms of Service</p>
           </div>
         </div>
       </footer>
@@ -848,7 +900,7 @@ export default function Home() {
                       <img src={item.image} alt={item.name} className="w-12 h-12 object-cover rounded" />
                       <div className="flex-1">
                         <h4 className="font-semibold text-sm">{item.name}</h4>
-                        <p className="text-blue-600 font-semibold">${item.price}</p>
+                        <p className="text-green-600 font-semibold">${item.price}</p>
                       </div>
                       <div className="flex items-center space-x-2">
                         <button 
@@ -872,7 +924,7 @@ export default function Home() {
                     <div className="flex justify-between items-center mb-4">
                       <span className="font-semibold">Total: ${cartTotal.toFixed(2)}</span>
                     </div>
-                    <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button className="w-full bg-green-400 text-black py-3 rounded-lg hover:bg-green-300 transition-colors font-semibold">
                       Checkout
                     </button>
                   </div>
@@ -890,8 +942,8 @@ export default function Home() {
             <div className="p-6 border-b">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-                    <Search className="h-5 w-5 text-white" />
+                  <div className="w-10 h-10 bg-green-400 rounded-full flex items-center justify-center">
+                    <Search className="h-5 w-5 text-black" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">AI-Powered Search</h3>
