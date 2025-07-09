@@ -6,8 +6,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'NutraFuel - AI-Powered Sports Nutrition',
-  description: 'Premium sports nutrition powered by AI. Get personalized supplement recommendations, expert guidance, and achieve your performance goals faster.',
+  title: 'APEX - Next Generation Fitness',
+  description: 'Elite performance supplements engineered for serious athletes. AI-powered recommendations, expert nutrition guidance, and next-generation fitness solutions.',
 }
 
 export default function RootLayout({

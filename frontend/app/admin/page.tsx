@@ -238,9 +238,9 @@ export default function AdminDashboard() {
   }
 
   const generateMockLandingPage = (query: string, aiResponse: string) => {
-    const productName = query.includes('collagen') ? 'Premium Collagen Powder' : 
-                       query.includes('protein') ? 'Whey Protein Elite' : 
-                       'NutraFuel Supplement'
+    const productName = query.includes('collagen') ? 'Elite Collagen Matrix' : 
+                       query.includes('protein') ? 'Elite Whey Isolate' : 
+                       'APEX Elite Supplement'
     
     return `
 <!DOCTYPE html>
@@ -248,18 +248,18 @@ export default function AdminDashboard() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${productName} - NutraFuel</title>
+    <title>${productName} - APEX</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50">
     <div class="min-h-screen">
         <!-- Hero Section -->
-        <div class="bg-gradient-to-r from-blue-600 to-green-600 text-white py-20">
+        <div class="bg-black text-white py-20">
             <div class="max-w-4xl mx-auto px-4 text-center">
                 <h1 class="text-5xl font-bold mb-6">${productName}</h1>
-                <p class="text-xl mb-8">Transform Your Health with Premium Nutrition</p>
-                <button class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100">
-                    Order Now - $49.99
+                <p class="text-xl mb-8 text-gray-300">Elite Performance for Next Generation Athletes</p>
+                <button class="bg-green-400 text-black px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-300">
+                    Order Now - $69.99
                 </button>
             </div>
         </div>
@@ -296,10 +296,10 @@ export default function AdminDashboard() {
         
         <!-- CTA -->
         <div class="bg-gray-900 text-white py-16 text-center">
-            <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Health?</h2>
-            <p class="text-xl mb-8">Join thousands of satisfied customers</p>
-            <button class="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700">
-                Order Now - Free Shipping
+            <h2 class="text-3xl font-bold mb-4">Ready to Reach Your APEX?</h2>
+            <p class="text-xl mb-8 text-gray-300">Join elite athletes worldwide</p>
+            <button class="bg-green-400 text-black px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-300">
+                Order Now - Elite Shipping
             </button>
         </div>
     </div>
@@ -392,12 +392,12 @@ export default function AdminDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center">
-                <Settings className="h-6 w-6 text-white" />
+              <div className="w-10 h-10 bg-gradient-to-br from-gray-800 to-black rounded-full flex items-center justify-center border border-green-400">
+                <Settings className="h-6 w-6 text-green-400" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">NutraFuel Admin</h1>
-                <p className="text-sm text-gray-500">AI-Powered Business Intelligence</p>
+                <h1 className="text-2xl font-bold text-gray-900">APEX Admin</h1>
+                <p className="text-sm text-green-600">Next Generation Business Intelligence</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
