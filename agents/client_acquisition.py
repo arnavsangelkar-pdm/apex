@@ -17,6 +17,13 @@ You help customers with:
 3. Nutrition advice and meal planning guidance
 4. Performance optimization and goal achievement
 5. Advanced analytics including cohort analysis and retention tracking
+6. Interactive chart generation for cohort analysis, retention heatmaps, and subscription trends
+
+When generating cohort charts, create HTML/CSS visualizations that show:
+- Monthly cohorts (rows) vs months since signup (columns)
+- Color-coded retention percentages (blue gradient: 100% = dark blue, 0% = light blue)
+- Clear labels and professional styling
+- Interactive hover effects showing exact percentages
 
 Current NutraFuel product offerings (2024):
 - Whey Protein Isolate: $49 (25g protein, fast absorption, post-workout)
@@ -88,6 +95,39 @@ COHORT_ANALYSIS_DATA = [
     "Churn Patterns: Highest drop-off occurs between months 2-3, loyalty program reduces churn by 18%"
 ]
 
+COHORT_CHART_GENERATION_DATA = [
+    "Cohort Chart HTML Structure: Table with cohort months as rows, retention periods as columns",
+    "Color Coding System: 90-100% = #1e40af (dark blue), 80-89% = #3b82f6, 70-79% = #60a5fa, 60-69% = #93c5fd, 50-59% = #dbeafe, <50% = #f8fafc",
+    "Chart Headers: 'Subscription Cohorts', 'Months since account creation' (0-12 columns)",
+    "Row Labels: Monthly cohorts (Jan 2025, Feb 2025, Mar 2025, etc.)",
+    "Interactive Features: Hover effects showing exact percentage, cohort size, absolute numbers",
+    "Styling: Professional table borders, centered text, responsive design, APEX color scheme",
+    "Data Format: Each cell shows retention percentage with appropriate background color",
+    "Chart Footer: Data source, last updated timestamp, download/export options"
+]
+
+CHART_HTML_TEMPLATE_DATA = [
+    "HTML Table Structure: <table class='cohort-chart'><thead><tr><th>Cohorts</th><th>0</th><th>1</th>...<th>12</th></tr></thead><tbody>",
+    "CSS Styling: .cohort-chart { border-collapse: collapse; width: 100%; font-family: Arial; } .cohort-chart th, td { padding: 8px; text-align: center; border: 1px solid #ddd; }",
+    "Color Classes: .retention-100 { background: #1e40af; color: white; } .retention-90 { background: #3b82f6; color: white; } .retention-80 { background: #60a5fa; }",
+    "Hover Effects: .cohort-chart td:hover { transform: scale(1.1); z-index: 10; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }",
+    "Responsive Design: @media (max-width: 768px) { .cohort-chart { font-size: 12px; } .cohort-chart th, td { padding: 4px; } }",
+    "JavaScript Interactivity: tooltip showing cohort details, percentage, absolute numbers on hover"
+]
+
+COMPREHENSIVE_COHORT_DATA = [
+    "Jan 2025 Cohort: 24 signups - Month 0: 100%, Month 1: 83%, Month 2: 75%, Month 3: 71%, Month 6: 63%, Month 9: 58%",
+    "Feb 2025 Cohort: 27 signups - Month 0: 100%, Month 1: 81%, Month 2: 74%, Month 3: 70%, Month 6: 61%, Month 8: 56%", 
+    "Mar 2025 Cohort: 33 signups - Month 0: 100%, Month 1: 85%, Month 2: 79%, Month 3: 73%, Month 6: 67%, Month 7: 62%",
+    "Apr 2025 Cohort: 30 signups - Month 0: 100%, Month 1: 87%, Month 2: 80%, Month 3: 76%, Month 6: 69%",
+    "May 2025 Cohort: 34 signups - Month 0: 100%, Month 1: 85%, Month 2: 79%, Month 3: 74%, Month 5: 68%",
+    "Jun 2025 Cohort: 28 signups - Month 0: 100%, Month 1: 82%, Month 2: 75%, Month 3: 71%, Month 4: 67%",
+    "Jul 2025 Cohort: 34 signups - Month 0: 100%, Month 1: 84%, Month 2: 79%, Month 3: 74%",
+    "Aug 2025 Cohort: 26 signups - Month 0: 100%, Month 1: 85%, Month 2: 77%",
+    "Sep 2025 Cohort: 31 signups - Month 0: 100%, Month 1: 81%",
+    "Oct 2025 Cohort: 29 signups - Month 0: 100%"
+]
+
 # Create agent instance
 agent = BaseRAGAgent(
     name="customer_experience",
@@ -95,7 +135,7 @@ agent = BaseRAGAgent(
 )
 
 # Load data into vector store
-agent.add_documents(PRODUCT_DATA + NUTRITION_GUIDANCE_DATA + GOAL_OPTIMIZATION_DATA + COHORT_ANALYSIS_DATA)
+agent.add_documents(PRODUCT_DATA + NUTRITION_GUIDANCE_DATA + GOAL_OPTIMIZATION_DATA + COHORT_ANALYSIS_DATA + COHORT_CHART_GENERATION_DATA + CHART_HTML_TEMPLATE_DATA + COMPREHENSIVE_COHORT_DATA)
 
 # Create and export the graph
 graph = agent.build_graph() 
