@@ -75,7 +75,7 @@ const products: Product[] = [
     name: 'Elite Whey Isolate',
     price: 69,
     originalPrice: 79,
-    image: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1594736797933-d0d1b727d1c7?w=500&h=500&fit=crop',
     category: 'Protein',
     description: '25g ultra-pure whey protein isolate, zero sugar, rapid absorption',
     rating: 4.9,
@@ -87,7 +87,7 @@ const products: Product[] = [
     name: 'Ignite Pre-Workout',
     price: 49,
     originalPrice: 59,
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=500&h=500&fit=crop',
     category: 'Pre-Workout',
     description: 'Clean energy, laser focus, explosive pumps. No crash.',
     rating: 4.8,
@@ -98,7 +98,7 @@ const products: Product[] = [
     id: '3',
     name: 'Creatine HCL Pro',
     price: 39,
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop',
     category: 'Performance',
     description: 'Superior absorption, strength gains, no bloating',
     rating: 4.9,
@@ -109,7 +109,7 @@ const products: Product[] = [
     id: '4',
     name: 'Recovery BCAA+',
     price: 42,
-    image: 'https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop',
     category: 'Recovery',
     description: '2:1:1 BCAA ratio + electrolytes for optimal recovery',
     rating: 4.7,
@@ -119,7 +119,7 @@ const products: Product[] = [
     id: '5',
     name: 'Burn Elite',
     price: 59,
-    image: 'https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop',
     category: 'Fat Loss',
     description: 'Advanced thermogenic formula, appetite control, energy boost',
     rating: 4.6,
@@ -130,7 +130,7 @@ const products: Product[] = [
     id: '6',
     name: 'Night Recovery Pro',
     price: 45,
-    image: 'https://images.unsplash.com/photo-1550572017-7a24be3feb1e?w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop',
     category: 'Recovery',
     description: 'Deep sleep support, muscle recovery, growth hormone optimization',
     rating: 4.8,
@@ -140,7 +140,7 @@ const products: Product[] = [
     id: '7',
     name: 'Peak Multivitamin',
     price: 35,
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop',
     category: 'Health',
     description: 'Elite athlete formulation, bioavailable nutrients',
     rating: 4.7,
@@ -150,7 +150,7 @@ const products: Product[] = [
     id: '8',
     name: 'Collagen Matrix',
     price: 52,
-    image: 'https://images.unsplash.com/photo-1556228578-dd2fa3d03b24?w=500&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop',
     category: 'Recovery',
     description: 'Type I, II, III collagen for joints, skin, and recovery',
     rating: 4.6,
@@ -389,7 +389,7 @@ export default function Home() {
                 <h1 className="text-xl font-bold text-white">
                   APEX
                 </h1>
-                <p className="text-xs text-green-400">Next Generation Fitness</p>
+                <p className="text-xs text-green-400">next generation nutrition</p>
               </div>
             </div>
 
@@ -431,7 +431,7 @@ export default function Home() {
                 className="hidden md:flex items-center space-x-2 px-4 py-2 text-gray-400 hover:text-green-400 transition-colors"
               >
                 <MessageCircle className="h-5 w-5" />
-                <span>AI Search</span>
+                <span>Chat with Nutritionist Rachel</span>
               </button>
 
               {/* Cart */}
@@ -482,7 +482,7 @@ export default function Home() {
                 onClick={() => {setShowSearchModal(true); performIntelligentSearch(searchQuery || "elite supplements")}}
                 className="w-full text-left px-3 py-2 text-gray-400 hover:text-green-400 hover:bg-gray-800 rounded-lg"
               >
-                🤖 AI Search
+                🤖 Ask Apex
               </button>
               <button
                 onClick={() => window.open('/admin', '_blank')}
@@ -521,7 +521,7 @@ export default function Home() {
                   onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
                   className="bg-green-400 text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-green-300 transition-colors flex items-center justify-center space-x-2"
                 >
-                  <span>Shop Elite Products</span>
+                  <span>Shop Best Sellers</span>
                   <ArrowRight className="h-5 w-5" />
                 </button>
                 <button
@@ -529,7 +529,7 @@ export default function Home() {
                   className="border-2 border-green-400 text-green-400 px-8 py-4 rounded-full font-bold text-lg hover:bg-green-400 hover:text-black transition-colors flex items-center justify-center space-x-2"
                 >
                   <MessageCircle className="h-5 w-5" />
-                  <span>Get AI Recommendations</span>
+                  <span>Let Apex Build Your Stack</span>
                 </button>
               </div>
 
@@ -563,10 +563,10 @@ export default function Home() {
                     <div className="font-bold">99.9%</div>
                     <div className="text-gray-300">Purity Rating</div>
                   </div>
-                  <div className="text-green-400">
-                    <div className="font-bold">24/7</div>
-                    <div className="text-gray-300">AI Support</div>
-                  </div>
+                                     <div className="text-green-400">
+                     <div className="font-bold">Custom</div>
+                     <div className="text-gray-300">Stacks</div>
+                   </div>
                   <div className="text-green-400">
                     <div className="font-bold">Pro</div>
                     <div className="text-gray-300">Formulations</div>
@@ -582,12 +582,89 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Product Categories Section */}
+      <section className="py-16 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Shop by Category</h2>
+            <p className="text-xl text-gray-600">Find the perfect supplements for your goals</p>
+          </div>
+          
+          <div className="grid md:grid-cols-5 gap-6">
+            {/* Proteins */}
+            <div className="text-center group cursor-pointer">
+              <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-black rounded-xl mb-4 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
+                <img
+                  src="https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=300&h=300&fit=crop"
+                  alt="Protein Supplements"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Proteins</h3>
+              <p className="text-gray-600 text-sm">Build lean muscle mass</p>
+            </div>
+
+            {/* Pre-workouts */}
+            <div className="text-center group cursor-pointer">
+              <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-black rounded-xl mb-4 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
+                <img
+                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop"
+                  alt="Pre-workout Supplements"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Pre-workouts</h3>
+              <p className="text-gray-600 text-sm">Explosive energy & focus</p>
+            </div>
+
+            {/* Recovery */}
+            <div className="text-center group cursor-pointer">
+              <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-black rounded-xl mb-4 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
+                <img
+                  src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=300&h=300&fit=crop"
+                  alt="Recovery Supplements"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Recovery</h3>
+              <p className="text-gray-600 text-sm">Faster muscle repair</p>
+            </div>
+
+            {/* Collagen Support */}
+            <div className="text-center group cursor-pointer">
+              <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-black rounded-xl mb-4 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
+                <img
+                  src="https://images.unsplash.com/photo-1556228578-dd2fa3d03b24?w=300&h=300&fit=crop"
+                  alt="Collagen Support"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Collagen Support</h3>
+              <p className="text-gray-600 text-sm">Joint & skin health</p>
+            </div>
+
+            {/* Essential Vitamins & Minerals */}
+            <div className="text-center group cursor-pointer">
+              <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-black rounded-xl mb-4 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
+                <img
+                  src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=300&fit=crop"
+                  alt="Vitamins & Minerals"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Essential Vitamins & Minerals</h3>
+              <p className="text-gray-600 text-sm">Complete daily foundation</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* AI Agents Section */}
       <section className="py-16 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">AI-Powered Fitness Intelligence</h2>
-            <p className="text-xl text-gray-400">Get personalized advice from our expert AI agents</p>
+            <h2 className="text-3xl font-bold text-white mb-4">Cutting Edge Nutrition Intelligence</h2>
+            <p className="text-xl text-gray-400">Get personalized nutrition and supplement stacks- just ask us!</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -597,7 +674,7 @@ export default function Home() {
                 <Search className="h-6 w-6 text-green-400" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">Smart Search</h3>
-              <p className="text-gray-400 text-sm mb-4">AI-powered product recommendations based on your goals</p>
+              <p className="text-gray-400 text-sm mb-4">Curated product recommendations based on your goals</p>
               <button
                 onClick={() => {setShowSearchModal(true); performIntelligentSearch("best supplements for my fitness goals")}}
                 className="w-full bg-green-400/10 text-green-400 py-2 rounded-lg hover:bg-green-400/20 transition-colors"
@@ -626,7 +703,7 @@ export default function Home() {
               <div className="w-12 h-12 bg-green-400/10 rounded-lg flex items-center justify-center mb-4">
                 <ChefHat className="h-6 w-6 text-green-400" />
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Rachel - Nutrition Expert</h3>
+              <h3 className="text-lg font-semibold text-white mb-2">Meet Rachel - Nutrition Expert</h3>
               <p className="text-gray-400 text-sm mb-4">Personalized nutrition guidance for peak performance</p>
               <button
                 onClick={() => startAgentChat('rachel_nutrition', 'Rachel - Nutrition Expert')}
@@ -800,7 +877,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">APEX</h3>
-                  <p className="text-sm text-green-400">Next Generation Fitness</p>
+                  <p className="text-sm text-green-400">next generation nutrition</p>
                 </div>
               </div>
               <p className="text-gray-400 mb-4">
