@@ -102,7 +102,9 @@ const backendAgents: Agent[] = [
 
 const sampleQueries = {
   'customer_experience': [
-    "What are our top customer acquisition channels?",
+    "Show me cohort analysis for our subscription customers",
+    "What are our customer retention trends?",
+    "Generate a cohort chart for Q3 2025",
     "How can we improve customer satisfaction?",
     "Show me customer lifetime value trends"
   ],
@@ -216,6 +218,15 @@ export default function AdminDashboard() {
         enhancedContent += '\n\n---\n\n**[Generate Chart] [Download Data]**'
         // Generate mock chart data
         setChartData(generateMockChartData(selectedAgent.id, inputMessage))
+      }
+      
+      if (selectedAgent.id === 'customer_experience' && 
+          (inputMessage.toLowerCase().includes('cohort') || inputMessage.toLowerCase().includes('retention') || 
+           inputMessage.toLowerCase().includes('customer lifetime') || inputMessage.toLowerCase().includes('churn') ||
+           inputMessage.toLowerCase().includes('subscription') || inputMessage.toLowerCase().includes('chart'))) {
+        enhancedContent += '\n\n---\n\n**[Generate Cohort Chart] [Download Data]**'
+        // Generate cohort chart data
+        setChartData(generateCohortChartData(inputMessage))
       }
 
       const assistantMessage: Message = {
@@ -335,6 +346,28 @@ export default function AdminDashboard() {
             backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'],
           }]
         }
+      }
+    }
+  }
+
+  const generateCohortChartData = (query: string) => {
+    return {
+      type: 'cohort',
+      title: 'Q3 2025 Subscription Cohort Analysis',
+      data: {
+        cohorts: [
+          { month: 'Jan 2025', signups: 24, retention: [100, 83, 75, 71, 63, 58, 54, 51, 48, 45, 42, 39, 36] },
+          { month: 'Feb 2025', signups: 27, retention: [100, 81, 74, 70, 61, 56, 52, 49, 46, 43, 40, 37] },
+          { month: 'Mar 2025', signups: 33, retention: [100, 85, 79, 73, 67, 62, 58, 55, 52, 49, 46] },
+          { month: 'Apr 2025', signups: 30, retention: [100, 87, 80, 76, 69, 64, 60, 57, 54, 51] },
+          { month: 'May 2025', signups: 34, retention: [100, 85, 79, 74, 68, 63, 59, 56, 53] },
+          { month: 'Jun 2025', signups: 28, retention: [100, 82, 75, 71, 67, 62, 58, 55] },
+          { month: 'Jul 2025', signups: 34, retention: [100, 84, 79, 74, 69, 64, 60] },
+          { month: 'Aug 2025', signups: 26, retention: [100, 85, 77, 72, 67, 62] },
+          { month: 'Sep 2025', signups: 31, retention: [100, 81, 76, 71, 66] },
+          { month: 'Oct 2025', signups: 29, retention: [100, 83, 78, 73] }
+        ],
+        timeLabels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
       }
     }
   }
@@ -669,6 +702,17 @@ export default function AdminDashboard() {
                                       </button>
                                     )
                                   }
+                                  if (text.includes('[Generate Cohort Chart]')) {
+                                    return (
+                                      <button 
+                                        onClick={() => setShowChart(true)}
+                                        className="inline-flex items-center space-x-1 bg-blue-500 text-white px-3 py-1 rounded-full text-xs hover:bg-blue-600 mr-2"
+                                      >
+                                        <Users className="h-3 w-3" />
+                                        <span>View Cohort Chart</span>
+                                      </button>
+                                    )
+                                  }
                                   if (text.includes('[Download Data]')) {
                                     return (
                                       <button 
@@ -871,6 +915,84 @@ export default function AdminDashboard() {
                     {chartData.data.labels.map((label: string, index: number) => (
                       <span key={index}>{label}</span>
                     ))}
+                  </div>
+                </div>
+              ) : chartData.type === 'cohort' ? (
+                <div className="w-full bg-white rounded-lg border overflow-x-auto">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50">
+                        <th className="p-3 text-left font-semibold border-b">Subscription Cohorts</th>
+                        {chartData.data.timeLabels.map((label: string) => (
+                          <th key={label} className="p-3 text-center font-semibold border-b text-xs">
+                            {label}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {chartData.data.cohorts.map((cohort: any, rowIndex: number) => (
+                        <tr key={cohort.month} className="hover:bg-gray-50">
+                          <td className="p-3 font-medium border-b">{cohort.month}</td>
+                          {cohort.retention.map((percentage: number, colIndex: number) => {
+                            const bgColor = percentage >= 90 ? '#1e40af' :
+                                           percentage >= 80 ? '#3b82f6' :
+                                           percentage >= 70 ? '#60a5fa' :
+                                           percentage >= 60 ? '#93c5fd' :
+                                           percentage >= 50 ? '#dbeafe' : '#f8fafc'
+                            const textColor = percentage >= 70 ? 'white' : '#374151'
+                            
+                            return (
+                              <td 
+                                key={colIndex} 
+                                className="p-3 text-center text-xs font-semibold border-b cursor-pointer hover:scale-105 transition-transform"
+                                style={{ 
+                                  backgroundColor: bgColor,
+                                  color: textColor
+                                }}
+                                title={`${cohort.month}: ${percentage}% retention at month ${colIndex}`}
+                              >
+                                {percentage}%
+                              </td>
+                            )
+                          })}
+                          {/* Fill empty cells for incomplete cohorts */}
+                          {Array.from({ length: chartData.data.timeLabels.length - cohort.retention.length }).map((_, emptyIndex) => (
+                            <td key={`empty-${emptyIndex}`} className="p-3 border-b bg-gray-100"></td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  
+                  <div className="p-4 bg-gray-50 border-t">
+                    <h4 className="font-semibold mb-2 text-sm">Color Legend:</h4>
+                    <div className="flex flex-wrap gap-2 text-xs">
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-4 rounded" style={{backgroundColor: '#1e40af'}}></div>
+                        <span>90-100%</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-4 rounded" style={{backgroundColor: '#3b82f6'}}></div>
+                        <span>80-89%</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-4 rounded" style={{backgroundColor: '#60a5fa'}}></div>
+                        <span>70-79%</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-4 rounded" style={{backgroundColor: '#93c5fd'}}></div>
+                        <span>60-69%</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-4 rounded" style={{backgroundColor: '#dbeafe'}}></div>
+                        <span>50-59%</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-4 rounded border" style={{backgroundColor: '#f8fafc'}}></div>
+                        <span>&lt;50%</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ) : (
