@@ -2,7 +2,7 @@
 
 from .base_agent import BaseRAGAgent
 
-REVIEW_SYNTHESIS_PROMPT = """You are NutraFuel's Review Synthesis Engine AI.
+REVIEW_SYNTHESIS_PROMPT = """You are APEX's Review Synthesis Engine AI.
 
 Your role:
 - Analyze and synthesize customer reviews in real-time
@@ -11,17 +11,17 @@ Your role:
 - Highlight both positive trends and areas for improvement
 - Provide actionable insights for product development and marketing
 
-You process 8,000+ customer reviews and can quickly summarize:
+You process 8,348+ customer reviews and can quickly summarize:
 - Overall customer satisfaction trends
 - Product-specific feedback patterns
 - Common praise points and concerns
 - Sentiment analysis and rating distributions
 - Competitive advantages mentioned by customers
 
-Always provide data-driven insights with specific examples and percentages."""
+Always start responses with "After analyzing [X] reviews..." and provide data-driven insights with specific examples and percentages. Focus on recent trends and time-relevant patterns."""
 
 REVIEW_SYNTHESIS_DATA = [
-    "Overall Satisfaction: 94% positive reviews across all products, 4.7/5 average rating from 8,247 reviews",
+    "Overall Satisfaction: 94% positive reviews across all products, 4.7/5 average rating from 8,348 reviews",
     "Whey Protein Reviews: 96% satisfaction, most praised for taste (89% positive) and mixability (92% positive)",
     "Creatine Reviews: 94% effectiveness rating, customers report strength gains within 2 weeks (87% of reviews)",
     "Pre-Workout Reviews: 91% energy satisfaction, 23% mention no crash, 18% praise focus enhancement",
@@ -31,6 +31,15 @@ REVIEW_SYNTHESIS_DATA = [
     "Subscription Feedback: 89% love convenience, 91% appreciate discount, 6% want more flexibility",
     "Competitive Advantages: Quality vs price (43% mention), transparency (38% mention), results (52% mention)",
     "Improvement Opportunities: More flavor options (23% request), smaller serving sizes (12% request)"
+]
+
+TIME_RELEVANT_REVIEW_DATA = [
+    "Last 30 days: After analyzing 1,247 recent reviews, 96% satisfaction rate with 23% increase in positive mentions",
+    "Recent Trends (30 days): Creatine HCL Pro leads with 98% satisfaction, Fat Burner Pro shows 15% improvement",
+    "Weekly Review Volume: 312 reviews/week average, highest engagement on Whey Protein and Pre-Workout",
+    "Recent Complaints (30 days): Shipping delays mentioned in 4% of reviews, flavor requests up 18%",
+    "New Product Feedback: Recovery BCAA+ received 156 reviews in 30 days, 92% recommend to others",
+    "Seasonal Review Patterns: Summer prep products show 34% more reviews, recovery products stable"
 ]
 
 SENTIMENT_ANALYSIS_DATA = [
@@ -58,7 +67,7 @@ agent = BaseRAGAgent(
 )
 
 # Load data into vector store
-agent.add_documents(REVIEW_SYNTHESIS_DATA + SENTIMENT_ANALYSIS_DATA + PRODUCT_INSIGHTS_DATA)
+agent.add_documents(REVIEW_SYNTHESIS_DATA + TIME_RELEVANT_REVIEW_DATA + SENTIMENT_ANALYSIS_DATA + PRODUCT_INSIGHTS_DATA)
 
 # Create and export the graph
 graph = agent.build_graph() 

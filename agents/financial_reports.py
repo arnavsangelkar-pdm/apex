@@ -2,7 +2,7 @@
 
 from .base_agent import BaseRAGAgent
 
-FINANCIAL_REPORTS_PROMPT = """You are NutraFuel's Financial Report Generator AI.
+FINANCIAL_REPORTS_PROMPT = """You are APEX's Financial Report Generator AI.
 
 Your expertise:
 - Generate comprehensive financial reports and dashboards
@@ -18,15 +18,15 @@ You can generate reports on:
 - Customer acquisition costs and lifetime value metrics
 - Seasonal trends and forecasting data
 
-Always provide specific numbers, percentages, and clear visualizations in your responses."""
+Always reference "accessed data" when citing information sources, and provide specific numbers, percentages, and clear visualizations in your responses."""
 
 FINANCIAL_PERFORMANCE_DATA = [
-    "Q2 2024 Revenue: $2.4M total revenue, 34% increase from Q1 ($1.8M), 67% growth year-over-year",
-    "Subscription Revenue Q2: $1.6M (67% of total), 89% retention rate, 15% quarter-over-quarter growth",
-    "One-time Purchase Q2: $800K (33% of total), 23% increase from Q1, average order value $78",
-    "Top Revenue Products Q2: Whey Protein ($720K), Pre-Workout ($480K), Creatine ($360K)",
-    "Customer Acquisition Q2: 12,400 new customers, $67 average acquisition cost, $289 lifetime value",
-    "Profit Margins Q2: 42% gross margin overall, Whey Protein (45%), Creatine (52%), Pre-Workout (38%)"
+    "Q3 2025 Revenue: $2.8M total revenue, 38% increase from Q2 ($2.1M), 72% growth year-over-year",
+    "Subscription Revenue Q3 2025: $1.9M (68% of total), 91% retention rate, 18% quarter-over-quarter growth",
+    "One-time Purchase Q3 2025: $900K (32% of total), 28% increase from Q2, average order value $82",
+    "Top Revenue Products Q3 2025: Whey Protein ($840K), Pre-Workout ($560K), Creatine ($420K)",
+    "Customer Acquisition Q3 2025: 14,200 new customers, $62 average acquisition cost, $312 lifetime value",
+    "Profit Margins Q3 2025: 44% gross margin overall, Whey Protein (47%), Creatine (54%), Pre-Workout (40%)"
 ]
 
 SUBSCRIPTION_METRICS_DATA = [
@@ -39,21 +39,21 @@ SUBSCRIPTION_METRICS_DATA = [
 ]
 
 QUARTERLY_COMPARISON_DATA = [
-    "Q2 vs Q1 Growth: Revenue +34%, New customers +28%, Subscription signups +45%",
-    "Q2 vs Q1 Product Performance: Whey Protein +31%, Creatine +42%, Fat Burner +67%",
-    "Q2 Seasonal Trends: Summer prep drove 67% increase in Fat Burner sales, Pre-Workout steady",
-    "Q2 Marketing ROI: $1.2M marketing spend, 4.2:1 ROAS, $67 customer acquisition cost",
-    "Q2 Operational Efficiency: 15% reduction in fulfillment costs, 98.7% order accuracy",
-    "Q2 Geographic Expansion: 23% growth in West Coast markets, 45% increase in subscription penetration"
+    "Q3 vs Q2 2025 Growth: Revenue +38%, New customers +32%, Subscription signups +48%",
+    "Q3 vs Q2 2025 Product Performance: Whey Protein +34%, Creatine +45%, Fat Burner +72%",
+    "Q3 2025 Seasonal Trends: Summer prep drove 72% increase in Fat Burner sales, Pre-Workout steady",
+    "Q3 2025 Marketing ROI: $1.4M marketing spend, 4.8:1 ROAS, $62 customer acquisition cost",
+    "Q3 2025 Operational Efficiency: 18% reduction in fulfillment costs, 99.1% order accuracy",
+    "Q3 2025 Geographic Expansion: 28% growth in West Coast markets, 52% increase in subscription penetration"
 ]
 
 FORECASTING_DATA = [
-    "Q3 2024 Forecast: $2.8M projected revenue (+17% from Q2), back-to-school fitness surge expected",
-    "Annual 2024 Projection: $10.2M total revenue, 78% from subscriptions, 145% year-over-year growth",
-    "Subscription Forecast: 45,000 active subscribers by end of 2024, $2.3M monthly recurring revenue",
-    "Product Demand Forecast: Pre-Workout +25% in Q3, Fat Burner +45% in Q4, Protein steady growth",
-    "Market Expansion: Launch in 3 new states Q3, potential $500K additional quarterly revenue",
-    "Investment Requirements: $800K for inventory scaling, $400K for marketing expansion"
+    "Q4 2025 Forecast: $3.2M projected revenue (+14% from Q3), holiday fitness surge expected",
+    "Annual 2025 Projection: $11.8M total revenue, 82% from subscriptions, 165% year-over-year growth",
+    "Subscription Forecast: 52,000 active subscribers by end of 2025, $2.8M monthly recurring revenue",
+    "Product Demand Forecast Q4 2025: Pre-Workout +28% in Q4, Fat Burner +52% in Q4, Protein steady growth",
+    "Market Expansion 2025: Launch in 5 new states Q4, potential $650K additional quarterly revenue",
+    "Investment Requirements 2025: $1.2M for inventory scaling, $600K for marketing expansion"
 ]
 
 # Create agent instance

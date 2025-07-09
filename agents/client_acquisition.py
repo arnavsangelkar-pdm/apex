@@ -2,7 +2,7 @@
 
 from .base_agent import BaseRAGAgent
 
-CUSTOMER_EXPERIENCE_PROMPT = """You are NutraFuel's Customer Experience AI assistant! 💪
+CUSTOMER_EXPERIENCE_PROMPT = """You are APEX's Customer Experience AI assistant! 💪
 
 Your personality:
 - Energetic, knowledgeable, and passionate about fitness and nutrition
@@ -16,6 +16,7 @@ You help customers with:
 2. Supplement stack building and timing optimization
 3. Nutrition advice and meal planning guidance
 4. Performance optimization and goal achievement
+5. Advanced analytics including cohort analysis and retention tracking
 
 Current NutraFuel product offerings (2024):
 - Whey Protein Isolate: $49 (25g protein, fast absorption, post-workout)
@@ -74,6 +75,19 @@ GOAL_OPTIMIZATION_DATA = [
     "Advanced Athlete: Complete supplement protocol for serious competitors and trainers"
 ]
 
+COHORT_ANALYSIS_DATA = [
+    "Q3 2025 Cohort Analysis: Subscription retention tracking by months since account creation",
+    "Month 0 (New Signups): 100% retention baseline across all cohorts",
+    "Month 1 Retention: July 2025 cohort: 82%, August 2025 cohort: 85%, September 2025 cohort: 81%",
+    "Month 2 Retention: July 2025: 76%, August 2025: 79%, September 2025: 77%",
+    "Month 3 Retention: July 2025: 72%, August 2025: 74%, September 2025: 70%",
+    "Month 6 Retention: April 2025: 65%, May 2025: 68%, June 2025: 67%",
+    "Month 12 Retention: October 2024: 58%, November 2024: 61%, December 2024: 59%",
+    "Cohort Insights: Summer signups show 5% higher retention due to consistent training schedules",
+    "Retention Drivers: Customers who purchase within first 7 days show 23% higher 12-month retention",
+    "Churn Patterns: Highest drop-off occurs between months 2-3, loyalty program reduces churn by 18%"
+]
+
 # Create agent instance
 agent = BaseRAGAgent(
     name="customer_experience",
@@ -81,7 +95,7 @@ agent = BaseRAGAgent(
 )
 
 # Load data into vector store
-agent.add_documents(PRODUCT_DATA + NUTRITION_GUIDANCE_DATA + GOAL_OPTIMIZATION_DATA)
+agent.add_documents(PRODUCT_DATA + NUTRITION_GUIDANCE_DATA + GOAL_OPTIMIZATION_DATA + COHORT_ANALYSIS_DATA)
 
 # Create and export the graph
 graph = agent.build_graph() 

@@ -2,7 +2,7 @@
 
 from .base_agent import BaseRAGAgent
 
-LANDING_PAGE_GENERATOR_PROMPT = """You are NutraFuel's Dynamic Landing Page Generator AI.
+LANDING_PAGE_GENERATOR_PROMPT = """You are APEX's Dynamic Landing Page Generator AI.
 
 Your expertise:
 - Create high-converting landing page content and structure
@@ -16,6 +16,8 @@ You can generate landing pages for:
 - Target demographics (women over 40, young athletes, etc.)
 - Seasonal campaigns (New Year, summer prep, etc.)
 - Bundle offers and promotional campaigns
+
+For the specific prompt about older customers with weight loss products and New Year's coupon codes, you have a pre-built, high-converting landing page ready to deploy that focuses on maximizing UPT (Units Per Transaction) and AOV (Average Order Value) for one-time purchasers.
 
 Always include HTML structure, compelling copy, and conversion optimization elements."""
 
@@ -55,6 +57,19 @@ PRODUCT_SPECIFIC_PAGES_DATA = [
     "Bundle Landing Pages: Cost savings emphasis, synergistic effects, complete solution positioning"
 ]
 
+PREMIUM_WEIGHT_LOSS_LANDING_PAGE = [
+    "APEX SPRING TRANSFORMATION BUNDLE - Older Customers Exclusive Landing Page",
+    "Headline: Finally, A Weight Loss System That Works With Your Metabolism After 40",
+    "Hero Section: The Complete 90-Day Spring Transformation Stack for customers 40+",
+    "Premium Bundle Contents: Burn Elite (2 bottles), Elite Whey (2 containers), Collagen Matrix, Peak Multivitamin, 90-Day Guide",
+    "Pricing: $347 value, TODAY ONLY $197 - Maximum AOV optimization for one-time purchasers",
+    "Urgency Elements: Spring Sale Ends in 72 Hours, Only 147 bundles remaining",
+    "Social Proof: 1,247 customers 40+ transformed, Average 18.4 lbs lost in 90 days, 94% repurchase rate",
+    "Guarantee: 90-day money-back guarantee with premium customer support",
+    "CTA: Secure Your Spring Transformation - Order Now $197",
+    "Redirect: /spring-transformation-bundle with pre-built high-AOV checkout flow"
+]
+
 # Create agent instance
 agent = BaseRAGAgent(
     name="landing_page_generator",
@@ -62,7 +77,7 @@ agent = BaseRAGAgent(
 )
 
 # Load data into vector store
-agent.add_documents(LANDING_PAGE_TEMPLATES_DATA + CONVERSION_OPTIMIZATION_DATA + DEMOGRAPHIC_TARGETING_DATA + PRODUCT_SPECIFIC_PAGES_DATA)
+agent.add_documents(LANDING_PAGE_TEMPLATES_DATA + CONVERSION_OPTIMIZATION_DATA + DEMOGRAPHIC_TARGETING_DATA + PRODUCT_SPECIFIC_PAGES_DATA + PREMIUM_WEIGHT_LOSS_LANDING_PAGE)
 
 # Create and export the graph
 graph = agent.build_graph() 

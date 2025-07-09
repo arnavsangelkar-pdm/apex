@@ -20,12 +20,12 @@ Always cite specific data points and focus on evidence-based nutrition insights 
 
 # Mock data - Supplement analytics and performance
 PRODUCT_PERFORMANCE_DATA = [
-    "Whey Protein Isolate Q4 2024: 96% customer satisfaction, 18% increase in repeat purchases",
-    "Creatine Monohydrate Q4 2024: 94% report strength gains, 23% improvement in power output metrics",
-    "Pre-Workout Complex: 91% energy satisfaction, bestselling pre-workout 8 months running",
-    "BCAA Recovery: 89% recovery improvement reported, 21% increase in endurance athlete customer base",
-    "Fat Burner Pro: 87% weight loss satisfaction, 15% average body fat reduction over 8 weeks",
-    "Sleep Recovery: 93% sleep quality rating, suitable for 97% of athletes and active individuals"
+    "Whey Protein Isolate Q3 2025: 96% customer satisfaction, 18% increase in repeat purchases",
+    "Creatine Monohydrate Q3 2025: 94% report strength gains, 23% improvement in power output metrics",
+    "Pre-Workout Complex Q3 2025: 91% energy satisfaction, bestselling pre-workout 8 months running",
+    "BCAA Recovery Q3 2025: 89% recovery improvement reported, 21% increase in endurance athlete customer base",
+    "Fat Burner Pro Q3 2025: 87% weight loss satisfaction, 15% average body fat reduction over 8 weeks",
+    "Sleep Recovery Q3 2025: 93% sleep quality rating, suitable for 97% of athletes and active individuals"
 ]
 
 INGREDIENT_ANALYTICS_DATA = [
@@ -38,12 +38,12 @@ INGREDIENT_ANALYTICS_DATA = [
 ]
 
 MARKET_INTELLIGENCE_DATA = [
-    "Supplement Market Q4 2024: 31% growth in plant protein, whey protein remains top performer",
-    "Customer Demographics: 72% customers aged 22-45, 84% prioritize third-party testing and transparency",
-    "Seasonal Trends: Protein sales peak 45% in January, pre-workout increases 38% in spring/summer",
-    "Competitor Analysis: NutraFuel prices 12% below premium brands while maintaining clinical dosages",
-    "Ingredient Trends: Clean label up 27%, nootropics growing 35%, sustainable packaging expected",
-    "Customer Preferences: 78% prefer unflavored options, 91% read supplement facts before purchasing"
+    "Supplement Market Q3 2025: 31% growth in plant protein, whey protein remains top performer",
+    "Customer Demographics Q3 2025: 72% customers aged 22-45, 84% prioritize third-party testing and transparency",
+    "Seasonal Trends Q3 2025: Protein sales peak 45% in January, pre-workout increases 38% in spring/summer",
+    "Competitor Analysis Q3 2025: APEX prices 12% below premium brands while maintaining clinical dosages",
+    "Ingredient Trends Q3 2025: Clean label up 27%, nootropics growing 35%, sustainable packaging expected",
+    "Customer Preferences Q3 2025: 78% prefer unflavored options, 91% read supplement facts before purchasing"
 ]
 
 CUSTOMER_PERFORMANCE_DATA = [
