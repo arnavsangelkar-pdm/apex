@@ -89,7 +89,7 @@ const products: Product[] = [
     name: 'Elite Whey Isolate',
     price: 69,
     originalPrice: 79,
-    image: '/products/apex-elite-whey-isolate.jpg',
+    image: '/images/elite-whey-isolate.png',
     category: 'Protein',
     description: '25g ultra-pure whey protein isolate, zero sugar, rapid absorption',
     rating: 4.9,
@@ -102,7 +102,7 @@ const products: Product[] = [
     name: 'Ignite Pre-Workout',
     price: 49,
     originalPrice: 59,
-    image: '/products/apex-ignite-pre-workout.jpg',
+    image: '/images/ignite-pre-workout.png',
     category: 'Pre-Workout',
     description: 'Clean energy, laser focus, explosive pumps. No crash.',
     rating: 4.8,
@@ -113,7 +113,7 @@ const products: Product[] = [
     id: '3',
     name: 'Creatine HCL Pro',
     price: 39,
-    image: '/products/apex-creatine-hcl-pro.jpg',
+    image: '/images/creatine-hcl-pro.png',
     category: 'Performance',
     description: 'Superior absorption, strength gains, no bloating',
     rating: 4.9,
@@ -124,7 +124,7 @@ const products: Product[] = [
     id: '4',
     name: 'Recovery BCAA+',
     price: 42,
-    image: '/products/apex-recovery-bcaa-plus.jpg',
+    image: '/images/recovery-bcaa-pro.png',
     category: 'Recovery',
     description: '2:1:1 BCAA ratio + electrolytes for optimal recovery',
     rating: 4.7,
@@ -134,7 +134,7 @@ const products: Product[] = [
     id: '5',
     name: 'Burn Elite',
     price: 59,
-    image: '/products/apex-burn-elite.jpg',
+    image: '/images/burn-elite.png',
     category: 'Fat Loss',
     description: 'Advanced thermogenic formula, appetite control, energy boost',
     rating: 4.6,
@@ -145,7 +145,7 @@ const products: Product[] = [
     id: '6',
     name: 'Night Recovery Pro',
     price: 45,
-    image: '/products/apex-night-recovery-pro.jpg',
+    image: '/images/night-recovery-pro.png',
     category: 'Recovery',
     description: 'Deep sleep support, muscle recovery, growth hormone optimization',
     rating: 4.8,
@@ -155,7 +155,7 @@ const products: Product[] = [
     id: '7',
     name: 'Peak Multivitamin',
     price: 35,
-    image: '/products/apex-peak-multivitamin.jpg',
+    image: '/images/peak-multivitamin.png',
     category: 'Health',
     description: 'Elite athlete formulation, bioavailable nutrients',
     rating: 4.7,
@@ -165,7 +165,7 @@ const products: Product[] = [
     id: '8',
     name: 'Collagen Matrix',
     price: 52,
-    image: '/products/apex-collagen-matrix.jpg',
+    image: '/images/collagen-matrix.png',
     category: 'Recovery',
     description: 'Type I, II, III collagen for joints, skin, and recovery',
     rating: 4.6,
@@ -649,64 +649,64 @@ export default function Home() {
             <p className="text-gray-700 text-lg">Find the perfect supplements for your goals</p>
           </div>
           
-          <div className="grid md:grid-cols-5 gap-8">
-            <div className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300">
-              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-green-50 group-hover:to-white transition-all duration-300 border border-gray-100 hover:border-green-200">
+          <div className="grid md:grid-cols-5 gap-12">
+            <div className="text-center group cursor-pointer">
+              <div className="transition-all duration-300">
                 <img 
-                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=600&fit=crop&crop=center" 
+                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=800&fit=crop&crop=center" 
                   alt="Proteins"
-                  className="w-40 h-40 mx-auto object-cover rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300"
+                  className="w-56 h-56 mx-auto object-cover rounded-3xl mb-6 group-hover:scale-105 transition-all duration-300"
                 />
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-600 mb-2">Proteins</h3>
-                <p className="text-gray-600">Build lean muscle mass</p>
+                <h3 className="text-2xl font-bold text-gray-900 group-hover:text-green-600 mb-2 transition-colors">Proteins</h3>
+                <p className="text-gray-600 text-lg">Build lean muscle mass</p>
               </div>
             </div>
             
-            <div className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300">
-              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-blue-50 group-hover:to-white transition-all duration-300 border border-gray-100 hover:border-blue-200">
+            <div className="text-center group cursor-pointer">
+              <div className="transition-all duration-300">
                 <img 
-                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=600&fit=crop&crop=center" 
+                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=800&fit=crop&crop=center" 
                   alt="Pre-workouts"
-                  className="w-40 h-40 mx-auto object-cover rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300"
+                  className="w-56 h-56 mx-auto object-cover rounded-3xl mb-6 group-hover:scale-105 transition-all duration-300"
                 />
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">Pre-workouts</h3>
-                <p className="text-gray-600">Fuel your training</p>
+                <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 mb-2 transition-colors">Pre-workouts</h3>
+                <p className="text-gray-600 text-lg">Fuel your training</p>
               </div>
             </div>
             
-            <div className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300">
-              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-purple-50 group-hover:to-white transition-all duration-300 border border-gray-100 hover:border-purple-200">
+            <div className="text-center group cursor-pointer">
+              <div className="transition-all duration-300">
                 <img 
-                  src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=600&fit=crop&crop=center" 
+                  src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=800&fit=crop&crop=center" 
                   alt="Recovery"
-                  className="w-40 h-40 mx-auto object-cover rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300"
+                  className="w-56 h-56 mx-auto object-cover rounded-3xl mb-6 group-hover:scale-105 transition-all duration-300"
                 />
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-purple-600 mb-2">Recovery</h3>
-                <p className="text-gray-600">Optimize muscle repair</p>
+                <h3 className="text-2xl font-bold text-gray-900 group-hover:text-purple-600 mb-2 transition-colors">Recovery</h3>
+                <p className="text-gray-600 text-lg">Optimize muscle repair</p>
               </div>
             </div>
             
-            <div className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300">
-              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-orange-50 group-hover:to-white transition-all duration-300 border border-gray-100 hover:border-orange-200">
+            <div className="text-center group cursor-pointer">
+              <div className="transition-all duration-300">
                 <img 
                   src="/images/collagen-support.png" 
                   alt="Collagen support"
-                  className="w-40 h-40 mx-auto object-contain rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300"
+                  className="w-56 h-56 mx-auto object-contain rounded-3xl mb-6 group-hover:scale-105 transition-all duration-300"
                 />
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 mb-2">Collagen Support</h3>
-                <p className="text-gray-600">Joint & skin health</p>
+                <h3 className="text-2xl font-bold text-gray-900 group-hover:text-orange-600 mb-2 transition-colors">Collagen Support</h3>
+                <p className="text-gray-600 text-lg">Joint & skin health</p>
               </div>
             </div>
             
-            <div className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300">
-              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-teal-50 group-hover:to-white transition-all duration-300 border border-gray-100 hover:border-teal-200">
+            <div className="text-center group cursor-pointer">
+              <div className="transition-all duration-300">
                 <img 
-                  src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=600&h=600&fit=crop&crop=center" 
+                  src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=800&h=800&fit=crop&crop=center" 
                   alt="Essential Vitamins & Minerals"
-                  className="w-40 h-40 mx-auto object-cover rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300"
+                  className="w-56 h-56 mx-auto object-cover rounded-3xl mb-6 group-hover:scale-105 transition-all duration-300"
                 />
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-teal-600 mb-2">Essential Vitamins & Minerals</h3>
-                <p className="text-gray-600">Complete nutrition foundation</p>
+                <h3 className="text-2xl font-bold text-gray-900 group-hover:text-teal-600 mb-2 transition-colors">Essential Vitamins & Minerals</h3>
+                <p className="text-gray-600 text-lg">Complete nutrition foundation</p>
               </div>
             </div>
           </div>
