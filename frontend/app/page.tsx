@@ -584,18 +584,55 @@ export default function Home() {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center">
-                <Award className="h-24 w-24 mx-auto mb-4 text-yellow-300" />
-                <h3 className="text-2xl font-bold mb-2">Performance Proven</h3>
-                <p className="text-blue-100">Join 50,000+ athletes achieving their goals</p>
-                <div className="grid grid-cols-2 gap-4 mt-6 text-sm">
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-300">94%</div>
-                    <div className="text-blue-200">Satisfaction Rate</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-300">4.8★</div>
-                    <div className="text-blue-200">Average Rating</div>
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1549476464-37392f717541?w=800&h=600&fit=crop&crop=center" 
+                  alt="Athlete with supplements"
+                  className="w-full h-96 object-cover"
+                />
+                {/* Opaque black overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+                
+                {/* Value propositions overlay */}
+                <div className="absolute inset-0 flex flex-col justify-center p-8 text-center">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-center space-x-3 mb-6">
+                      <Award className="h-8 w-8 text-green-400" />
+                      <h3 className="text-2xl font-bold text-white">Performance Proven</h3>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 gap-4 space-y-3">
+                      <div className="flex items-center justify-center space-x-3">
+                        <CheckCircle className="h-6 w-6 text-green-400 flex-shrink-0" />
+                        <span className="text-white font-semibold">Third-Party Lab Tested</span>
+                      </div>
+                      
+                      <div className="flex items-center justify-center space-x-3">
+                        <Brain className="h-6 w-6 text-green-400 flex-shrink-0" />
+                        <span className="text-white font-semibold">AI-Powered Recommendations</span>
+                      </div>
+                      
+                      <div className="flex items-center justify-center space-x-3">
+                        <TrendingUp className="h-6 w-6 text-green-400 flex-shrink-0" />
+                        <span className="text-white font-semibold">Clinically Dosed Formulas</span>
+                      </div>
+                      
+                      <div className="flex items-center justify-center space-x-3">
+                        <Users className="h-6 w-6 text-green-400 flex-shrink-0" />
+                        <span className="text-white font-semibold">50,000+ Satisfied Athletes</span>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-gray-600">
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-green-400">94%</div>
+                        <div className="text-gray-300 text-sm">Satisfaction Rate</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-green-400">4.8★</div>
+                        <div className="text-gray-300 text-sm">Average Rating</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -612,64 +649,64 @@ export default function Home() {
             <p className="text-gray-700 text-lg">Find the perfect supplements for your goals</p>
           </div>
           
-          <div className="grid md:grid-cols-5 gap-6">
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
+          <div className="grid md:grid-cols-5 gap-8">
+            <div className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300">
+              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-green-50 group-hover:to-white transition-all duration-300 border border-gray-100 hover:border-green-200">
                 <img 
-                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&crop=center" 
+                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=600&fit=crop&crop=center" 
                   alt="Proteins"
-                  className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
+                  className="w-40 h-40 mx-auto object-cover rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300"
                 />
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-600">Proteins</h3>
-                <p className="text-sm text-gray-600">Build lean muscle mass</p>
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-600 mb-2">Proteins</h3>
+                <p className="text-gray-600">Build lean muscle mass</p>
               </div>
             </div>
             
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
+            <div className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300">
+              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-blue-50 group-hover:to-white transition-all duration-300 border border-gray-100 hover:border-blue-200">
                 <img 
-                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&crop=center" 
+                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=600&fit=crop&crop=center" 
                   alt="Pre-workouts"
-                  className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
+                  className="w-40 h-40 mx-auto object-cover rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300"
                 />
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-600">Pre-workouts</h3>
-                <p className="text-sm text-gray-600">Fuel your training</p>
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">Pre-workouts</h3>
+                <p className="text-gray-600">Fuel your training</p>
               </div>
             </div>
             
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
+            <div className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300">
+              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-purple-50 group-hover:to-white transition-all duration-300 border border-gray-100 hover:border-purple-200">
                 <img 
-                  src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=400&fit=crop&crop=center" 
+                  src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=600&fit=crop&crop=center" 
                   alt="Recovery"
-                  className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
+                  className="w-40 h-40 mx-auto object-cover rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300"
                 />
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-600">Recovery</h3>
-                <p className="text-sm text-gray-600">Optimize muscle repair</p>
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-purple-600 mb-2">Recovery</h3>
+                <p className="text-gray-600">Optimize muscle repair</p>
               </div>
             </div>
             
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
+            <div className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300">
+              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-orange-50 group-hover:to-white transition-all duration-300 border border-gray-100 hover:border-orange-200">
                 <img 
-                  src="https://images.unsplash.com/photo-1506629905607-12d4c32bb3d4?w=400&h=400&fit=crop&crop=center" 
+                  src="/images/collagen-support.png" 
                   alt="Collagen support"
-                  className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
+                  className="w-40 h-40 mx-auto object-contain rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300"
                 />
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-600">Collagen Support</h3>
-                <p className="text-sm text-gray-600">Joint & skin health</p>
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 mb-2">Collagen Support</h3>
+                <p className="text-gray-600">Joint & skin health</p>
               </div>
             </div>
             
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
+            <div className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300">
+              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl group-hover:bg-gradient-to-br group-hover:from-teal-50 group-hover:to-white transition-all duration-300 border border-gray-100 hover:border-teal-200">
                 <img 
-                  src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=400&fit=crop&crop=center" 
+                  src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=600&h=600&fit=crop&crop=center" 
                   alt="Essential Vitamins & Minerals"
-                  className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
+                  className="w-40 h-40 mx-auto object-cover rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300"
                 />
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-600">Essential Vitamins & Minerals</h3>
-                <p className="text-sm text-gray-600">Complete nutrition foundation</p>
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-teal-600 mb-2">Essential Vitamins & Minerals</h3>
+                <p className="text-gray-600">Complete nutrition foundation</p>
               </div>
             </div>
           </div>
