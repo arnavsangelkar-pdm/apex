@@ -196,6 +196,8 @@ export default function Home() {
   const [searchResults, setSearchResults] = useState<any[]>([])
   const [isSearching, setIsSearching] = useState(false)
   const [voiceSupported, setVoiceSupported] = useState(false)
+  const [showAddStackButton, setShowAddStackButton] = useState(false)
+  const [agentTitle, setAgentTitle] = useState('AI Assistant')
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Set mounted to true after hydration
@@ -238,13 +240,54 @@ export default function Home() {
     }
   }
 
+  // Add recommended stack to cart
+  const addRecommendedStack = () => {
+    // Default recommended stack - same 3 products each time
+    const recommendedProducts = [
+      products.find(p => p.name === 'Elite Whey Isolate'),
+      products.find(p => p.name === 'Ignite Pre-Workout'),
+      products.find(p => p.name === 'Creatine HCL Pro')
+    ].filter(Boolean) // Remove any undefined products
+
+    recommendedProducts.forEach(product => {
+      if (product) addToCart(product)
+    })
+
+    // Close agent modal and show cart
+    closeAgent()
+    setShowCart(true)
+  }
+
   const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0)
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0)
+
+  // Close agent function
+  const closeAgent = () => {
+    setShowAgent(false)
+    setActiveAgent('')
+    setMessages([])
+    setInputMessage('')
+    setShowAddStackButton(false)
+    setAgentTitle('AI Assistant')
+  }
 
   // Agent functions
   const startAgentChat = (agentId: string, agentName: string) => {
     setActiveAgent(agentId)
     setShowAgent(true)
+    
+    // Set agent-specific titles and behavior
+    if (agentId === 'rachel_nutrition' && agentName.includes('stack')) {
+      setAgentTitle('Apex Custom Stacks')
+      setShowAddStackButton(false) // Will show after AI responds
+    } else if (agentId === 'rachel_nutrition') {
+      setAgentTitle('Rachel the Celebrity Nutritionist')
+      setShowAddStackButton(false)
+    } else {
+      setAgentTitle('AI Assistant')
+      setShowAddStackButton(false)
+    }
+    
     setMessages([{
       role: 'assistant',
       content: `Hi! I'm ${agentName}. How can I help you today?`,
@@ -308,10 +351,19 @@ export default function Home() {
     setIsLoading(true)
 
     try {
+      // Configure optimized parameters for faster responses
+      const timeoutMs = 20000; // 20s timeout for frontend agents
+      const kValue = 2; // Use fewer documents for faster responses
+      
       const response = await axios.post('/query/frontend', {
         query: inputMessage,
         agent: activeAgent,
-        k: 3
+        k: kValue
+      }, {
+        timeout: timeoutMs,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
 
       const assistantMessage: Message = {
@@ -321,11 +373,27 @@ export default function Home() {
       }
 
       setMessages(prev => [...prev, assistantMessage])
-    } catch (error) {
+      
+      // Show "Add this Stack" button for custom stack agent after AI responds
+      if (agentTitle === 'Apex Custom Stacks') {
+        setShowAddStackButton(true)
+      }
+    } catch (error: any) {
       console.error('Error:', error)
+      
+      let errorMessage = 'Sorry, I encountered an error. Please try again.'
+      
+      if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+        errorMessage = 'The request timed out. Please try a simpler, more specific question.'
+      } else if (error.response?.status === 404) {
+        errorMessage = 'API server not found. Please make sure the backend server is running on port 8000.'
+      } else if (error.response?.status >= 500) {
+        errorMessage = 'Server error. The AI agent may be overloaded. Please try again in a moment.'
+      }
+      
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.',
+        content: errorMessage,
         timestamp: new Date()
       }])
     } finally {
@@ -560,7 +628,7 @@ export default function Home() {
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button
-                  onClick={() => startAgentChat('rachel_nutrition', 'Rachel - Nutrition Expert')}
+                  onClick={() => startAgentChat('rachel_nutrition', 'Apex Custom Stack Builder')}
                   className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-white hover:text-black transition-colors flex items-center justify-center space-x-2"
                 >
                   <MessageCircle className="h-5 w-5" />
@@ -1231,12 +1299,12 @@ export default function Home() {
                     <MessageCircle className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">AI Assistant</h3>
+                    <h3 className="text-2xl font-bold text-white">{agentTitle}</h3>
                     <p className="text-gray-400">Powered by advanced AI technology</p>
                   </div>
                 </div>
                 <button 
-                  onClick={() => setShowAgent(false)}
+                  onClick={closeAgent}
                   className="p-3 hover:bg-gray-700 rounded-xl transition-colors text-gray-400 hover:text-white"
                 >
                   <X className="h-6 w-6" />
@@ -1280,6 +1348,22 @@ export default function Home() {
                 <div ref={messagesEndRef} />
               </div>
             </div>
+            
+            {/* Add This Stack Button */}
+            {showAddStackButton && (
+              <div className="px-8 py-4 border-t border-gray-700 bg-gray-800">
+                <div className="max-w-4xl mx-auto text-center">
+                  <button
+                    onClick={addRecommendedStack}
+                    className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-8 py-4 rounded-xl hover:from-green-600 hover:to-blue-700 transition-all duration-300 flex items-center space-x-2 shadow-lg mx-auto font-semibold text-lg"
+                  >
+                    <ShoppingCart className="h-5 w-5" />
+                    <span>Add This Stack</span>
+                  </button>
+                  <p className="text-gray-400 text-sm mt-2">Add recommended supplements to your cart</p>
+                </div>
+              </div>
+            )}
             
             {/* Input Area */}
             <div className="p-8 border-t border-gray-700 bg-gray-800">

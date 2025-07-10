@@ -308,6 +308,27 @@ export default function WheyProteinPage() {
               </button>
             </div>
 
+            {/* AI Synthesized Review */}
+            <div className="bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-4">
+              <div className="flex items-start space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Zap className="h-5 w-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-800 mb-2">
+                    Our AI synthesized over 5k reviews to give you the key points you need to know!
+                  </p>
+                  <div className="bg-white rounded-lg p-3 border border-blue-100">
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                      "Overwhelming positive feedback, especially relating to flavor, mixability and price point. 
+                      Very few users had negative comments, however the little that did, expressed frustration 
+                      on not having a broader variety of flavors."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Price */}
             <div className="flex items-center space-x-4">
               <span className="text-3xl font-bold text-gray-900">${selectedFlavor.price}</span>
