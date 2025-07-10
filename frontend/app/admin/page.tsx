@@ -665,9 +665,9 @@ export default function AdminDashboard() {
       {/* AI Agent Modal */}
       {showAgentModal && selectedAgent && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-900 rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden shadow-2xl border border-gray-700">
-            {/* Header */}
-            <div className="p-8 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900">
+          <div className="bg-gray-900 rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden shadow-2xl border border-gray-700 flex flex-col">
+            {/* Header - Always visible */}
+            <div className="flex-shrink-0 p-6 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div className={`w-12 h-12 ${selectedAgent.color} rounded-xl flex items-center justify-center`}>
@@ -680,14 +680,15 @@ export default function AdminDashboard() {
                 </div>
                 <button 
                   onClick={closeAgentModal}
-                  className="p-3 hover:bg-gray-700 rounded-xl transition-colors text-gray-400 hover:text-white"
+                  className="p-3 hover:bg-gray-700 rounded-xl transition-colors text-gray-400 hover:text-white flex items-center justify-center"
+                  title="Close"
                 >
                   <X className="h-6 w-6" />
                 </button>
               </div>
             </div>
 
-            <div className="flex h-[75vh]">
+            <div className="flex flex-1 min-h-0">
               {/* Sample Queries Sidebar */}
               <div className="w-80 border-r border-gray-700 bg-gray-800 p-6 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
                 <h4 className="font-semibold mb-4 text-white text-lg">Sample Queries</h4>
@@ -705,7 +706,7 @@ export default function AdminDashboard() {
               </div>
 
               {/* Chat Area */}
-              <div className="flex-1 flex flex-col bg-gray-900">
+              <div className="flex-1 flex flex-col bg-gray-900 min-h-0">
                 <div className="flex-1 overflow-y-auto p-8 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
                   <div className="space-y-6 max-w-5xl mx-auto">
                     {messages.map((message, index) => (
@@ -856,7 +857,7 @@ export default function AdminDashboard() {
                 </div>
                 
                 {/* Input Area */}
-                <div className="p-8 border-t border-gray-700 bg-gray-800">
+                <div className="flex-shrink-0 p-6 border-t border-gray-700 bg-gray-800">
                   <div className="max-w-5xl mx-auto">
                     <div className="flex space-x-4">
                       <input

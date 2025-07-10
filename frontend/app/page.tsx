@@ -1296,9 +1296,9 @@ export default function Home() {
       {/* AI Agent Modal */}
       {showAgent && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-900 rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-gray-700">
-            {/* Header */}
-            <div className="p-8 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900">
+          <div className="bg-gray-900 rounded-3xl max-w-6xl w-full max-h-[95vh] overflow-hidden shadow-2xl border border-gray-700 flex flex-col">
+            {/* Header - Always visible */}
+            <div className="flex-shrink-0 p-6 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center">
@@ -1311,7 +1311,8 @@ export default function Home() {
                 </div>
                 <button 
                   onClick={closeAgent}
-                  className="p-3 hover:bg-gray-700 rounded-xl transition-colors text-gray-400 hover:text-white"
+                  className="p-3 hover:bg-gray-700 rounded-xl transition-colors text-gray-400 hover:text-white flex items-center justify-center"
+                  title="Close"
                 >
                   <X className="h-6 w-6" />
                 </button>
@@ -1319,7 +1320,7 @@ export default function Home() {
             </div>
             
             {/* Messages Area */}
-            <div className="h-[600px] overflow-y-auto p-8 bg-gray-900 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+            <div className="flex-1 overflow-y-auto p-6 bg-gray-900 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 min-h-0">
               <div className="space-y-6 max-w-4xl mx-auto">
                 {messages.map((message, index) => (
                   <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -1357,7 +1358,7 @@ export default function Home() {
             
             {/* Add This Stack Button */}
             {showAddStackButton && (
-              <div className="px-8 py-4 border-t border-gray-700 bg-gray-800">
+              <div className="flex-shrink-0 px-6 py-4 border-t border-gray-700 bg-gray-800">
                 <div className="max-w-4xl mx-auto text-center">
                   <button
                     onClick={addRecommendedStack}
@@ -1372,7 +1373,7 @@ export default function Home() {
             )}
             
             {/* Input Area */}
-            <div className="p-8 border-t border-gray-700 bg-gray-800">
+            <div className="flex-shrink-0 p-6 border-t border-gray-700 bg-gray-800">
               <div className="max-w-4xl mx-auto">
                 <div className="flex space-x-4">
                   <input
