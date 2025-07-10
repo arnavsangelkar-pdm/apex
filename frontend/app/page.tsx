@@ -556,7 +556,7 @@ export default function Home() {
                   className="bg-green-400 text-black px-8 py-4 rounded-full text-lg font-bold hover:bg-green-300 transition-colors flex items-center justify-center space-x-2 group"
                 >
                   <Zap className="h-5 w-5" />
-                  <span>Find My Stack</span>
+                  <span>Shop Best Sellers</span>
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button
@@ -564,7 +564,7 @@ export default function Home() {
                   className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-white hover:text-black transition-colors flex items-center justify-center space-x-2"
                 >
                   <MessageCircle className="h-5 w-5" />
-                  <span>Talk to AI Expert</span>
+                  <span>Let Apex build your stack</span>
                 </button>
               </div>
 
@@ -575,7 +575,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Award className="h-5 w-5 text-green-400" />
-                  <span className="text-gray-300">Elite Formulas</span>
+                  <span className="text-gray-300">Custom Stacks</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Activity className="h-5 w-5 text-green-400" />
@@ -604,12 +604,84 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Product Categories Section */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-black mb-4">Shop by Category</h2>
+            <p className="text-gray-700 text-lg">Find the perfect supplements for your goals</p>
+          </div>
+          
+          <div className="grid md:grid-cols-5 gap-6">
+            <div className="text-center group cursor-pointer">
+              <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
+                <img 
+                  src="/products/apex-elite-whey-isolate.jpg" 
+                  alt="Proteins"
+                  className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-600">Proteins</h3>
+                <p className="text-sm text-gray-600">Build lean muscle mass</p>
+              </div>
+            </div>
+            
+            <div className="text-center group cursor-pointer">
+              <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
+                <img 
+                  src="/products/apex-ignite-pre-workout.jpg" 
+                  alt="Pre-workouts"
+                  className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-600">Pre-workouts</h3>
+                <p className="text-sm text-gray-600">Fuel your training</p>
+              </div>
+            </div>
+            
+            <div className="text-center group cursor-pointer">
+              <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
+                <img 
+                  src="/products/apex-recovery-bcaa-plus.jpg" 
+                  alt="Recovery"
+                  className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-600">Recovery</h3>
+                <p className="text-sm text-gray-600">Optimize muscle repair</p>
+              </div>
+            </div>
+            
+            <div className="text-center group cursor-pointer">
+              <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
+                <img 
+                  src="/products/apex-collagen-matrix.jpg" 
+                  alt="Collagen support"
+                  className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-600">Collagen Support</h3>
+                <p className="text-sm text-gray-600">Joint & skin health</p>
+              </div>
+            </div>
+            
+            <div className="text-center group cursor-pointer">
+              <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
+                <img 
+                  src="/products/apex-peak-multivitamin.jpg" 
+                  alt="Essential Vitamins & Minerals"
+                  className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-600">Essential Vitamins & Minerals</h3>
+                <p className="text-sm text-gray-600">Complete nutrition foundation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* AI Assistants Section */}
       <section className="py-16 px-4 bg-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-black mb-4">Your AI-Powered Performance Team</h3>
-            <p className="text-gray-700 text-lg">Expert guidance whenever you need it</p>
+            <h3 className="text-3xl font-bold text-black mb-4">Cutting edge nutrition intelligence</h3>
+            <p className="text-gray-700 text-lg">Get personalized nutrition and supplement stacks- just ask us!</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -621,7 +693,7 @@ export default function Home() {
                 <Search className="h-6 w-6 text-white group-hover:text-black" />
               </div>
               <h4 className="text-lg font-bold mb-2 text-black">Smart Search</h4>
-              <p className="text-gray-700 text-sm mb-3">Find the perfect supplement stack for your goals</p>
+              <p className="text-gray-700 text-sm mb-3">Curated product recommendations based on your goals</p>
               <div className="text-green-400 text-sm font-bold">Try: "Stack for muscle and fat loss" →</div>
             </div>
 
@@ -644,7 +716,7 @@ export default function Home() {
               <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mb-4 group-hover:bg-green-400 transition-colors">
                 <Target className="h-6 w-6 text-white group-hover:text-black" />
               </div>
-              <h4 className="text-lg font-bold mb-2 text-black">Hey Rachel</h4>
+              <h4 className="text-lg font-bold mb-2 text-black">Meet Rachel - nutrition expert</h4>
               <p className="text-gray-700 text-sm mb-3">Nutrition and supplement guidance</p>
               <div className="text-green-400 text-sm font-bold">"What should I eat for muscle gain?" →</div>
             </div>
