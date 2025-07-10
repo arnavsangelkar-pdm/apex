@@ -236,29 +236,17 @@ export default function AdminDashboard() {
       // Handle different agent types with special features
       let enhancedContent = assistantResponse
       
+      // Landing page generator gets preview functionality
       if (selectedAgent.id === 'landing_page_generator' && assistantResponse.includes('landing page')) {
         enhancedContent += '\n\n---\n\n**[Preview Landing Page] [Generate HTML]**'
         // Store the content for preview
         setPreviewContent(generateMockLandingPage(inputMessage, assistantResponse))
       }
       
-      if ((selectedAgent.id === 'financial_reports' || selectedAgent.id === 'product_analytics') && 
-          (inputMessage.toLowerCase().includes('chart') || inputMessage.toLowerCase().includes('graph') || 
-           inputMessage.toLowerCase().includes('visual') || inputMessage.toLowerCase().includes('revenue') ||
-           inputMessage.toLowerCase().includes('performance'))) {
-        enhancedContent += '\n\n---\n\n**[Generate Chart] [Download Data]**'
-        // Generate mock chart data
-        setChartData(generateMockChartData(selectedAgent.id, inputMessage))
-      }
-      
-      if (selectedAgent.id === 'customer_experience' && 
-          (inputMessage.toLowerCase().includes('cohort') || inputMessage.toLowerCase().includes('retention') || 
-           inputMessage.toLowerCase().includes('customer lifetime') || inputMessage.toLowerCase().includes('churn') ||
-           inputMessage.toLowerCase().includes('subscription') || inputMessage.toLowerCase().includes('chart'))) {
-        enhancedContent += '\n\n---\n\n**[Generate Cohort Chart] [Download Data]**'
-        // Generate cohort chart data
-        setChartData(generateCohortChartData(inputMessage))
-      }
+      // ALL agents get chart generation capability
+      enhancedContent += '\n\n---\n\n**[View Chart] [Download Data]**'
+      // Generate chart data for all agents
+      setChartData(generateChartDataForAgent(selectedAgent.id, inputMessage, assistantResponse))
 
       const assistantMessage: Message = {
         role: 'assistant',
@@ -369,36 +357,7 @@ export default function AdminDashboard() {
     `
   }
 
-  const generateMockChartData = (agentId: string, query: string) => {
-    if (agentId === 'financial_reports') {
-      return {
-        type: 'line',
-        title: 'Revenue Trend - Q1 vs Q2',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-          datasets: [{
-            label: 'Revenue ($)',
-            data: [180000, 190000, 210000, 230000, 250000, 280000],
-            borderColor: 'rgb(59, 130, 246)',
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-          }]
-        }
-      }
-    } else {
-      return {
-        type: 'bar',
-        title: 'Product Performance Analysis',
-        data: {
-          labels: ['Whey Protein', 'Creatine', 'Pre-Workout', 'BCAA', 'Fat Burner'],
-          datasets: [{
-            label: 'Sales',
-            data: [1200, 800, 600, 400, 350],
-            backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'],
-          }]
-        }
-      }
-    }
-  }
+
 
   const generateCohortChartData = (query: string) => {
     return {
@@ -419,6 +378,115 @@ export default function AdminDashboard() {
         ],
         timeLabels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
       }
+    }
+  }
+
+  // Generate chart data for any agent based on agent type
+  const generateChartDataForAgent = (agentId: string, query: string, aiResponse: string) => {
+    switch (agentId) {
+      case 'customer_experience':
+        return {
+          type: 'cohort',
+          title: 'Customer Retention Analysis',
+          data: {
+            cohorts: [
+              { month: 'Jan 2025', signups: 24, retention: [100, 83, 75, 71, 63, 58, 54, 51, 48, 45, 42, 39, 36] },
+              { month: 'Feb 2025', signups: 27, retention: [100, 81, 74, 70, 61, 56, 52, 49, 46, 43, 40, 37] },
+              { month: 'Mar 2025', signups: 33, retention: [100, 85, 79, 73, 67, 62, 58, 55, 52, 49, 46] },
+              { month: 'Apr 2025', signups: 30, retention: [100, 87, 80, 76, 69, 64, 60, 57, 54, 51] },
+              { month: 'May 2025', signups: 34, retention: [100, 85, 79, 74, 68, 63, 59, 56, 53] },
+              { month: 'Jun 2025', signups: 28, retention: [100, 82, 75, 71, 67, 62, 58, 55] }
+            ],
+            timeLabels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+          }
+        }
+
+      case 'financial_reports':
+        return {
+          type: 'line',
+          title: 'Revenue Growth Analysis',
+          data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+              label: 'Revenue ($)',
+              data: [180000, 190000, 210000, 230000, 250000, 280000],
+              borderColor: 'rgb(16, 185, 129)',
+              backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            }]
+          }
+        }
+
+      case 'product_analytics':
+        return {
+          type: 'bar',
+          title: 'Product Performance Metrics',
+          data: {
+            labels: ['Whey Protein', 'Creatine', 'Pre-Workout', 'BCAA', 'Fat Burner'],
+            datasets: [{
+              label: 'Sales Volume',
+              data: [1200, 800, 600, 400, 350],
+              backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'],
+            }]
+          }
+        }
+
+      case 'sales_optimizer':
+        return {
+          type: 'bar',
+          title: 'Sales Optimization Insights',
+          data: {
+            labels: ['Q1 Sales', 'Q2 Sales', 'Q3 Forecast', 'Q4 Target'],
+            datasets: [{
+              label: 'Revenue ($)',
+              data: [450000, 520000, 580000, 650000],
+              backgroundColor: ['#10b981', '#22c55e', '#84cc16', '#eab308'],
+            }]
+          }
+        }
+
+      case 'review_synthesis':
+        return {
+          type: 'bar',
+          title: 'Customer Sentiment Analysis',
+          data: {
+            labels: ['5 Stars', '4 Stars', '3 Stars', '2 Stars', '1 Star'],
+            datasets: [{
+              label: 'Review Count',
+              data: [3200, 1800, 400, 150, 50],
+              backgroundColor: ['#10b981', '#22c55e', '#fbbf24', '#f59e0b', '#ef4444'],
+            }]
+          }
+        }
+
+      case 'landing_page_generator':
+        return {
+          type: 'line',
+          title: 'Landing Page Performance',
+          data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            datasets: [{
+              label: 'Conversion Rate (%)',
+              data: [2.1, 2.8, 3.2, 3.9],
+              borderColor: 'rgb(168, 85, 247)',
+              backgroundColor: 'rgba(168, 85, 247, 0.1)',
+            }]
+          }
+        }
+
+      default:
+        // Default chart for any other agents
+        return {
+          type: 'bar',
+          title: 'Business Intelligence Overview',
+          data: {
+            labels: ['Customers', 'Revenue', 'Products', 'Growth'],
+            datasets: [{
+              label: 'Performance Metrics',
+              data: [28547, 2400000, 8, 34],
+              backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'],
+            }]
+          }
+        }
     }
   }
 
@@ -744,25 +812,14 @@ export default function AdminDashboard() {
                                       </button>
                                     )
                                   }
-                                  if (text.includes('[Generate Chart]')) {
+                                  if (text.includes('[View Chart]')) {
                                     return (
                                       <button 
                                         onClick={() => setShowChart(true)}
-                                        className="inline-flex items-center space-x-1 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:from-purple-600 hover:to-purple-700 mr-2 shadow-lg"
+                                        className="inline-flex items-center space-x-1 bg-gradient-to-r from-green-500 to-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:from-green-600 hover:to-blue-700 mr-2 shadow-lg"
                                       >
-                                        <BarChart className="h-4 w-4" />
+                                        <BarChart3 className="h-4 w-4" />
                                         <span>View Chart</span>
-                                      </button>
-                                    )
-                                  }
-                                  if (text.includes('[Generate Cohort Chart]')) {
-                                    return (
-                                      <button 
-                                        onClick={() => setShowChart(true)}
-                                        className="inline-flex items-center space-x-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:from-blue-600 hover:to-blue-700 mr-2 shadow-lg"
-                                      >
-                                        <Users className="h-4 w-4" />
-                                        <span>View Cohort Chart</span>
                                       </button>
                                     )
                                   }
