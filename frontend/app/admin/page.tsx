@@ -664,38 +664,39 @@ export default function AdminDashboard() {
 
       {/* AI Agent Modal */}
       {showAgentModal && selectedAgent && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden shadow-2xl">
-            <div className="p-6 border-b bg-gradient-to-r from-gray-50 to-white">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden shadow-2xl border border-gray-700">
+            {/* Header */}
+            <div className="p-8 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className={`w-10 h-10 ${selectedAgent.color} rounded-lg flex items-center justify-center`}>
-                    <selectedAgent.icon className="h-5 w-5 text-white" />
+                <div className="flex items-center space-x-4">
+                  <div className={`w-12 h-12 ${selectedAgent.color} rounded-xl flex items-center justify-center`}>
+                    <selectedAgent.icon className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">{selectedAgent.name}</h3>
-                    <p className="text-gray-600 text-sm">{selectedAgent.description}</p>
+                    <h3 className="text-2xl font-bold text-white">{selectedAgent.name}</h3>
+                    <p className="text-gray-400">{selectedAgent.description}</p>
                   </div>
                 </div>
                 <button 
                   onClick={closeAgentModal}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-3 hover:bg-gray-700 rounded-xl transition-colors text-gray-400 hover:text-white"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-6 w-6" />
                 </button>
               </div>
             </div>
 
-            <div className="flex h-[60vh]">
+            <div className="flex h-[75vh]">
               {/* Sample Queries Sidebar */}
-              <div className="w-80 border-r bg-gray-50 p-4 overflow-y-auto">
-                <h4 className="font-semibold mb-3 text-gray-900">Sample Queries</h4>
-                <div className="space-y-2">
+              <div className="w-80 border-r border-gray-700 bg-gray-800 p-6 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                <h4 className="font-semibold mb-4 text-white text-lg">Sample Queries</h4>
+                <div className="space-y-3">
                   {sampleQueries[selectedAgent.id as keyof typeof sampleQueries]?.map((query, index) => (
                     <button
                       key={index}
                       onClick={() => handleSampleQuery(query)}
-                      className="w-full text-left p-3 text-sm bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-200 rounded-lg transition-colors"
+                      className="w-full text-left p-4 text-sm bg-gray-700 hover:bg-gray-600 border border-gray-600 hover:border-green-400 rounded-xl transition-all duration-300 text-gray-200 hover:text-white shadow-lg hover:shadow-xl"
                     >
                       {query}
                     </button>
@@ -704,18 +705,19 @@ export default function AdminDashboard() {
               </div>
 
               {/* Chat Area */}
-              <div className="flex-1 flex flex-col">
-                <div className="flex-1 overflow-y-auto p-6">
-                  <div className="space-y-4">
+              <div className="flex-1 flex flex-col bg-gray-900">
+                <div className="flex-1 overflow-y-auto p-8 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                  <div className="space-y-6 max-w-5xl mx-auto">
                     {messages.map((message, index) => (
-                      <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} mb-4`}>
-                        <div className={`max-w-[85%] px-4 py-3 rounded-lg ${
+                      <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} mb-6`}>
+                        <div className={`max-w-[80%] px-6 py-4 rounded-2xl ${
                           message.role === 'user' 
-                            ? 'bg-blue-600 text-white' 
-                            : 'bg-gray-100 text-gray-800'
+                            ? 'bg-gradient-to-br from-green-500 to-blue-600 text-white shadow-lg' 
+                            : 'bg-gray-800 text-gray-100 border border-gray-700 shadow-lg'
                         }`}>
-                          <div className="text-sm leading-relaxed break-words">
+                          <div className="text-base leading-relaxed break-words">
                             <ReactMarkdown 
+                              className="prose prose-invert max-w-none"
                               components={{
                                 strong: ({children}) => {
                                   const text = children?.toString() || ''
@@ -723,9 +725,9 @@ export default function AdminDashboard() {
                                     return (
                                       <button 
                                         onClick={() => setShowPreview(true)}
-                                        className="inline-flex items-center space-x-1 bg-blue-500 text-white px-3 py-1 rounded-full text-xs hover:bg-blue-600 mr-2"
+                                        className="inline-flex items-center space-x-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:from-blue-600 hover:to-blue-700 mr-2 shadow-lg"
                                       >
-                                        <Monitor className="h-3 w-3" />
+                                        <Monitor className="h-4 w-4" />
                                         <span>Preview</span>
                                       </button>
                                     )
@@ -734,9 +736,9 @@ export default function AdminDashboard() {
                                     return (
                                       <button 
                                         onClick={() => navigator.clipboard.writeText(previewContent)}
-                                        className="inline-flex items-center space-x-1 bg-green-500 text-white px-3 py-1 rounded-full text-xs hover:bg-green-600"
+                                        className="inline-flex items-center space-x-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-lg text-sm hover:from-green-600 hover:to-green-700 shadow-lg"
                                       >
-                                        <FileText className="h-3 w-3" />
+                                        <FileText className="h-4 w-4" />
                                         <span>Copy HTML</span>
                                       </button>
                                     )
@@ -745,9 +747,9 @@ export default function AdminDashboard() {
                                     return (
                                       <button 
                                         onClick={() => setShowChart(true)}
-                                        className="inline-flex items-center space-x-1 bg-purple-500 text-white px-3 py-1 rounded-full text-xs hover:bg-purple-600 mr-2"
+                                        className="inline-flex items-center space-x-1 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:from-purple-600 hover:to-purple-700 mr-2 shadow-lg"
                                       >
-                                        <BarChart className="h-3 w-3" />
+                                        <BarChart className="h-4 w-4" />
                                         <span>View Chart</span>
                                       </button>
                                     )
@@ -756,9 +758,9 @@ export default function AdminDashboard() {
                                     return (
                                       <button 
                                         onClick={() => setShowChart(true)}
-                                        className="inline-flex items-center space-x-1 bg-blue-500 text-white px-3 py-1 rounded-full text-xs hover:bg-blue-600 mr-2"
+                                        className="inline-flex items-center space-x-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:from-blue-600 hover:to-blue-700 mr-2 shadow-lg"
                                       >
-                                        <Users className="h-3 w-3" />
+                                        <Users className="h-4 w-4" />
                                         <span>View Cohort Chart</span>
                                       </button>
                                     )
@@ -767,30 +769,30 @@ export default function AdminDashboard() {
                                     return (
                                       <button 
                                         onClick={() => downloadChartData()}
-                                        className="inline-flex items-center space-x-1 bg-orange-500 text-white px-3 py-1 rounded-full text-xs hover:bg-orange-600"
+                                        className="inline-flex items-center space-x-1 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-2 rounded-lg text-sm hover:from-orange-600 hover:to-orange-700 shadow-lg"
                                       >
-                                        <Download className="h-3 w-3" />
+                                        <Download className="h-4 w-4" />
                                         <span>Download</span>
                                       </button>
                                     )
                                   }
-                                  return <strong>{children}</strong>
+                                  return <strong className="text-green-400">{children}</strong>
                                 },
                                 code: ({children, className}) => {
                                   const isInline = !className
                                   if (isInline) {
                                     return (
-                                      <code className="bg-gray-800 text-gray-100 px-1 py-0.5 rounded text-xs font-mono">
+                                      <code className="bg-gray-700 text-green-400 px-2 py-1 rounded text-sm font-mono">
                                         {children}
                                       </code>
                                     )
                                   }
                                   return (
-                                    <div className="my-3 bg-gray-900 rounded-lg overflow-hidden">
-                                      <div className="bg-gray-800 px-4 py-2 text-xs text-gray-300 font-semibold">
+                                    <div className="my-4 bg-gray-800 rounded-xl overflow-hidden border border-gray-600">
+                                      <div className="bg-gray-700 px-4 py-3 text-sm text-gray-300 font-semibold border-b border-gray-600">
                                         HTML Code
                                       </div>
-                                      <pre className="p-4 text-xs text-gray-100 overflow-x-auto max-h-64">
+                                      <pre className="p-4 text-sm text-gray-100 overflow-x-auto max-h-64">
                                         <code className="font-mono whitespace-pre-wrap break-all">
                                           {children}
                                         </code>
@@ -800,11 +802,11 @@ export default function AdminDashboard() {
                                 },
                                 pre: ({children}) => {
                                   return (
-                                    <div className="my-3 bg-gray-900 rounded-lg overflow-hidden">
-                                      <div className="bg-gray-800 px-4 py-2 text-xs text-gray-300 font-semibold">
+                                    <div className="my-4 bg-gray-800 rounded-xl overflow-hidden border border-gray-600">
+                                      <div className="bg-gray-700 px-4 py-3 text-sm text-gray-300 font-semibold border-b border-gray-600">
                                         Generated Code
                                       </div>
-                                      <pre className="p-4 text-xs text-gray-100 overflow-x-auto max-h-64">
+                                      <pre className="p-4 text-sm text-gray-100 overflow-x-auto max-h-64">
                                         <code className="font-mono whitespace-pre-wrap break-all">
                                           {children}
                                         </code>
@@ -817,30 +819,30 @@ export default function AdminDashboard() {
                               {message.content}
                             </ReactMarkdown>
                           </div>
-                          <div className="text-xs opacity-70 mt-2">
-                            {message.timestamp.toLocaleTimeString()}
+                          <div className="text-xs opacity-70 mt-3">
+                            {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </div>
                         </div>
                       </div>
                     ))}
                     {isLoading && (
                       <div className="flex justify-start">
-                        <div className="bg-gray-100 px-4 py-3 rounded-lg max-w-[85%]">
-                          <div className="flex items-center space-x-3">
+                        <div className="bg-gray-800 px-6 py-4 rounded-2xl max-w-[80%] border border-gray-700">
+                          <div className="flex items-center space-x-4">
                             <div className="flex space-x-1">
-                              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
-                              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                              <div className="w-3 h-3 bg-green-400 rounded-full animate-bounce"></div>
+                              <div className="w-3 h-3 bg-green-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                              <div className="w-3 h-3 bg-green-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
                             </div>
                             <div className="flex-1">
-                              <div className="text-sm text-gray-700 font-medium">{loadingMessage}</div>
+                              <div className="text-base text-gray-100 font-medium">{loadingMessage}</div>
                               {selectedAgent?.id === 'customer_experience' && (
-                                <div className="text-xs text-gray-500 mt-1">Optimized for faster response</div>
+                                <div className="text-sm text-gray-400 mt-1">Optimized for faster response</div>
                               )}
                             </div>
                             <button
                               onClick={cancelRequest}
-                              className="text-xs bg-red-100 hover:bg-red-200 text-red-600 px-2 py-1 rounded transition-colors"
+                              className="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg transition-colors shadow-lg"
                               title="Cancel request"
                             >
                               Cancel
@@ -853,24 +855,34 @@ export default function AdminDashboard() {
                   </div>
                 </div>
                 
-                <div className="p-6 border-t bg-gray-50">
-                  <div className="flex space-x-3">
-                    <input
-                      type="text"
-                      placeholder="Ask for business insights..."
-                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      value={inputMessage}
-                      onChange={(e) => setInputMessage(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                    />
-                    <button
-                      onClick={sendMessage}
-                      disabled={isLoading}
-                      className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center space-x-2"
-                    >
-                      <Send className="h-4 w-4" />
-                      <span>Send</span>
-                    </button>
+                {/* Input Area */}
+                <div className="p-8 border-t border-gray-700 bg-gray-800">
+                  <div className="max-w-5xl mx-auto">
+                    <div className="flex space-x-4">
+                      <input
+                        type="text"
+                        placeholder="Ask for business insights and analytics..."
+                        className="flex-1 px-6 py-4 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent text-lg"
+                        value={inputMessage}
+                        onChange={(e) => setInputMessage(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && !isLoading && sendMessage()}
+                      />
+                      <button
+                        onClick={sendMessage}
+                        disabled={isLoading || !inputMessage.trim()}
+                        className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-8 py-4 rounded-xl hover:from-green-600 hover:to-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 shadow-lg"
+                      >
+                        <Send className="h-5 w-5" />
+                        <span className="font-semibold">Send</span>
+                      </button>
+                    </div>
+                    <div className="flex items-center justify-between mt-4 text-sm text-gray-400">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                        <span>Admin AI Ready</span>
+                      </div>
+                      <div>Press Enter to send</div>
+                    </div>
                   </div>
                 </div>
               </div>

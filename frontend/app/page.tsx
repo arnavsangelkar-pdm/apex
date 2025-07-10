@@ -1221,37 +1221,58 @@ export default function Home() {
 
       {/* AI Agent Modal */}
       {showAgent && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
-            <div className="p-6 border-b">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-gray-700">
+            {/* Header */}
+            <div className="p-8 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900">
               <div className="flex items-center justify-between">
-                <h3 className="text-xl font-semibold">AI Assistant</h3>
-                <button onClick={() => setShowAgent(false)}>
-                  <X className="h-5 w-5" />
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center">
+                    <MessageCircle className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">AI Assistant</h3>
+                    <p className="text-gray-400">Powered by advanced AI technology</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setShowAgent(false)}
+                  className="p-3 hover:bg-gray-700 rounded-xl transition-colors text-gray-400 hover:text-white"
+                >
+                  <X className="h-6 w-6" />
                 </button>
               </div>
             </div>
             
-            <div className="h-96 overflow-y-auto p-6">
-              <div className="space-y-4">
+            {/* Messages Area */}
+            <div className="h-[600px] overflow-y-auto p-8 bg-gray-900 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+              <div className="space-y-6 max-w-4xl mx-auto">
                 {messages.map((message, index) => (
                   <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                    <div className={`max-w-2xl px-6 py-4 rounded-2xl ${
                       message.role === 'user' 
-                        ? 'bg-blue-600 text-white' 
-                        : 'bg-gray-100 text-gray-800 border border-gray-200'
+                        ? 'bg-gradient-to-br from-green-500 to-blue-600 text-white shadow-lg' 
+                        : 'bg-gray-800 text-gray-100 border border-gray-700 shadow-lg'
                     }`}>
-                      <ReactMarkdown className="text-sm">{message.content}</ReactMarkdown>
+                      <ReactMarkdown className="text-base leading-relaxed prose prose-invert max-w-none">
+                        {message.content}
+                      </ReactMarkdown>
+                      <div className="text-xs mt-2 opacity-70">
+                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </div>
                     </div>
                   </div>
                 ))}
                 {isLoading && (
                   <div className="flex justify-start">
-                    <div className="bg-gray-100 px-4 py-2 rounded-lg">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                    <div className="bg-gray-800 px-6 py-4 rounded-2xl border border-gray-700">
+                      <div className="flex items-center space-x-2">
+                        <div className="flex space-x-1">
+                          <div className="w-3 h-3 bg-green-400 rounded-full animate-bounce"></div>
+                          <div className="w-3 h-3 bg-green-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                          <div className="w-3 h-3 bg-green-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                        </div>
+                        <span className="text-gray-400 text-sm">AI is thinking...</span>
                       </div>
                     </div>
                   </div>
@@ -1260,23 +1281,34 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="p-6 border-t">
-              <div className="flex space-x-2">
-                <input
-                  type="text"
-                  placeholder="Ask me anything..."
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                />
-                <button
-                  onClick={sendMessage}
-                  disabled={isLoading}
-                  className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50"
-                >
-                  <Send className="h-5 w-5" />
-                </button>
+            {/* Input Area */}
+            <div className="p-8 border-t border-gray-700 bg-gray-800">
+              <div className="max-w-4xl mx-auto">
+                <div className="flex space-x-4">
+                  <input
+                    type="text"
+                    placeholder="Ask me anything about supplements, nutrition, or fitness..."
+                    className="flex-1 px-6 py-4 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent text-lg"
+                    value={inputMessage}
+                    onChange={(e) => setInputMessage(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && !isLoading && sendMessage()}
+                  />
+                  <button
+                    onClick={sendMessage}
+                    disabled={isLoading || !inputMessage.trim()}
+                    className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-8 py-4 rounded-xl hover:from-green-600 hover:to-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 shadow-lg"
+                  >
+                    <Send className="h-5 w-5" />
+                    <span className="font-semibold">Send</span>
+                  </button>
+                </div>
+                <div className="flex items-center justify-between mt-4 text-sm text-gray-400">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span>AI Ready</span>
+                  </div>
+                  <div>Press Enter to send</div>
+                </div>
               </div>
             </div>
           </div>
