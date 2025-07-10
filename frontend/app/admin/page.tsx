@@ -216,8 +216,8 @@ export default function AdminDashboard() {
 
     try {
       // Configure axios with timeout and optimized parameters for faster responses
-      const timeoutMs = selectedAgent.id === 'customer_experience' ? 15000 : 25000; // 15s for customer experience, 25s for others (reduced from 30s)
-      const kValue = selectedAgent.id === 'customer_experience' ? 1 : 2; // Use fewer documents for faster responses (reduced from 3 to 2)
+      const timeoutMs = selectedAgent.id === 'customer_experience' ? 12000 : 18000; // 12s for customer experience, 18s for others (further reduced)
+      const kValue = 1; // Use only 1 document for maximum speed on all agents
       
       const response = await axios.post('/query/backend', {
         query: inputMessage,

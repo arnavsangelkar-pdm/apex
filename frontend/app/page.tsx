@@ -263,6 +263,7 @@ export default function Home() {
 
   // Close agent function
   const closeAgent = () => {
+    console.log('Closing agent - resetting all state') // Debug log
     setShowAgent(false)
     setActiveAgent('')
     setMessages([])
@@ -273,20 +274,25 @@ export default function Home() {
 
   // Agent functions
   const startAgentChat = (agentId: string, agentName: string) => {
+    console.log('Starting agent chat with:', { agentId, agentName }) // Debug log
+    
     setActiveAgent(agentId)
     setShowAgent(true)
     
     // Set agent-specific titles and behavior
+    let newTitle = 'AI Assistant'
     if (agentId === 'rachel_nutrition' && agentName.includes('stack')) {
-      setAgentTitle('Apex Custom Stacks')
+      newTitle = 'Apex Custom Stacks'
       setShowAddStackButton(false) // Will show after AI responds
     } else if (agentId === 'rachel_nutrition') {
-      setAgentTitle('Rachel the Celebrity Nutritionist')
+      newTitle = 'Rachel the Celebrity Nutritionist'
       setShowAddStackButton(false)
     } else {
-      setAgentTitle('AI Assistant')
       setShowAddStackButton(false)
     }
+    
+    console.log('Setting agent title to:', newTitle) // Debug log
+    setAgentTitle(newTitle)
     
     setMessages([{
       role: 'assistant',
@@ -352,8 +358,8 @@ export default function Home() {
 
     try {
       // Configure optimized parameters for faster responses
-      const timeoutMs = 20000; // 20s timeout for frontend agents
-      const kValue = 2; // Use fewer documents for faster responses
+      const timeoutMs = 15000; // 15s timeout for frontend agents (reduced further)
+      const kValue = 1; // Use only 1 document for maximum speed
       
       const response = await axios.post('/query/frontend', {
         query: inputMessage,
