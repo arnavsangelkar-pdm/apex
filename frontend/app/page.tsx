@@ -89,7 +89,7 @@ const products: Product[] = [
     name: 'Elite Whey Isolate',
     price: 69,
     originalPrice: 79,
-    image: '/images/elite-whey-isolate.png',
+    image: '/products/apex-elite-whey-isolate.jpg',
     category: 'Protein',
     description: '25g ultra-pure whey protein isolate, zero sugar, rapid absorption',
     rating: 4.9,
@@ -102,7 +102,7 @@ const products: Product[] = [
     name: 'Ignite Pre-Workout',
     price: 49,
     originalPrice: 59,
-    image: '/images/ignite-pre-workout.png',
+    image: '/products/apex-ignite-pre-workout.jpg',
     category: 'Pre-Workout',
     description: 'Clean energy, laser focus, explosive pumps. No crash.',
     rating: 4.8,
@@ -113,7 +113,7 @@ const products: Product[] = [
     id: '3',
     name: 'Creatine HCL Pro',
     price: 39,
-    image: '/images/creatine-hcl-pro.png',
+    image: '/products/apex-creatine-hcl-pro.jpg',
     category: 'Performance',
     description: 'Superior absorption, strength gains, no bloating',
     rating: 4.9,
@@ -124,7 +124,7 @@ const products: Product[] = [
     id: '4',
     name: 'Recovery BCAA+',
     price: 42,
-    image: '/images/recovery-bcaa-pro.png',
+    image: '/products/apex-recovery-bcaa-plus.jpg',
     category: 'Recovery',
     description: '2:1:1 BCAA ratio + electrolytes for optimal recovery',
     rating: 4.7,
@@ -134,7 +134,7 @@ const products: Product[] = [
     id: '5',
     name: 'Burn Elite',
     price: 59,
-    image: '/images/burn-elite.png',
+    image: '/products/apex-burn-elite.jpg',
     category: 'Fat Loss',
     description: 'Advanced thermogenic formula, appetite control, energy boost',
     rating: 4.6,
@@ -145,7 +145,7 @@ const products: Product[] = [
     id: '6',
     name: 'Night Recovery Pro',
     price: 45,
-    image: '/images/night-recovery-pro.png',
+    image: '/products/apex-night-recovery-pro.jpg',
     category: 'Recovery',
     description: 'Deep sleep support, muscle recovery, growth hormone optimization',
     rating: 4.8,
@@ -155,7 +155,7 @@ const products: Product[] = [
     id: '7',
     name: 'Peak Multivitamin',
     price: 35,
-    image: '/images/peak-multivitamin.png',
+    image: '/products/apex-peak-multivitamin.jpg',
     category: 'Health',
     description: 'Elite athlete formulation, bioavailable nutrients',
     rating: 4.7,
@@ -165,7 +165,7 @@ const products: Product[] = [
     id: '8',
     name: 'Collagen Matrix',
     price: 52,
-    image: '/images/collagen-matrix.png',
+    image: '/products/apex-collagen-matrix.jpg',
     category: 'Recovery',
     description: 'Type I, II, III collagen for joints, skin, and recovery',
     rating: 4.6,
@@ -691,7 +691,7 @@ export default function Home() {
                 <img 
                   src="/images/collagen-support.png" 
                   alt="Collagen support"
-                  className="w-56 h-56 mx-auto object-contain rounded-3xl mb-6 group-hover:scale-105 transition-all duration-300"
+                  className="w-56 h-56 mx-auto object-cover rounded-3xl mb-6 group-hover:scale-105 transition-all duration-300"
                 />
                 <h3 className="text-2xl font-bold text-gray-900 group-hover:text-orange-600 mb-2 transition-colors">Collagen Support</h3>
                 <p className="text-gray-600 text-lg">Joint & skin health</p>
