@@ -281,8 +281,8 @@ export default function Home() {
     
     // Set agent-specific titles and behavior
     let newTitle = 'AI Assistant'
-    if (agentId === 'rachel_nutrition' && agentName.includes('stack')) {
-      newTitle = 'Apex Custom Stacks'
+    if (agentId === 'rachel_nutrition' && agentName.toLowerCase().includes('stack')) {
+      newTitle = 'APEX Custom Stacks'
       setShowAddStackButton(false) // Will show after AI responds
     } else if (agentId === 'rachel_nutrition') {
       newTitle = 'Rachel the Celebrity Nutritionist'
@@ -296,7 +296,9 @@ export default function Home() {
     
     setMessages([{
       role: 'assistant',
-      content: `Hi! I'm ${agentName}. How can I help you today?`,
+      content: agentId === 'rachel_nutrition' && agentName.toLowerCase().includes('stack') 
+        ? `Hi! I'm APEX Custom Stack Builder. How can I help you today?`
+        : `Hi! I'm ${agentName}. How can I help you today?`,
       timestamp: new Date()
     }])
   }
@@ -381,7 +383,7 @@ export default function Home() {
       setMessages(prev => [...prev, assistantMessage])
       
       // Show "Add this Stack" button for custom stack agent after AI responds
-      if (agentTitle === 'Apex Custom Stacks') {
+      if (agentTitle === 'APEX Custom Stacks') {
         setShowAddStackButton(true)
       }
     } catch (error: any) {
@@ -634,11 +636,11 @@ export default function Home() {
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button
-                  onClick={() => startAgentChat('rachel_nutrition', 'Apex Custom Stack Builder')}
+                  onClick={() => startAgentChat('rachel_nutrition', 'APEX Custom Stack Builder')}
                   className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-white hover:text-black transition-colors flex items-center justify-center space-x-2"
                 >
                   <MessageCircle className="h-5 w-5" />
-                  <span>Let Apex build your stack</span>
+                  <span>Let's build your stack</span>
                 </button>
               </div>
 
