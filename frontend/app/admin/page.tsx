@@ -448,18 +448,18 @@ export default function AdminDashboard() {
   // Don't render until mounted to prevent hydration errors
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen bg-black">
         <div className="animate-pulse">
-          <div className="h-20 bg-white shadow-sm"></div>
+          <div className="h-20 bg-gray-900 shadow-2xl border-b border-gray-800"></div>
           <div className="p-8">
             <div className="grid md:grid-cols-4 gap-6 mb-8">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-24 bg-white rounded-lg"></div>
+                <div key={i} className="h-24 bg-gray-900/50 rounded-xl border border-gray-800"></div>
               ))}
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-32 bg-white rounded-lg"></div>
+                <div key={i} className="h-32 bg-gray-900/50 rounded-xl border border-gray-800"></div>
               ))}
             </div>
           </div>
@@ -469,29 +469,29 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-gray-900/95 backdrop-blur-sm shadow-2xl border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-gray-800 to-black rounded-full flex items-center justify-center border border-green-400">
-                <Settings className="h-6 w-6 text-green-400" />
+              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                <Settings className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">APEX Admin</h1>
-                <p className="text-sm text-green-600">Next Generation Business Intelligence</p>
+                <h1 className="text-2xl font-bold text-white">APEX Admin</h1>
+                <p className="text-sm text-green-400 font-medium">Next Generation Business Intelligence</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => window.open('/', '_blank')}
-                className="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors"
+                className="flex items-center space-x-2 px-4 py-2 text-gray-300 hover:text-green-400 transition-colors rounded-lg hover:bg-gray-800"
               >
                 <ExternalLink className="h-5 w-5" />
                 <span>View Store</span>
               </button>
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
                 <span className="text-white text-sm font-semibold">A</span>
               </div>
             </div>
@@ -504,14 +504,14 @@ export default function AdminDashboard() {
         {/* KPI Cards */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
           {kpiData.map((kpi, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-sm p-6">
+            <div key={index} className="bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-2xl p-6 border border-gray-800 hover:border-green-400/30 transition-all duration-300">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">{kpi.label}</p>
-                  <p className="text-2xl font-bold text-gray-900">{kpi.value}</p>
+                  <p className="text-sm text-gray-400 font-medium">{kpi.label}</p>
+                  <p className="text-2xl font-bold text-white mt-1">{kpi.value}</p>
                 </div>
-                <div className={`flex items-center space-x-1 text-sm ${
-                  kpi.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                <div className={`flex items-center space-x-1 text-sm font-semibold ${
+                  kpi.trend === 'up' ? 'text-green-400' : 'text-red-400'
                 }`}>
                   <Activity className="h-4 w-4" />
                   <span>{kpi.change}</span>
@@ -524,8 +524,8 @@ export default function AdminDashboard() {
         {/* AI Agents Section */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">AI Business Intelligence Agents</h2>
-            <div className="flex items-center space-x-2 text-sm text-gray-500">
+            <h2 className="text-2xl font-bold text-white">AI Business Intelligence Agents</h2>
+            <div className="flex items-center space-x-2 text-sm text-green-400 font-medium">
               <Zap className="h-4 w-4" />
               <span>Real-time AI insights</span>
             </div>
@@ -538,19 +538,19 @@ export default function AdminDashboard() {
                 <div
                   key={agent.id}
                   onClick={() => handleAgentSelect(agent)}
-                  className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer group p-6"
+                  className="bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-2xl hover:shadow-green-400/10 border border-gray-800 hover:border-green-400/30 transition-all duration-300 cursor-pointer group p-6"
                 >
                   <div className="flex items-start space-x-4">
-                    <div className={`w-12 h-12 ${agent.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                    <div className={`w-12 h-12 ${agent.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg`}>
                       <Icon className="h-6 w-6 text-white" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{agent.name}</h3>
-                        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">{agent.category}</span>
+                        <h3 className="font-semibold text-white group-hover:text-green-400 transition-colors">{agent.name}</h3>
+                        <span className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-full border border-gray-700">{agent.category}</span>
                       </div>
-                      <p className="text-gray-600 text-sm mb-3">{agent.description}</p>
-                      <div className="flex items-center text-blue-600 text-sm font-medium">
+                      <p className="text-gray-400 text-sm mb-3">{agent.description}</p>
+                      <div className="flex items-center text-green-400 text-sm font-medium">
                         <span>Analyze Now</span>
                         <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -564,26 +564,26 @@ export default function AdminDashboard() {
 
         {/* Quick Actions */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Reports</h3>
+          <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-2xl p-6 border border-gray-800">
+            <h3 className="text-lg font-semibold text-white mb-4">Quick Reports</h3>
             <div className="space-y-3">
               <button 
                 onClick={() => handleAgentSelect(backendAgents.find(a => a.id === 'financial_reports')!)}
-                className="w-full text-left p-3 hover:bg-gray-50 rounded-lg transition-colors flex items-center justify-between"
+                className="w-full text-left p-3 hover:bg-gray-800/50 rounded-lg transition-colors flex items-center justify-between text-gray-300 hover:text-green-400 border border-gray-800 hover:border-green-400/30"
               >
                 <span>Q2 vs Q1 Revenue Analysis</span>
                 <ArrowRight className="h-4 w-4" />
               </button>
               <button 
                 onClick={() => handleAgentSelect(backendAgents.find(a => a.id === 'review_synthesis')!)}
-                className="w-full text-left p-3 hover:bg-gray-50 rounded-lg transition-colors flex items-center justify-between"
+                className="w-full text-left p-3 hover:bg-gray-800/50 rounded-lg transition-colors flex items-center justify-between text-gray-300 hover:text-green-400 border border-gray-800 hover:border-green-400/30"
               >
                 <span>Customer Satisfaction Summary</span>
                 <ArrowRight className="h-4 w-4" />
               </button>
               <button 
                 onClick={() => handleAgentSelect(backendAgents.find(a => a.id === 'product_analytics')!)}
-                className="w-full text-left p-3 hover:bg-gray-50 rounded-lg transition-colors flex items-center justify-between"
+                className="w-full text-left p-3 hover:bg-gray-800/50 rounded-lg transition-colors flex items-center justify-between text-gray-300 hover:text-green-400 border border-gray-800 hover:border-green-400/30"
               >
                 <span>Product Performance Insights</span>
                 <ArrowRight className="h-4 w-4" />
@@ -591,34 +591,34 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">AI Capabilities</h3>
+          <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-2xl p-6 border border-gray-800">
+            <h3 className="text-lg font-semibold text-white mb-4">AI Capabilities</h3>
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                  <BarChart3 className="h-4 w-4 text-blue-600" />
+                <div className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center border border-blue-400/30">
+                  <BarChart3 className="h-4 w-4 text-blue-400" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Real-time Analytics</p>
-                  <p className="text-sm text-gray-600">Live business intelligence and insights</p>
+                  <p className="font-medium text-white">Real-time Analytics</p>
+                  <p className="text-sm text-gray-400">Live business intelligence and insights</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                  <MessageSquare className="h-4 w-4 text-green-600" />
+                <div className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center border border-green-400/30">
+                  <MessageSquare className="h-4 w-4 text-green-400" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Review Synthesis</p>
-                  <p className="text-sm text-gray-600">8,000+ reviews analyzed instantly</p>
+                  <p className="font-medium text-white">Review Synthesis</p>
+                  <p className="text-sm text-gray-400">8,000+ reviews analyzed instantly</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                  <Globe className="h-4 w-4 text-purple-600" />
+                <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center border border-purple-400/30">
+                  <Globe className="h-4 w-4 text-purple-400" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Dynamic Content</p>
-                  <p className="text-sm text-gray-600">Auto-generated landing pages</p>
+                  <p className="font-medium text-white">Dynamic Content</p>
+                  <p className="text-sm text-gray-400">Auto-generated landing pages</p>
                 </div>
               </div>
             </div>
@@ -626,37 +626,37 @@ export default function AdminDashboard() {
         </div>
 
         {/* Performance Metrics */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-2xl p-6 border border-gray-800">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-gray-900">Performance Overview</h3>
+            <h3 className="text-lg font-semibold text-white">Performance Overview</h3>
             <div className="flex items-center space-x-2">
-              <button className="p-2 hover:bg-gray-100 rounded-lg">
+              <button className="p-2 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-green-400 transition-colors">
                 <Filter className="h-4 w-4" />
               </button>
-              <button className="p-2 hover:bg-gray-100 rounded-lg">
+              <button className="p-2 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-green-400 transition-colors">
                 <Calendar className="h-4 w-4" />
               </button>
-              <button className="p-2 hover:bg-gray-100 rounded-lg">
+              <button className="p-2 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-green-400 transition-colors">
                 <Download className="h-4 w-4" />
               </button>
             </div>
           </div>
           
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center p-4 border rounded-lg">
-              <div className="text-2xl font-bold text-blue-600 mb-1">94%</div>
-              <div className="text-sm text-gray-600">Customer Satisfaction</div>
-              <div className="text-xs text-green-600 mt-1">+2% from last month</div>
+            <div className="text-center p-4 border border-gray-800 rounded-xl bg-gray-800/30 hover:border-blue-400/30 transition-colors">
+              <div className="text-2xl font-bold text-blue-400 mb-1">94%</div>
+              <div className="text-sm text-gray-400">Customer Satisfaction</div>
+              <div className="text-xs text-green-400 mt-1 font-medium">+2% from last month</div>
             </div>
-            <div className="text-center p-4 border rounded-lg">
-              <div className="text-2xl font-bold text-green-600 mb-1">$2.4M</div>
-              <div className="text-sm text-gray-600">Quarterly Revenue</div>
-              <div className="text-xs text-green-600 mt-1">+34% from Q1</div>
+            <div className="text-center p-4 border border-gray-800 rounded-xl bg-gray-800/30 hover:border-green-400/30 transition-colors">
+              <div className="text-2xl font-bold text-green-400 mb-1">$2.4M</div>
+              <div className="text-sm text-gray-400">Quarterly Revenue</div>
+              <div className="text-xs text-green-400 mt-1 font-medium">+34% from Q1</div>
             </div>
-            <div className="text-center p-4 border rounded-lg">
-              <div className="text-2xl font-bold text-purple-600 mb-1">28,547</div>
-              <div className="text-sm text-gray-600">Active Subscribers</div>
-              <div className="text-xs text-green-600 mt-1">+15% growth</div>
+            <div className="text-center p-4 border border-gray-800 rounded-xl bg-gray-800/30 hover:border-purple-400/30 transition-colors">
+              <div className="text-2xl font-bold text-purple-400 mb-1">28,547</div>
+              <div className="text-sm text-gray-400">Active Subscribers</div>
+              <div className="text-xs text-green-400 mt-1 font-medium">+15% growth</div>
             </div>
           </div>
         </div>
@@ -894,28 +894,31 @@ export default function AdminDashboard() {
 
       {/* Landing Page Preview Modal */}
       {showPreview && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
-            <div className="p-6 border-b">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden border border-gray-700 shadow-2xl">
+            <div className="p-6 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900">
               <div className="flex items-center justify-between">
-                <h3 className="text-xl font-semibold">Landing Page Preview</h3>
+                <h3 className="text-xl font-semibold text-white">Landing Page Preview</h3>
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => navigator.clipboard.writeText(previewContent)}
-                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-lg hover:from-green-600 hover:to-blue-700 transition-all"
                   >
                     <FileText className="h-4 w-4" />
                     <span>Copy HTML</span>
                   </button>
-                  <button onClick={() => setShowPreview(false)}>
+                  <button 
+                    onClick={() => setShowPreview(false)}
+                    className="p-2 hover:bg-gray-700 rounded-lg text-gray-400 hover:text-white transition-colors"
+                  >
                     <X className="h-5 w-5" />
                   </button>
                 </div>
               </div>
             </div>
             
-            <div className="p-6 overflow-auto max-h-[70vh]">
-              <div className="border rounded-lg overflow-hidden">
+            <div className="p-6 overflow-auto max-h-[70vh] bg-gray-900">
+              <div className="border border-gray-700 rounded-lg overflow-hidden">
                 <iframe
                   srcDoc={previewContent}
                   className="w-full h-96 border-0"
@@ -924,9 +927,9 @@ export default function AdminDashboard() {
               </div>
               
               <div className="mt-6">
-                <h4 className="font-semibold mb-3">HTML Source:</h4>
-                <pre className="bg-gray-100 p-4 rounded-lg text-sm overflow-auto max-h-40">
-                  <code>{previewContent}</code>
+                <h4 className="font-semibold mb-3 text-white">HTML Source:</h4>
+                <pre className="bg-gray-800 border border-gray-700 p-4 rounded-lg text-sm overflow-auto max-h-40">
+                  <code className="text-gray-300">{previewContent}</code>
                 </pre>
               </div>
             </div>
@@ -936,34 +939,37 @@ export default function AdminDashboard() {
 
       {/* Chart Modal */}
       {showChart && chartData && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
-            <div className="p-6 border-b">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden border border-gray-700 shadow-2xl">
+            <div className="p-6 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900">
               <div className="flex items-center justify-between">
-                <h3 className="text-xl font-semibold">{chartData.title}</h3>
+                <h3 className="text-xl font-semibold text-white">{chartData.title}</h3>
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={downloadChartData}
-                    className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                    className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all"
                   >
                     <Download className="h-4 w-4" />
                     <span>Download Data</span>
                   </button>
-                  <button onClick={() => setShowChart(false)}>
+                  <button 
+                    onClick={() => setShowChart(false)}
+                    className="p-2 hover:bg-gray-700 rounded-lg text-gray-400 hover:text-white transition-colors"
+                  >
                     <X className="h-5 w-5" />
                   </button>
                 </div>
               </div>
             </div>
             
-            <div className="p-6">
+            <div className="p-6 bg-gray-900">
               {chartData.type === 'line' ? (
-                <div className="w-full h-80 bg-gray-50 rounded-lg flex items-center justify-center relative">
+                <div className="w-full h-80 bg-gray-800 rounded-lg flex items-center justify-center relative border border-gray-700">
                   <svg viewBox="0 0 400 200" className="w-full h-full">
                     {/* Grid lines */}
                     <defs>
                       <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
-                        <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#e5e7eb" strokeWidth="1"/>
+                        <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#374151" strokeWidth="1"/>
                       </pattern>
                     </defs>
                     <rect width="100%" height="100%" fill="url(#grid)" />
@@ -971,7 +977,7 @@ export default function AdminDashboard() {
                     {/* Line chart */}
                     <polyline
                       fill="none"
-                      stroke="#3B82F6"
+                      stroke="#10b981"
                       strokeWidth="3"
                       points="40,160 100,150 160,130 220,110 280,90 340,70"
                     />
@@ -983,26 +989,26 @@ export default function AdminDashboard() {
                         cx={40 + index * 60}
                         cy={160 - (index * 15)}
                         r="4"
-                        fill="#3B82F6"
+                        fill="#10b981"
                       />
                     ))}
                   </svg>
                   
                   {/* Labels */}
-                  <div className="absolute bottom-2 left-0 right-0 flex justify-around text-xs text-gray-600">
+                  <div className="absolute bottom-2 left-0 right-0 flex justify-around text-xs text-gray-400">
                     {chartData.data.labels && chartData.data.labels.map((label: string, index: number) => (
                       <span key={index}>{label}</span>
                     ))}
                   </div>
                 </div>
               ) : chartData.type === 'cohort' ? (
-                <div className="w-full bg-white rounded-lg border overflow-x-auto">
+                <div className="w-full bg-gray-800 rounded-lg border border-gray-700 overflow-x-auto">
                   <table className="w-full border-collapse">
                     <thead>
-                      <tr className="bg-gray-50">
-                        <th className="p-3 text-left font-semibold border-b">Subscription Cohorts</th>
+                      <tr className="bg-gray-700">
+                        <th className="p-3 text-left font-semibold border-b border-gray-600 text-white">Subscription Cohorts</th>
                         {chartData.data.timeLabels.map((label: string) => (
-                          <th key={label} className="p-3 text-center font-semibold border-b text-xs">
+                          <th key={label} className="p-3 text-center font-semibold border-b border-gray-600 text-xs text-gray-300">
                             {label}
                           </th>
                         ))}
@@ -1010,20 +1016,20 @@ export default function AdminDashboard() {
                     </thead>
                     <tbody>
                       {chartData.data.cohorts.map((cohort: any, rowIndex: number) => (
-                        <tr key={cohort.month} className="hover:bg-gray-50">
-                          <td className="p-3 font-medium border-b">{cohort.month}</td>
+                        <tr key={cohort.month} className="hover:bg-gray-700/50">
+                          <td className="p-3 font-medium border-b border-gray-600 text-white">{cohort.month}</td>
                           {cohort.retention.map((percentage: number, colIndex: number) => {
                             const bgColor = percentage >= 90 ? '#1e40af' :
                                            percentage >= 80 ? '#3b82f6' :
                                            percentage >= 70 ? '#60a5fa' :
                                            percentage >= 60 ? '#93c5fd' :
-                                           percentage >= 50 ? '#dbeafe' : '#f8fafc'
-                            const textColor = percentage >= 70 ? 'white' : '#374151'
+                                           percentage >= 50 ? '#dbeafe' : '#374151'
+                            const textColor = percentage >= 70 ? 'white' : '#d1d5db'
                             
                             return (
                               <td 
                                 key={colIndex} 
-                                className="p-3 text-center text-xs font-semibold border-b cursor-pointer hover:scale-105 transition-transform"
+                                className="p-3 text-center text-xs font-semibold border-b border-gray-600 cursor-pointer hover:scale-105 transition-transform"
                                 style={{ 
                                   backgroundColor: bgColor,
                                   color: textColor
@@ -1036,16 +1042,16 @@ export default function AdminDashboard() {
                           })}
                           {/* Fill empty cells for incomplete cohorts */}
                           {Array.from({ length: chartData.data.timeLabels.length - cohort.retention.length }).map((_, emptyIndex) => (
-                            <td key={`empty-${emptyIndex}`} className="p-3 border-b bg-gray-100"></td>
+                            <td key={`empty-${emptyIndex}`} className="p-3 border-b border-gray-600 bg-gray-800"></td>
                           ))}
                         </tr>
                       ))}
                     </tbody>
                   </table>
                   
-                  <div className="p-4 bg-gray-50 border-t">
-                    <h4 className="font-semibold mb-2 text-sm">Color Legend:</h4>
-                    <div className="flex flex-wrap gap-2 text-xs">
+                  <div className="p-4 bg-gray-700 border-t border-gray-600">
+                    <h4 className="font-semibold mb-2 text-sm text-white">Color Legend:</h4>
+                    <div className="flex flex-wrap gap-2 text-xs text-gray-300">
                       <div className="flex items-center space-x-1">
                         <div className="w-4 h-4 rounded" style={{backgroundColor: '#1e40af'}}></div>
                         <span>90-100%</span>
@@ -1067,14 +1073,14 @@ export default function AdminDashboard() {
                         <span>50-59%</span>
                       </div>
                       <div className="flex items-center space-x-1">
-                        <div className="w-4 h-4 rounded border" style={{backgroundColor: '#f8fafc'}}></div>
+                        <div className="w-4 h-4 rounded border border-gray-600" style={{backgroundColor: '#374151'}}></div>
                         <span>&lt;50%</span>
                       </div>
                     </div>
                   </div>
                 </div>
               ) : (
-                <div className="w-full h-80 bg-gray-50 rounded-lg flex items-end justify-around p-4 space-x-2">
+                <div className="w-full h-80 bg-gray-800 rounded-lg flex items-end justify-around p-4 space-x-2 border border-gray-700">
                   {chartData.data.datasets && chartData.data.datasets[0] && chartData.data.datasets[0].data.map((value: number, index: number) => (
                     <div key={index} className="flex flex-col items-center space-y-2">
                       <div 
@@ -1084,34 +1090,34 @@ export default function AdminDashboard() {
                           backgroundColor: chartData.data.datasets[0].backgroundColor[index]
                         }}
                       />
-                      <span className="text-xs text-gray-600 text-center">
+                      <span className="text-xs text-gray-400 text-center">
                         {chartData.data.labels[index]}
                       </span>
-                      <span className="text-xs font-semibold">{value}</span>
+                      <span className="text-xs font-semibold text-white">{value}</span>
                     </div>
                   ))}
                 </div>
               )}
               
-              <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                <h4 className="font-semibold mb-2">Data Summary:</h4>
+              <div className="mt-6 p-4 bg-gray-800 rounded-lg border border-gray-700">
+                <h4 className="font-semibold mb-2 text-white">Data Summary:</h4>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-gray-600">Total Data Points:</span>
-                    <span className="ml-2 font-semibold">
+                    <span className="text-gray-400">Total Data Points:</span>
+                    <span className="ml-2 font-semibold text-white">
                       {chartData.type === 'cohort' 
                         ? chartData.data.cohorts?.length || 0
                         : chartData.data.labels?.length || 0}
                     </span>
                   </div>
                   <div>
-                    <span className="text-gray-600">Chart Type:</span>
-                    <span className="ml-2 font-semibold capitalize">{chartData.type}</span>
+                    <span className="text-gray-400">Chart Type:</span>
+                    <span className="ml-2 font-semibold capitalize text-white">{chartData.type}</span>
                   </div>
                   {chartData.type === 'line' && (
                     <div className="col-span-2">
-                      <span className="text-gray-600">Trend:</span>
-                      <span className="ml-2 font-semibold text-green-600">📈 Increasing</span>
+                      <span className="text-gray-400">Trend:</span>
+                      <span className="ml-2 font-semibold text-green-400">📈 Increasing</span>
                     </div>
                   )}
                 </div>
