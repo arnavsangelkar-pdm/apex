@@ -185,8 +185,8 @@ export default function WheyProteinPage() {
   const [isFavorite, setIsFavorite] = useState(false)
   const [activeTab, setActiveTab] = useState('description')
 
-  const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
-  const totalReviews = reviews.length
+  const averageRating = 4.8
+  const totalReviews = 5691
 
   const filteredReviews = reviews.filter(review => {
     if (reviewFilter === 'all') return true
@@ -280,21 +280,31 @@ export default function WheyProteinPage() {
             {/* Rating */}
             <div className="flex items-center space-x-4">
               <div className="flex items-center">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star
-                    key={star}
-                    className={`h-5 w-5 ${
-                      star <= averageRating ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                    }`}
-                  />
-                ))}
+                {[1, 2, 3, 4, 5].map((star) => {
+                  const isFilled = star <= Math.floor(averageRating)
+                  const isPartial = star === Math.ceil(averageRating) && averageRating % 1 !== 0
+                  
+                  return (
+                    <div key={star} className="relative">
+                      <Star className="h-5 w-5 text-gray-300" />
+                      {isFilled && (
+                        <Star className="h-5 w-5 text-yellow-400 fill-current absolute top-0 left-0" />
+                      )}
+                      {isPartial && (
+                        <div className="absolute top-0 left-0 overflow-hidden" style={{ width: `${(averageRating % 1) * 100}%` }}>
+                          <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
                 <span className="ml-2 text-sm text-gray-600">({averageRating.toFixed(1)})</span>
               </div>
               <button 
                 onClick={() => setShowReviews(!showReviews)}
                 className="text-sm text-blue-600 hover:text-blue-700"
               >
-                {totalReviews} Reviews
+                {totalReviews.toLocaleString()} Reviews
               </button>
             </div>
 
