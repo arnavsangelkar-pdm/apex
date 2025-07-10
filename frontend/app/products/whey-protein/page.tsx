@@ -40,10 +40,12 @@ interface Review {
 }
 
 const productImages = [
-  '/products/apex-elite-whey-isolate.jpg',
-  '/products/apex-elite-whey-isolate.jpg',
-  '/products/apex-elite-whey-isolate.jpg',
-  '/products/apex-elite-whey-isolate.jpg'
+  '/images/elite-whey-isolate.png',
+  'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=800&fit=crop&crop=center',
+  'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=800&fit=crop&crop=center',
+  'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=800&fit=crop&crop=center',
+  'https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=800&h=800&fit=crop&crop=center',
+  'https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=800&h=800&fit=crop&crop=center'
 ]
 
 const flavors = [
