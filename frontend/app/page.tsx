@@ -616,7 +616,7 @@ export default function Home() {
             <div className="text-center group cursor-pointer">
               <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
                 <img 
-                  src="/products/apex-elite-whey-isolate.jpg" 
+                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&crop=center" 
                   alt="Proteins"
                   className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
                 />
@@ -628,7 +628,7 @@ export default function Home() {
             <div className="text-center group cursor-pointer">
               <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
                 <img 
-                  src="/products/apex-ignite-pre-workout.jpg" 
+                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&crop=center" 
                   alt="Pre-workouts"
                   className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
                 />
@@ -640,7 +640,7 @@ export default function Home() {
             <div className="text-center group cursor-pointer">
               <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
                 <img 
-                  src="/products/apex-recovery-bcaa-plus.jpg" 
+                  src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=400&fit=crop&crop=center" 
                   alt="Recovery"
                   className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
                 />
@@ -652,7 +652,7 @@ export default function Home() {
             <div className="text-center group cursor-pointer">
               <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
                 <img 
-                  src="/products/apex-collagen-matrix.jpg" 
+                  src="https://images.unsplash.com/photo-1506629905607-12d4c32bb3d4?w=400&h=400&fit=crop&crop=center" 
                   alt="Collagen support"
                   className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
                 />
@@ -664,7 +664,7 @@ export default function Home() {
             <div className="text-center group cursor-pointer">
               <div className="bg-gray-100 rounded-2xl p-6 mb-4 group-hover:bg-green-50 transition-colors">
                 <img 
-                  src="/products/apex-peak-multivitamin.jpg" 
+                  src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=400&fit=crop&crop=center" 
                   alt="Essential Vitamins & Minerals"
                   className="w-24 h-24 mx-auto object-cover rounded-lg mb-4"
                 />
