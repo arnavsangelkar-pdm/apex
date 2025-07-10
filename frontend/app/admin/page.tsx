@@ -102,11 +102,11 @@ const backendAgents: Agent[] = [
 
 const sampleQueries = {
   'customer_experience': [
-    "Show me cohort analysis for our subscription customers",
-    "What are our customer retention trends?",
-    "Generate a cohort chart for Q3 2025",
-    "How can we improve customer satisfaction?",
-    "Show me customer lifetime value trends"
+    "Show cohort chart",
+    "Q3 retention rates",
+    "Customer satisfaction summary",
+    "Subscription churn analysis",
+    "Generate cohort analysis"
   ],
   'product_analytics': [
     "Which products are performing best this quarter?",
@@ -150,6 +150,8 @@ export default function AdminDashboard() {
   const [messages, setMessages] = useState<Message[]>([])
   const [inputMessage, setInputMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [loadingMessage, setLoadingMessage] = useState('')
+  const [cancelRequest, setCancelRequest] = useState<() => void>(() => {})
   const [showAgentModal, setShowAgentModal] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [previewContent, setPreviewContent] = useState('')
@@ -193,11 +195,40 @@ export default function AdminDashboard() {
     setInputMessage('')
     setIsLoading(true)
 
+    // Set loading message based on agent type
+    const agentLoadingMessages = {
+      'customer_experience': 'Analyzing customer data (15s max)...',
+      'product_analytics': 'Processing product metrics...',
+      'financial_reports': 'Generating financial analysis...',
+      'review_synthesis': 'Synthesizing customer reviews...',
+      'landing_page_generator': 'Creating landing page...',
+      'sales_optimizer': 'Optimizing sales strategy...'
+    }
+    setLoadingMessage(agentLoadingMessages[selectedAgent.id as keyof typeof agentLoadingMessages] || 'Processing your request...')
+
+    // Create cancel token for this request
+    const cancelTokenSource = axios.CancelToken.source()
+    setCancelRequest(() => () => {
+      cancelTokenSource.cancel('Request cancelled by user')
+      setIsLoading(false)
+      setLoadingMessage('')
+    })
+
     try {
+      // Configure axios with timeout and optimized parameters for faster responses
+      const timeoutMs = selectedAgent.id === 'customer_experience' ? 15000 : 30000; // 15s for customer experience, 30s for others
+      const kValue = selectedAgent.id === 'customer_experience' ? 1 : 3; // Use fewer documents for faster customer experience responses
+      
       const response = await axios.post('/query/backend', {
         query: inputMessage,
         agent: selectedAgent.id,
-        k: 3
+        k: kValue
+      }, {
+        timeout: timeoutMs,
+        cancelToken: cancelTokenSource.token,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
 
       const assistantResponse = response.data.response || 'I apologize, I encountered an issue processing your request.'
@@ -236,15 +267,34 @@ export default function AdminDashboard() {
       }
 
       setMessages(prev => [...prev, assistantMessage])
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error sending message:', error)
+      
+      // Don't show error message if request was cancelled
+      if (axios.isCancel(error)) {
+        console.log('Request cancelled by user')
+        return
+      }
+      
+      let errorMessage = 'Sorry, I encountered an error. Please try again.'
+      
+      if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+        errorMessage = 'The request timed out. The AI agent is processing too much data. Please try a simpler, more specific question.'
+      } else if (error.response?.status === 404) {
+        errorMessage = 'API server not found. Please make sure the backend server is running on port 8000.'
+      } else if (error.response?.status >= 500) {
+        errorMessage = 'Server error. The AI agent may be overloaded. Please try again in a moment.'
+      }
+      
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'Sorry, I encountered an error. Please make sure the API server is running.',
+        content: errorMessage,
         timestamp: new Date()
       }])
     } finally {
       setIsLoading(false)
+      setLoadingMessage('')
+      setCancelRequest(() => {})
     }
   }
 
@@ -775,11 +825,26 @@ export default function AdminDashboard() {
                     ))}
                     {isLoading && (
                       <div className="flex justify-start">
-                        <div className="bg-gray-100 px-4 py-3 rounded-lg">
-                          <div className="flex space-x-1">
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                        <div className="bg-gray-100 px-4 py-3 rounded-lg max-w-[85%]">
+                          <div className="flex items-center space-x-3">
+                            <div className="flex space-x-1">
+                              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
+                              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                            </div>
+                            <div className="flex-1">
+                              <div className="text-sm text-gray-700 font-medium">{loadingMessage}</div>
+                              {selectedAgent?.id === 'customer_experience' && (
+                                <div className="text-xs text-gray-500 mt-1">Optimized for faster response</div>
+                              )}
+                            </div>
+                            <button
+                              onClick={cancelRequest}
+                              className="text-xs bg-red-100 hover:bg-red-200 text-red-600 px-2 py-1 rounded transition-colors"
+                              title="Cancel request"
+                            >
+                              Cancel
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -898,21 +963,21 @@ export default function AdminDashboard() {
                       points="40,160 100,150 160,130 220,110 280,90 340,70"
                     />
                     
-                                         {/* Data points */}
-                     {chartData.data.datasets[0].data.map((_: number, index: number) => (
-                       <circle
-                         key={index}
-                         cx={40 + index * 60}
-                         cy={160 - (index * 15)}
-                         r="4"
-                         fill="#3B82F6"
-                       />
-                     ))}
+                    {/* Data points */}
+                    {chartData.data.datasets && chartData.data.datasets[0] && chartData.data.datasets[0].data.map((_: number, index: number) => (
+                      <circle
+                        key={index}
+                        cx={40 + index * 60}
+                        cy={160 - (index * 15)}
+                        r="4"
+                        fill="#3B82F6"
+                      />
+                    ))}
                   </svg>
                   
                   {/* Labels */}
                   <div className="absolute bottom-2 left-0 right-0 flex justify-around text-xs text-gray-600">
-                    {chartData.data.labels.map((label: string, index: number) => (
+                    {chartData.data.labels && chartData.data.labels.map((label: string, index: number) => (
                       <span key={index}>{label}</span>
                     ))}
                   </div>
@@ -997,7 +1062,7 @@ export default function AdminDashboard() {
                 </div>
               ) : (
                 <div className="w-full h-80 bg-gray-50 rounded-lg flex items-end justify-around p-4 space-x-2">
-                  {chartData.data.datasets[0].data.map((value: number, index: number) => (
+                  {chartData.data.datasets && chartData.data.datasets[0] && chartData.data.datasets[0].data.map((value: number, index: number) => (
                     <div key={index} className="flex flex-col items-center space-y-2">
                       <div 
                         className="w-12 rounded-t"
@@ -1020,7 +1085,11 @@ export default function AdminDashboard() {
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="text-gray-600">Total Data Points:</span>
-                    <span className="ml-2 font-semibold">{chartData.data.labels.length}</span>
+                    <span className="ml-2 font-semibold">
+                      {chartData.type === 'cohort' 
+                        ? chartData.data.cohorts?.length || 0
+                        : chartData.data.labels?.length || 0}
+                    </span>
                   </div>
                   <div>
                     <span className="text-gray-600">Chart Type:</span>
