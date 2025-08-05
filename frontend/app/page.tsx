@@ -359,8 +359,8 @@ export default function Home() {
     setIsLoading(true)
 
     try {
-      // Configure optimized parameters for faster responses
-      const timeoutMs = 15000; // 15s timeout for frontend agents (reduced further)
+      // Configure timeout for Render cold starts and API processing
+      const timeoutMs = 45000; // 45s timeout to handle Render cold starts
       const kValue = 1; // Use only 1 document for maximum speed
       
       const response = await axios.post('/query/frontend', {
@@ -392,7 +392,7 @@ export default function Home() {
       let errorMessage = 'Sorry, I encountered an error. Please try again.'
       
       if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
-        errorMessage = 'The request timed out. Please try a simpler, more specific question.'
+        errorMessage = 'The request timed out. This may be due to a cold start on the server. Please try again in a moment.'
       } else if (error.response?.status === 404) {
         errorMessage = 'API server not found. Please make sure the backend server is running on port 8000.'
       } else if (error.response?.status >= 500) {

@@ -199,10 +199,22 @@ async def health_check():
         "backend_agents": len(backend_agents)
     }
 
+@app.get("/warmup")
+async def warmup():
+    """Warmup endpoint to prevent cold starts"""
+    return {"status": "warmed", "message": "Server is ready"}
+
 if __name__ == "__main__":
     print("💪 Starting NutraFuel AI API Server...")
     print("📚 API Docs: http://localhost:8000/docs")
     print("🎯 API Base: http://localhost:8000")
-    print("🛍️  Frontend Agents: http://localhost:8000/agents/frontend")
+    print("🛍️  Frontend Agents: http://localhost:8000/agents/frontend") 
     print("🔧 Backend Agents: http://localhost:8000/agents/backend")
-    uvicorn.run(app, host="0.0.0.0", port=8000) 
+    # Configure uvicorn with production settings
+    uvicorn.run(
+        app, 
+        host="0.0.0.0", 
+        port=int(os.getenv("PORT", 8000)),
+        timeout_keep_alive=30,
+        timeout_notify=30
+    ) 

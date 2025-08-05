@@ -267,7 +267,7 @@ export default function AdminDashboard() {
       let errorMessage = 'Sorry, I encountered an error. Please try again.'
       
       if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
-        errorMessage = 'The request timed out. The AI agent is processing too much data. Please try a simpler, more specific question.'
+        errorMessage = 'The request timed out. This may be due to a cold start on the server. Please try again in a moment.'
       } else if (error.response?.status === 404) {
         errorMessage = 'API server not found. Please make sure the backend server is running on port 8000.'
       } else if (error.response?.status >= 500) {

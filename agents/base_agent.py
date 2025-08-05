@@ -25,7 +25,8 @@ class BaseRAGAgent:
         self.llm = ChatOpenAI(
             model="gpt-4o-mini", 
             temperature=0.7,
-            api_key=os.getenv("OPENAI_API_KEY")
+            api_key=os.getenv("OPENAI_API_KEY"),
+            timeout=30  # 30 second timeout for OpenAI calls
         )
         self.embeddings = OpenAIEmbeddings(
             api_key=os.getenv("OPENAI_API_KEY")
@@ -33,6 +34,7 @@ class BaseRAGAgent:
         self.vector_store = None
         self.documents = []
         self.doc_metadata = []  # Store metadata for references
+        self._vector_store_initialized = False  # Cache flag
         
     def add_documents(self, documents: List[str]):
         """Add documents to the vector store with metadata"""
@@ -49,30 +51,34 @@ class BaseRAGAgent:
                 "index": i
             })
         
-        if self.documents:
-            # Use a fresh in-memory store each time to avoid persistence issues
-            import tempfile
-            import shutil
+        self.doc_metadata = metadatas
+        # Mark that we need to initialize the vector store (lazy loading)
+        self._vector_store_initialized = False
+    
+    def _ensure_vector_store(self):
+        """Lazy initialization of vector store for performance"""
+        if self._vector_store_initialized or not self.documents:
+            return
             
-            # Create a temporary directory for this agent's vector store
-            temp_dir = tempfile.mkdtemp(prefix=f"chroma_{self.name}_")
-            
-            try:
-                self.vector_store = Chroma.from_texts(
-                    texts=self.documents,
-                    embedding=self.embeddings,
-                    persist_directory=temp_dir,
-                    collection_name=f"{self.name}_collection",
-                    metadatas=metadatas
-                )
-                self.doc_metadata = metadatas
-            except Exception as e:
-                # Clean up temp directory if creation fails
-                shutil.rmtree(temp_dir, ignore_errors=True)
-                raise e
+        try:
+            # Use in-memory store for better performance
+            self.vector_store = Chroma.from_texts(
+                texts=self.documents,
+                embedding=self.embeddings,
+                collection_name=f"{self.name}_collection",
+                metadatas=self.doc_metadata
+            )
+            self._vector_store_initialized = True
+        except Exception as e:
+            print(f"Error initializing vector store for {self.name}: {e}")
+            # Continue without vector store
+            self.vector_store = None
     
     def retrieve_context_with_sources(self, query: str, k: int = 3) -> Tuple[str, List[Dict]]:
         """Retrieve relevant context with source references"""
+        # Ensure vector store is initialized
+        self._ensure_vector_store()
+        
         if self.vector_store is None:
             return "", []
         
