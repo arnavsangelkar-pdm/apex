@@ -210,11 +210,6 @@ if __name__ == "__main__":
     print("🎯 API Base: http://localhost:8000")
     print("🛍️  Frontend Agents: http://localhost:8000/agents/frontend") 
     print("🔧 Backend Agents: http://localhost:8000/agents/backend")
-    # Configure uvicorn with production settings
-    uvicorn.run(
-        app, 
-        host="0.0.0.0", 
-        port=int(os.getenv("PORT", 8000)),
-        timeout_keep_alive=30,
-        timeout_notify=30
-    ) 
+    # Use PORT environment variable for Render deployment
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port) 
