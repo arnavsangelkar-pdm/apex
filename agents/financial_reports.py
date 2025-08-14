@@ -62,8 +62,9 @@ agent = BaseRAGAgent(
     system_prompt=FINANCIAL_REPORTS_PROMPT
 )
 
-# Load data into vector store
-agent.add_documents(FINANCIAL_PERFORMANCE_DATA + SUBSCRIPTION_METRICS_DATA + QUARTERLY_COMPARISON_DATA + FORECASTING_DATA)
+# Load essential data to prevent timeouts - focus on key financial metrics
+essential_financial_data = FINANCIAL_PERFORMANCE_DATA + QUARTERLY_COMPARISON_DATA  # Core financial data most commonly requested
+agent.add_documents(essential_financial_data)
 
 # Create and export the graph
 graph = agent.build_graph() 

@@ -61,8 +61,9 @@ agent = BaseRAGAgent(
     system_prompt=PRODUCT_ANALYTICS_PROMPT
 )
 
-# Load data into vector store
-agent.add_documents(PRODUCT_PERFORMANCE_DATA + INGREDIENT_ANALYTICS_DATA + MARKET_INTELLIGENCE_DATA + CUSTOMER_PERFORMANCE_DATA)
+# Load essential data to prevent timeouts - focus on performance and customer data
+essential_analytics_data = PRODUCT_PERFORMANCE_DATA + CUSTOMER_PERFORMANCE_DATA  # Core metrics most commonly requested
+agent.add_documents(essential_analytics_data)
 
 # Create and export the graph
 graph = agent.build_graph() 

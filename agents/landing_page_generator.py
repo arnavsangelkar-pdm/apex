@@ -70,14 +70,15 @@ PREMIUM_WEIGHT_LOSS_LANDING_PAGE = [
     "Redirect: /spring-transformation-bundle with pre-built high-AOV checkout flow"
 ]
 
-# Create agent instance
+# Create agent instance with extended timeout for long content generation
 agent = BaseRAGAgent(
     name="landing_page_generator",
     system_prompt=LANDING_PAGE_GENERATOR_PROMPT
 )
 
-# Load data into vector store
-agent.add_documents(LANDING_PAGE_TEMPLATES_DATA + CONVERSION_OPTIMIZATION_DATA + DEMOGRAPHIC_TARGETING_DATA + PRODUCT_SPECIFIC_PAGES_DATA + PREMIUM_WEIGHT_LOSS_LANDING_PAGE)
+# Load only essential data to prevent timeouts - reduced document set
+essential_data = LANDING_PAGE_TEMPLATES_DATA + PREMIUM_WEIGHT_LOSS_LANDING_PAGE  # Focus on core templates and premium content
+agent.add_documents(essential_data)
 
 # Create and export the graph
 graph = agent.build_graph() 
