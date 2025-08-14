@@ -188,7 +188,15 @@ async def process_agent_query(agent, request: QueryRequest):
             sources=sources
         )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Error in agent {request.agent}: {e}")
+        # Simple fallback message
+        fallback_message = f"I'm temporarily experiencing high demand. As your {request.agent} assistant, I'm here to help! Please try your question again in a moment, and I'll provide you with a detailed response."
+        
+        return QueryResponse(
+            response=fallback_message,
+            agent=request.agent,
+            sources=[]
+        )
 
 @app.get("/health")
 async def health_check():

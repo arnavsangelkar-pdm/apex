@@ -26,7 +26,7 @@ class BaseRAGAgent:
             model="gpt-4o-mini", 
             temperature=0.7,
             api_key=os.getenv("OPENAI_API_KEY"),
-            timeout=30  # 30 second timeout for OpenAI calls
+            request_timeout=60  # Increase timeout to 60 seconds to prevent timeouts
         )
         self.embeddings = OpenAIEmbeddings(
             api_key=os.getenv("OPENAI_API_KEY")
