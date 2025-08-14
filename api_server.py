@@ -8,6 +8,7 @@ from typing import Dict, List, Optional
 import uvicorn
 from dotenv import load_dotenv
 import os
+import asyncio
 
 # Load environment variables
 load_dotenv()
@@ -172,15 +173,33 @@ async def query_agent_legacy(request: QueryRequest):
 async def process_agent_query(agent, request: QueryRequest):
     """Process query for any agent"""
     try:
-        # Get context and sources
-        context, sources = agent.retrieve_context_with_sources(request.query, k=request.k)
-        
-        # Generate response
-        graph = agent.build_graph()
-        result = graph.invoke({"messages": [{"role": "user", "content": request.query}]})
-        
-        # Extract response
-        response_text = result["messages"][-1].content if result["messages"] else "No response generated"
+        # Extended timeout for landing page generator
+        if request.agent == "landing_page_generator":
+            # Use asyncio timeout for long operations
+            async def process_with_timeout():
+                # Get context and sources
+                context, sources = agent.retrieve_context_with_sources(request.query, k=request.k)
+                
+                # Generate response
+                graph = agent.build_graph()
+                result = graph.invoke({"messages": [{"role": "user", "content": request.query}]})
+                
+                return result, sources
+            
+            # 3 minute timeout for landing page generation
+            result, sources = await asyncio.wait_for(process_with_timeout(), timeout=180)
+            response_text = result["messages"][-1].content if result["messages"] else "No response generated"
+        else:
+            # Normal processing for other agents
+            # Get context and sources
+            context, sources = agent.retrieve_context_with_sources(request.query, k=request.k)
+            
+            # Generate response
+            graph = agent.build_graph()
+            result = graph.invoke({"messages": [{"role": "user", "content": request.query}]})
+            
+            # Extract response
+            response_text = result["messages"][-1].content if result["messages"] else "No response generated"
         
         return QueryResponse(
             response=response_text,
@@ -189,8 +208,32 @@ async def process_agent_query(agent, request: QueryRequest):
         )
     except Exception as e:
         print(f"Error in agent {request.agent}: {e}")
-        # Simple fallback message
-        fallback_message = f"I'm temporarily experiencing high demand. As your {request.agent} assistant, I'm here to help! Please try your question again in a moment, and I'll provide you with a detailed response."
+        
+        # Specific fallback for landing page generator with immediate value
+        if request.agent == "landing_page_generator":
+            fallback_message = """# Quick Landing Page Template - Weight Loss Focus
+
+## Hero Section
+**Headline:** "Transform Your Body in 90 Days - Guaranteed Results After 40"
+
+## Key Elements:
+- **Hero Image:** Before/after transformation photos
+- **Primary CTA:** "Start Your Transformation - $197 (Save $150)"
+- **Trust Badges:** 90-day guarantee, 5,000+ success stories
+- **Social Proof:** "Join 1,247 customers who lost 18+ lbs"
+
+## Bundle Offer:
+- APEX Spring Transformation Bundle
+- Burn Elite + Elite Whey + Collagen Matrix
+- Originally $347, Today Only $197
+- Free 90-Day Transformation Guide
+
+## Call-to-Action:
+**"Secure Your Spring Transformation - Order Now"**
+
+*This is a quick template. For a fully customized landing page, please try again when server load is lower.*"""
+        else:
+            fallback_message = f"I'm temporarily experiencing high demand. As your {request.agent} assistant, I'm here to help! Please try your question again in a moment, and I'll provide you with a detailed response."
         
         return QueryResponse(
             response=fallback_message,

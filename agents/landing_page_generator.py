@@ -76,6 +76,9 @@ agent = BaseRAGAgent(
     system_prompt=LANDING_PAGE_GENERATOR_PROMPT
 )
 
+# Override with longer timeout for complex landing page generation
+agent.llm.request_timeout = 120  # 2 minutes for complex page generation
+
 # Load only essential data to prevent timeouts - reduced document set
 essential_data = LANDING_PAGE_TEMPLATES_DATA + PREMIUM_WEIGHT_LOSS_LANDING_PAGE  # Focus on core templates and premium content
 agent.add_documents(essential_data)
