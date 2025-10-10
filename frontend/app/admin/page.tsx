@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { queryAI } from '@/lib/aiService'
+import { queryAI } from '../../lib/aiService'
 import { 
   BarChart3, 
   TrendingUp,

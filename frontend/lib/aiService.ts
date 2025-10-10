@@ -20,7 +20,57 @@ export function generateMockResponse(agentName: string, query: string): AIRespon
   
   // Frontend Agents
   if (agentName === "rachel_nutrition") {
-    if (queryLower.includes("dinner") || queryLower.includes("meal") || queryLower.includes("cook") || queryLower.includes("recipe")) {
+    if (queryLower.includes("stack") || queryLower.includes("supplement") || queryLower.includes("stack") || queryLower.includes("bundle")) {
+      return {
+        response: `🏆 **APEX Custom Stacks - Premium Supplement Bundles**
+
+Welcome to our exclusive custom stack builder! Here are our most popular pre-designed stacks:
+
+## 🥇 **LEAN MUSCLE STACK** - $95 (Save $8!)
+**Perfect for building lean muscle mass**
+- **Whey Protein Isolate** - $49 (25g complete protein)
+- **Creatine Monohydrate** - $29 (strength & power gains)
+- **Peak Multivitamin** - $25 (nutritional foundation)
+
+## 🔥 **FAT BURNING STACK** - $108 (Save $8!)
+**Burn fat while preserving muscle**
+- **Whey Protein Isolate** - $49 (preserve muscle)
+- **Burn Elite Fat Burner** - $42 (boost metabolism)
+- **Peak Multivitamin** - $25 (support during deficit)
+
+## ⚡ **PERFORMANCE STACK** - $105 (Save $8!)
+**Maximize athletic performance**
+- **Ignite Pre-Workout** - $39 (energy & focus)
+- **Recovery BCAA Pro** - $35 (endurance & recovery)
+- **Night Recovery Pro** - $31 (sleep & recovery)
+
+## 🌟 **ELITE COMPLETE STACK** - $189 (Save $25!)
+**The ultimate all-in-one solution**
+- **Whey Protein Isolate** - $49
+- **Creatine HCL Pro** - $35
+- **Ignite Pre-Workout** - $39
+- **Recovery BCAA Pro** - $35
+- **Peak Multivitamin** - $25
+- **Night Recovery Pro** - $31
+
+## 💎 **WOMEN'S WELLNESS STACK** - $127 (Save $15!)
+**Designed specifically for women**
+- **Elite Collagen Matrix** - $49 (skin, hair, nails)
+- **Whey Protein Isolate** - $49 (lean muscle)
+- **Peak Multivitamin** - $25 (complete nutrition)
+- **FREE Women's Nutrition Guide** - $15 value
+
+**🎯 All stacks include:**
+- Free shipping on orders $75+
+- 30-day money-back guarantee
+- Third-party tested for purity
+- Detailed usage instructions
+
+Which stack interests you most? I can customize any of these based on your specific goals! 💪`,
+        agent: agentName,
+        sources: []
+      };
+    } else if (queryLower.includes("dinner") || queryLower.includes("meal") || queryLower.includes("cook") || queryLower.includes("recipe")) {
       return {
         response: `Hi! I'm Rachel, your nutrition coach! 🍎
 
