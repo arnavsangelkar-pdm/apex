@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
+import { queryAI } from '../../lib/aiService'
 import { 
   BarChart3, 
   TrendingUp,
@@ -31,8 +31,7 @@ import {
   BarChart
 } from 'lucide-react'
 
-// Configure axios
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+// AI Service is now local - no external API calls needed
 
 interface Agent {
   id: string
@@ -197,7 +196,7 @@ export default function AdminDashboard() {
 
     // Set loading message based on agent type
     const agentLoadingMessages = {
-      'customer_experience': 'Analyzing customer data (15s max)...',
+      'customer_experience': 'Analyzing customer data...',
       'product_analytics': 'Processing product metrics...',
       'financial_reports': 'Generating financial analysis...',
       'review_synthesis': 'Synthesizing customer reviews...',
@@ -206,32 +205,16 @@ export default function AdminDashboard() {
     }
     setLoadingMessage(agentLoadingMessages[selectedAgent.id as keyof typeof agentLoadingMessages] || 'Processing your request...')
 
-    // Create cancel token for this request
-    const cancelTokenSource = axios.CancelToken.source()
+    // Create cancel function for this request
     setCancelRequest(() => () => {
-      cancelTokenSource.cancel('Request cancelled by user')
       setIsLoading(false)
       setLoadingMessage('')
     })
 
     try {
-      // Configure axios with timeout and optimized parameters for faster responses
-      const timeoutMs = selectedAgent.id === 'customer_experience' ? 12000 : 18000; // 12s for customer experience, 18s for others (further reduced)
-      const kValue = 1; // Use only 1 document for maximum speed on all agents
-      
-      const response = await axios.post('/query/backend', {
-        query: inputMessage,
-        agent: selectedAgent.id,
-        k: kValue
-      }, {
-        timeout: timeoutMs,
-        cancelToken: cancelTokenSource.token,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+      const response = await queryAI(selectedAgent.id, inputMessage)
 
-      const assistantResponse = response.data.response || 'I apologize, I encountered an issue processing your request.'
+      const assistantResponse = response.response || 'I apologize, I encountered an issue processing your request.'
       
       // Handle different agent types with special features
       let enhancedContent = assistantResponse
@@ -258,21 +241,7 @@ export default function AdminDashboard() {
     } catch (error: any) {
       console.error('Error sending message:', error)
       
-      // Don't show error message if request was cancelled
-      if (axios.isCancel(error)) {
-        console.log('Request cancelled by user')
-        return
-      }
-      
-      let errorMessage = 'Sorry, I encountered an error. Please try again.'
-      
-      if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
-        errorMessage = 'The request timed out. This may be due to a cold start on the server. Please try again in a moment.'
-      } else if (error.response?.status === 404) {
-        errorMessage = 'API server not found. Please make sure the backend server is running on port 8000.'
-      } else if (error.response?.status >= 500) {
-        errorMessage = 'Server error. The AI agent may be overloaded. Please try again in a moment.'
-      }
+      const errorMessage = 'Sorry, I encountered an error. Please try again.'
       
       setMessages(prev => [...prev, {
         role: 'assistant',

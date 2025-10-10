@@ -55,59 +55,40 @@ A comprehensive AI-powered nutrition and supplements platform demonstrating adva
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.9+
 - Node.js 18.17.0+
-- OpenAI API Key
 
 ### 1. Clone & Setup
 ```bash
 git clone https://github.com/arnavsangelkar-pdm/apex.git
 cd apex
 
-# Install Python dependencies
-pip install -r requirements.txt
-
 # Install frontend dependencies
 cd frontend
 npm install
-cd ..
 ```
 
-### 2. Environment Configuration
+### 2. Start Development Server
 ```bash
-# Create .env file
-echo "OPENAI_API_KEY=your_openai_api_key_here" > .env
-```
-
-### 3. Start Development Servers
-```bash
-# Terminal 1 - API Server
-python3 api_server.py
-
-# Terminal 2 - Frontend
+# Start the frontend (standalone)
 cd frontend && npm run dev
 ```
 
-### 4. Access the Platform
+### 3. Access the Platform
 - **Customer Site**: http://localhost:3001
 - **Admin Dashboard**: http://localhost:3001/admin
-- **API Documentation**: http://localhost:8000/docs
+
+**🎉 That's it!** No backend server needed - all AI features work locally with mock responses.
 
 ## 🌐 Deployment on Render
 
-### Backend Deployment
-1. **Create Web Service**:
-   - Repository: Connect your GitHub repo
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `python3 api_server.py`
-   - Environment: Add `OPENAI_API_KEY`
-
-### Frontend Deployment  
+### Standalone Frontend Deployment  
 1. **Create Static Site**:
-   - Repository: Same GitHub repo
-   - Build Command: `cd frontend && npm install && npm run build`
+   - Repository: Connect your GitHub repo
+   - Build Command: `cd frontend && npm install && npm run export`
    - Publish Directory: `frontend/out`
-   - Environment: Set `NEXT_PUBLIC_API_URL` to your backend URL
+   - Environment: Set `NODE_VERSION` to `18.17.0`
+
+**🎉 That's it!** No backend needed - deploy as a single static site with full AI functionality.
 
 ## 🎯 Demo Scenarios
 
@@ -173,8 +154,7 @@ cd frontend && npm run dev
 - Styling in Tailwind classes
 
 ### Environment Variables
-- `OPENAI_API_KEY`: Required for AI functionality
-- `NEXT_PUBLIC_API_URL`: Frontend API base URL (production)
+- No environment variables needed! All AI responses are built-in mock data.
 
 ## 🤝 Contributing
 

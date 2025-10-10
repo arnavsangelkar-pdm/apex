@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
+import { queryAI } from '../lib/aiService'
 import Link from 'next/link'
 import { 
   Dumbbell, 
@@ -53,8 +53,7 @@ import {
   CheckCircle
 } from 'lucide-react'
 
-// Configure axios
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+// AI Service is now local - no external API calls needed
 
 // Types
 interface Product {
@@ -307,21 +306,14 @@ export default function Home() {
   const performIntelligentSearch = async (query: string) => {
     setIsSearching(true)
     try {
-      const response = await axios.post('/query/frontend', {
-        query: query,
-        agent: 'intelligent_search',
-        k: 5
-      })
+      const response = await queryAI('intelligent_search', query)
 
-      // Parse the response to extract product recommendations
-      const aiResponse = response.data.response
-      
       // Create mock search results based on AI response
       const results = [
         {
           type: 'ai_recommendation',
           title: 'AI Recommendation',
-          description: aiResponse,
+          description: response.response,
           relevance: 100
         },
         ...filteredProducts.slice(0, 4).map(product => ({
@@ -359,24 +351,11 @@ export default function Home() {
     setIsLoading(true)
 
     try {
-      // Configure timeout for Render cold starts and API processing
-      const timeoutMs = 45000; // 45s timeout to handle Render cold starts
-      const kValue = 1; // Use only 1 document for maximum speed
-      
-      const response = await axios.post('/query/frontend', {
-        query: inputMessage,
-        agent: activeAgent,
-        k: kValue
-      }, {
-        timeout: timeoutMs,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+      const response = await queryAI(activeAgent, inputMessage)
 
       const assistantMessage: Message = {
         role: 'assistant',
-        content: response.data.response || 'Sorry, I encountered an issue.',
+        content: response.response || 'Sorry, I encountered an issue.',
         timestamp: new Date()
       }
 
@@ -389,15 +368,7 @@ export default function Home() {
     } catch (error: any) {
       console.error('Error:', error)
       
-      let errorMessage = 'Sorry, I encountered an error. Please try again.'
-      
-      if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
-        errorMessage = 'The request timed out. This may be due to a cold start on the server. Please try again in a moment.'
-      } else if (error.response?.status === 404) {
-        errorMessage = 'API server not found. Please make sure the backend server is running on port 8000.'
-      } else if (error.response?.status >= 500) {
-        errorMessage = 'Server error. The AI agent may be overloaded. Please try again in a moment.'
-      }
+      const errorMessage = 'Sorry, I encountered an error. Please try again.'
       
       setMessages(prev => [...prev, {
         role: 'assistant',
