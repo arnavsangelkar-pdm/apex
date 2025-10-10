@@ -4,7 +4,7 @@ services:
     name: apex-frontend
     buildCommand: |
       cd frontend
-      npm install
+      npm ci
       npm run export
     staticPublishPath: frontend/out
     envVars:
