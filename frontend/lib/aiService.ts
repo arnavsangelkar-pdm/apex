@@ -20,7 +20,204 @@ export function generateMockResponse(agentName: string, query: string): AIRespon
   
   // Frontend Agents
   if (agentName === "rachel_nutrition") {
-    if (queryLower.includes("stack") || queryLower.includes("supplement") || queryLower.includes("stack") || queryLower.includes("bundle")) {
+    if (queryLower.includes("muscle") && (queryLower.includes("burn") || queryLower.includes("burning"))) {
+      return {
+        response: `🔥 **FAT BURNING STACK** - $108 (Save $8!)
+
+**Perfect for burning fat while preserving muscle mass**
+
+## 🎯 **What's Included:**
+- **Whey Protein Isolate** - $49 (preserve muscle during fat loss)
+- **Burn Elite Fat Burner** - $42 (boost metabolism by 12-15%)
+- **Peak Multivitamin** - $25 (support during calorie deficit)
+
+## 💪 **Why This Stack Works:**
+- Protein prevents muscle loss during fat loss
+- Fat Burner increases metabolism and energy
+- Multivitamin maintains nutrition during deficit
+- Perfect for body recomposition goals
+
+## ⚡ **How to Use:**
+- Take Fat Burner 30 minutes before meals
+- Whey protein between meals to stay full
+- Multivitamin with breakfast daily
+
+## 📈 **Expected Results:**
+- 1-2 lbs fat loss per week
+- Muscle preservation during cut
+- Increased energy and focus
+- Better workout performance
+
+**🎯 Includes:**
+- Free shipping on orders $75+
+- 30-day money-back guarantee
+- Third-party tested for purity
+- Detailed usage instructions
+
+Ready to burn fat while keeping your hard-earned muscle? This stack has helped thousands achieve their body recomposition goals! 🔥`,
+        agent: agentName,
+        sources: []
+      };
+    } else if (queryLower.includes("lean") && queryLower.includes("muscle")) {
+      return {
+        response: `🥇 **LEAN MUSCLE STACK** - $95 (Save $8!)
+
+**Perfect for building lean muscle mass without excess fat**
+
+## 🎯 **What's Included:**
+- **Whey Protein Isolate** - $49 (25g complete protein)
+- **Creatine Monohydrate** - $29 (strength & power gains)
+- **Peak Multivitamin** - $25 (nutritional foundation)
+
+## 💪 **Why This Stack Works:**
+- Whey + Creatine increases muscle protein synthesis by 40%
+- Perfect post-workout combination for lean gains
+- Multivitamin supports recovery and overall health
+- Clean, effective ingredients for lean muscle building
+
+## ⚡ **How to Use:**
+- Whey protein within 30 minutes post-workout
+- Creatine 5g daily (loading phase: 20g for first week)
+- Multivitamin with breakfast daily
+
+## 📈 **Expected Results:**
+- 2-4 lbs lean muscle gain in 8 weeks
+- 15-20% strength increase
+- Faster recovery between workouts
+- Improved workout performance
+
+**🎯 Includes:**
+- Free shipping on orders $75+
+- 30-day money-back guarantee
+- Third-party tested for purity
+- Detailed usage instructions
+
+Ready to build lean muscle? This stack has helped thousands achieve their muscle-building goals! 💪`,
+        agent: agentName,
+        sources: []
+      };
+    } else if (queryLower.includes("performance") || queryLower.includes("athletic")) {
+      return {
+        response: `⚡ **PERFORMANCE STACK** - $105 (Save $8!)
+
+**Maximize athletic performance and recovery**
+
+## 🎯 **What's Included:**
+- **Ignite Pre-Workout** - $39 (energy & focus)
+- **Recovery BCAA Pro** - $35 (endurance & recovery)
+- **Night Recovery Pro** - $31 (sleep & recovery)
+
+## 💪 **Why This Stack Works:**
+- Pre-workout boosts energy and focus for intense training
+- BCAA supports endurance and reduces muscle breakdown
+- Night recovery optimizes sleep and muscle repair
+- Complete performance and recovery cycle
+
+## ⚡ **How to Use:**
+- Pre-workout 30 minutes before training
+- BCAA during or after workouts
+- Night recovery 30 minutes before bed
+
+## 📈 **Expected Results:**
+- Increased workout intensity and duration
+- Faster recovery between sessions
+- Better sleep quality
+- Enhanced athletic performance
+
+**🎯 Includes:**
+- Free shipping on orders $75+
+- 30-day money-back guarantee
+- Third-party tested for purity
+- Detailed usage instructions
+
+Ready to unlock your peak performance? This stack is designed for serious athletes! ⚡`,
+        agent: agentName,
+        sources: []
+      };
+    } else if (queryLower.includes("women") || queryLower.includes("wellness")) {
+      return {
+        response: `💎 **WOMEN'S WELLNESS STACK** - $127 (Save $15!)
+
+**Designed specifically for women's health and wellness**
+
+## 🎯 **What's Included:**
+- **Elite Collagen Matrix** - $49 (skin, hair, nails)
+- **Whey Protein Isolate** - $49 (lean muscle maintenance)
+- **Peak Multivitamin** - $25 (complete nutrition)
+- **FREE Women's Nutrition Guide** - $15 value
+
+## 💪 **Why This Stack Works:**
+- Collagen supports skin elasticity and joint health
+- Whey protein maintains lean muscle and metabolism
+- Multivitamin provides essential nutrients for women
+- Comprehensive wellness approach
+
+## ⚡ **How to Use:**
+- Collagen in the morning with breakfast
+- Whey protein post-workout or as meal replacement
+- Multivitamin with breakfast daily
+
+## 📈 **Expected Results:**
+- Improved skin, hair, and nail health
+- Maintained lean muscle mass
+- Better energy levels
+- Enhanced overall wellness
+
+**🎯 Includes:**
+- Free shipping on orders $75+
+- 30-day money-back guarantee
+- Third-party tested for purity
+- Detailed usage instructions
+
+Ready to feel your best? This stack is designed specifically for women's unique needs! 💎`,
+        agent: agentName,
+        sources: []
+      };
+    } else if (queryLower.includes("complete") || queryLower.includes("elite") || queryLower.includes("ultimate")) {
+      return {
+        response: `🌟 **ELITE COMPLETE STACK** - $189 (Save $25!)
+
+**The ultimate all-in-one solution for serious athletes**
+
+## 🎯 **What's Included:**
+- **Whey Protein Isolate** - $49 (complete protein)
+- **Creatine HCL Pro** - $35 (strength & power)
+- **Ignite Pre-Workout** - $39 (energy & focus)
+- **Recovery BCAA Pro** - $35 (endurance & recovery)
+- **Peak Multivitamin** - $25 (nutritional foundation)
+- **Night Recovery Pro** - $31 (sleep & recovery)
+
+## 💪 **Why This Stack Works:**
+- Complete training cycle support
+- Pre-workout energy, intra-workout endurance, post-workout recovery
+- Night recovery for optimal sleep and muscle repair
+- Everything you need for serious training
+
+## ⚡ **How to Use:**
+- Pre-workout 30 minutes before training
+- BCAA during workouts
+- Whey protein post-workout
+- Creatine daily
+- Multivitamin with breakfast
+- Night recovery before bed
+
+## 📈 **Expected Results:**
+- Maximum muscle growth and strength gains
+- Enhanced workout performance
+- Faster recovery between sessions
+- Complete athletic optimization
+
+**🎯 Includes:**
+- Free shipping on orders $75+
+- 30-day money-back guarantee
+- Third-party tested for purity
+- Detailed usage instructions
+
+Ready for the ultimate training stack? This is our most comprehensive bundle! 🌟`,
+        agent: agentName,
+        sources: []
+      };
+    } else if (queryLower.includes("stack") || queryLower.includes("supplement") || queryLower.includes("bundle")) {
       return {
         response: `🏆 **APEX Custom Stacks - Premium Supplement Bundles**
 
@@ -28,37 +225,18 @@ Welcome to our exclusive custom stack builder! Here are our most popular pre-des
 
 ## 🥇 **LEAN MUSCLE STACK** - $95 (Save $8!)
 **Perfect for building lean muscle mass**
-- **Whey Protein Isolate** - $49 (25g complete protein)
-- **Creatine Monohydrate** - $29 (strength & power gains)
-- **Peak Multivitamin** - $25 (nutritional foundation)
 
 ## 🔥 **FAT BURNING STACK** - $108 (Save $8!)
 **Burn fat while preserving muscle**
-- **Whey Protein Isolate** - $49 (preserve muscle)
-- **Burn Elite Fat Burner** - $42 (boost metabolism)
-- **Peak Multivitamin** - $25 (support during deficit)
 
 ## ⚡ **PERFORMANCE STACK** - $105 (Save $8!)
 **Maximize athletic performance**
-- **Ignite Pre-Workout** - $39 (energy & focus)
-- **Recovery BCAA Pro** - $35 (endurance & recovery)
-- **Night Recovery Pro** - $31 (sleep & recovery)
 
 ## 🌟 **ELITE COMPLETE STACK** - $189 (Save $25!)
 **The ultimate all-in-one solution**
-- **Whey Protein Isolate** - $49
-- **Creatine HCL Pro** - $35
-- **Ignite Pre-Workout** - $39
-- **Recovery BCAA Pro** - $35
-- **Peak Multivitamin** - $25
-- **Night Recovery Pro** - $31
 
 ## 💎 **WOMEN'S WELLNESS STACK** - $127 (Save $15!)
 **Designed specifically for women**
-- **Elite Collagen Matrix** - $49 (skin, hair, nails)
-- **Whey Protein Isolate** - $49 (lean muscle)
-- **Peak Multivitamin** - $25 (complete nutrition)
-- **FREE Women's Nutrition Guide** - $15 value
 
 **🎯 All stacks include:**
 - Free shipping on orders $75+
