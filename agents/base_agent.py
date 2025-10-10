@@ -1,50 +1,30 @@
-"""Base RAG Agent with ChromaDB"""
+"""Base RAG Agent with Mock Implementation for Demo"""
 
 from typing import Dict, Any, List, Tuple
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from langchain_community.vectorstores import Chroma
-from langchain_core.messages import HumanMessage, AIMessage
-from langchain_core.prompts import ChatPromptTemplate
-from langgraph.graph import StateGraph, MessagesState, START, END
 import os
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-# Check for API key
-if not os.getenv("OPENAI_API_KEY"):
-    raise ValueError("OPENAI_API_KEY not found in environment variables. Please check your .env file.")
-
 class BaseRAGAgent:
-    """Base class for RAG agents"""
+    """Base class for RAG agents with mock implementation"""
     
     def __init__(self, name: str, system_prompt: str):
         self.name = name
         self.system_prompt = system_prompt
-        self.llm = ChatOpenAI(
-            model="gpt-4o-mini", 
-            temperature=0.7,
-            api_key=os.getenv("OPENAI_API_KEY"),
-            request_timeout=60  # Increase timeout to 60 seconds to prevent timeouts
-        )
-        self.embeddings = OpenAIEmbeddings(
-            api_key=os.getenv("OPENAI_API_KEY")
-        )
-        self.vector_store = None
         self.documents = []
         self.doc_metadata = []  # Store metadata for references
-        self._vector_store_initialized = False  # Cache flag
         
     def add_documents(self, documents: List[str]):
-        """Add documents to the vector store with metadata"""
+        """Add documents to the agent's knowledge base"""
         self.documents = documents  # Replace instead of extend to ensure fresh data
         
         # Create metadata for each document
         metadatas = []
         for i, doc in enumerate(documents):
             # Extract a title from the first part of the document
-            title = doc.split('-')[0].strip() if '-' in doc else f"Document {i+1}"
+            title = doc.split(':')[0].strip() if ':' in doc else f"Document {i+1}"
             metadatas.append({
                 "source": f"{self.name}_doc_{i+1}",
                 "title": title,
@@ -52,50 +32,30 @@ class BaseRAGAgent:
             })
         
         self.doc_metadata = metadatas
-        # Mark that we need to initialize the vector store (lazy loading)
-        self._vector_store_initialized = False
-    
-    def _ensure_vector_store(self):
-        """Lazy initialization of vector store for performance"""
-        if self._vector_store_initialized or not self.documents:
-            return
-            
-        try:
-            # Use in-memory store for better performance
-            self.vector_store = Chroma.from_texts(
-                texts=self.documents,
-                embedding=self.embeddings,
-                collection_name=f"{self.name}_collection",
-                metadatas=self.doc_metadata
-            )
-            self._vector_store_initialized = True
-        except Exception as e:
-            print(f"Error initializing vector store for {self.name}: {e}")
-            # Continue without vector store
-            self.vector_store = None
     
     def retrieve_context_with_sources(self, query: str, k: int = 3) -> Tuple[str, List[Dict]]:
-        """Retrieve relevant context with source references"""
-        # Ensure vector store is initialized
-        self._ensure_vector_store()
-        
-        if self.vector_store is None:
+        """Retrieve relevant context with source references using mock similarity"""
+        if not self.documents:
             return "", []
         
-        # Get documents with metadata
-        docs_with_scores = self.vector_store.similarity_search_with_relevance_scores(query, k=k)
+        # Simple mock similarity - return first k documents
+        selected_docs = self.documents[:min(k, len(self.documents))]
         
         context_parts = []
         sources = []
         
-        for doc, score in docs_with_scores:
-            context_parts.append(doc.page_content)
+        for i, doc in enumerate(selected_docs):
+            context_parts.append(doc)
             
             # Create source reference
             source = {
-                "content": doc.page_content[:100] + "..." if len(doc.page_content) > 100 else doc.page_content,
-                "metadata": doc.metadata,
-                "relevance_score": score
+                "content": doc[:100] + "..." if len(doc) > 100 else doc,
+                "metadata": self.doc_metadata[i] if i < len(self.doc_metadata) else {
+                    "source": f"{self.name}_doc_{i+1}",
+                    "title": f"Document {i+1}",
+                    "index": i
+                },
+                "relevance_score": 0.95 - (i * 0.1)  # Mock decreasing relevance
             }
             sources.append(source)
         
@@ -103,7 +63,7 @@ class BaseRAGAgent:
         return context, sources
     
     def retrieve_context(self, query: str, k: int = 3) -> str:
-        """Retrieve relevant context from vector store (backward compatibility)"""
+        """Retrieve relevant context from knowledge base (backward compatibility)"""
         context, _ = self.retrieve_context_with_sources(query, k)
         return context
     
@@ -123,44 +83,42 @@ class BaseRAGAgent:
         
         return formatted
     
-    def process_message(self, state: MessagesState) -> Dict[str, Any]:
-        """Process incoming message with RAG and source citations"""
-        messages = state["messages"]
+    def process_message(self, state: Dict) -> Dict[str, Any]:
+        """Process incoming message with mock response"""
+        messages = state.get("messages", [])
+        if not messages:
+            return {"messages": [{"role": "assistant", "content": "Hello! How can I help you today?"}]}
+        
         last_message = messages[-1]
+        query = last_message.get("content", "") if isinstance(last_message, dict) else str(last_message)
         
-        # Retrieve relevant context with sources
-        context, sources = self.retrieve_context_with_sources(last_message.content)
+        # Mock response based on agent type and query
+        if "nutrition" in self.name.lower():
+            response_content = "Hi! I'm Rachel, your nutrition coach! I'd be happy to help you with meal planning and nutrition guidance. What are your specific goals?"
+        elif "search" in self.name.lower():
+            response_content = "I'm here to help you find the perfect supplements for your fitness goals! What are you looking for?"
+        elif "customer" in self.name.lower():
+            response_content = "Welcome to NutraFuel customer service! How can I help you today?"
+        else:
+            response_content = f"Hello! I'm your {self.name.replace('_', ' ').title()} assistant. How can I help you?"
         
-        # Create prompt
-        prompt = ChatPromptTemplate.from_messages([
-            ("system", self.system_prompt),
-            ("system", f"Use the following context to answer questions. When using information from the context, mention which source it comes from:\n{context}"),
-            ("human", "{input}")
-        ])
-        
-        # Generate response
-        chain = prompt | self.llm
-        response = chain.invoke({
-            "input": last_message.content
-        })
-        
-        # Add source citations to the response
-        response_content = response.content
-        if sources:
-            response_content += self.format_sources(sources)
-        
-        return {"messages": [AIMessage(content=response_content)]}
+        return {"messages": [{"role": "assistant", "content": response_content}]}
     
-    def build_graph(self) -> StateGraph:
-        """Build the LangGraph workflow"""
-        workflow = StateGraph(MessagesState)
+    def build_graph(self):
+        """Build a mock graph that returns the agent instance"""
+        return MockGraph(self)
+
+class MockGraph:
+    """Mock graph implementation for demo purposes"""
+    
+    def __init__(self, agent):
+        self.agent = agent
+    
+    def invoke(self, input_data: Dict) -> Dict:
+        """Mock invoke that returns a simple response"""
+        messages = input_data.get("messages", [])
+        if not messages:
+            return {"messages": [{"role": "assistant", "content": "Hello! How can I help you?"}]}
         
-        # Add the main processing node
-        workflow.add_node("process", self.process_message)
-        
-        # Add edges
-        workflow.add_edge(START, "process")
-        workflow.add_edge("process", END)
-        
-        # Compile
-        return workflow.compile() 
+        # Return the same mock response as process_message
+        return self.agent.process_message(input_data) 

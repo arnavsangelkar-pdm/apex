@@ -1,10 +1,10 @@
 services:
   # API Backend Service
   - type: web
-    name: nutrafuel-api
+    name: apex-api
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python3 api_server.py
+    startCommand: python api_server.py
     envVars:
       - key: OPENAI_API_KEY
         sync: false
@@ -13,30 +13,16 @@ services:
     healthCheckPath: /health
     numInstances: 1
     
-  # Warmup Cron Job (to prevent cold starts)
-  - type: cron
-    name: nutrafuel-warmup
-    env: node
-    buildCommand: npm install axios
-    startCommand: node -e "const axios = require('axios'); setInterval(() => axios.get(process.env.API_URL + '/warmup').catch(() => {}), 600000);"
-    envVars:
-      - key: API_URL
-        fromService:
-          name: nutrafuel-api
-          type: web
-          property: url
-    schedule: "*/10 * * * *"  # Every 10 minutes
-
   # Frontend Static Site
   - type: web  
-    name: nutrafuel-frontend
+    name: apex-frontend
     env: static
-    buildCommand: cd frontend && npm install && npm run build && npm run export
+    buildCommand: cd frontend && npm install && npm run export
     staticPublishPath: frontend/out
     envVars:
       - key: NEXT_PUBLIC_API_URL
         fromService:
-          name: nutrafuel-api
+          name: apex-api
           type: web
           property: url
       - key: NODE_VERSION

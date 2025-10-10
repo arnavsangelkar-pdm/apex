@@ -1,8 +1,8 @@
-# 🚀 NutraFuel AI - AI-Powered Nutrition Platform
+# 🚀 Apex AI - AI-Powered Nutrition Platform
 
 A comprehensive AI-powered nutrition and supplements platform demonstrating advanced RAG (Retrieval-Augmented Generation) capabilities with LangGraph agents, modern React frontend, and professional business intelligence tools.
 
-![NutraFuel AI Platform](https://img.shields.io/badge/AI-Powered-blue) ![Next.js](https://img.shields.io/badge/Next.js-14.0.4-black) ![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green) ![LangGraph](https://img.shields.io/badge/LangGraph-AI-purple)
+![Apex AI Platform](https://img.shields.io/badge/AI-Powered-blue) ![Next.js](https://img.shields.io/badge/Next.js-14.0.4-black) ![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green) ![LangGraph](https://img.shields.io/badge/LangGraph-AI-purple)
 
 ## 🌟 Features
 
@@ -61,8 +61,8 @@ A comprehensive AI-powered nutrition and supplements platform demonstrating adva
 
 ### 1. Clone & Setup
 ```bash
-git clone https://github.com/[username]/client-ai-demo.git
-cd client-ai-demo
+git clone https://github.com/arnavsangelkar-pdm/apex.git
+cd apex
 
 # Install Python dependencies
 pip install -r requirements.txt
