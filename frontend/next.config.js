@@ -1,15 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  ...(process.env.NODE_ENV === 'production' && {
-    output: 'export',
-    trailingSlash: true,
-  }),
+  output: 'export',
+  trailingSlash: true,
   images: {
     unoptimized: true
   },
   assetPrefix: process.env.NODE_ENV === 'production' ? '' : undefined,
-  // Enable rewrites in development mode
+  // Enable rewrites in development mode only
   ...(process.env.NODE_ENV !== 'production' && {
     async rewrites() {
       return [

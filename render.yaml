@@ -1,8 +1,7 @@
 services:
   # Frontend Static Site - Standalone
-  - type: web  
+  - type: static
     name: apex-frontend
-    env: static
     buildCommand: cd frontend && npm install && npm run export
     staticPublishPath: frontend/out
     envVars:
