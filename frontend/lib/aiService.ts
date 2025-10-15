@@ -542,44 +542,118 @@ What area of your lifestyle would you like to level up? Let's make it happen! �
 
   // Backend Agents
   if (agentName === "review_synthesis") {
-    return {
-      response: `📊 **Review Synthesis Engine - Customer Insights**
+    if (queryLower.includes("whey") || queryLower.includes("protein")) {
+      return {
+        response: `📊 **Review Synthesis - Whey Protein Isolate Analysis**
 
-**Analysis of 8,247 Customer Reviews (Last 90 Days)**
+After analyzing 2,341 customer reviews for Whey Protein Isolate (last 90 days), customers report 96% satisfaction with an average 4.8/5 star rating. The most praised features are exceptional taste and mixability (mentioned in 89% of positive reviews), with customers consistently noting "no clumps" and "best-tasting protein I've ever had."
 
-**⭐ Overall Satisfaction: 4.6/5 Stars**
+**Key Highlights:**
+- **Taste & Texture**: 89% praise the flavor and smooth mixing
+- **Results**: 84% report visible muscle gains within 8 weeks
+- **Quality**: 91% specifically mention appreciation for third-party testing
+- **Value**: 73% consider it "worth the price" vs competitors
 
-**🔝 Top Performing Products:**
-1. **Whey Protein Isolate** - 4.8/5 (2,341 reviews)
-   - "Best tasting protein I've ever had!" - Sarah M.
-   - "Mixes perfectly, no clumps" - Mike T.
-   - 96% would recommend to friends
+**Top Customer Quotes:**
+- "Best tasting protein I've ever had!" - Sarah M.
+- "Mixes perfectly, no clumps" - Mike T.
+- "Finally found a protein that doesn't upset my stomach" - James K.
 
-2. **Creatine Monohydrate** - 4.7/5 (1,892 reviews)
-   - "Strength gains in just 2 weeks!" - Alex R.
-   - "Pure, effective, great value" - Jessica L.
-   - 94% report strength improvements
+**Minor Improvement Areas:**
+- 12% request larger container options (5lb vs 2lb)
+- 8% desire more flavor variety beyond vanilla/chocolate
 
-**📈 Trending Themes:**
-- ✅ **Taste & Mixability** mentioned in 78% of positive reviews
-- ✅ **Fast Results** noted by 84% of customers
-- ✅ **Third-Party Testing** appreciated by 91% of buyers
-- ⚠️ **Packaging** - 12% suggest larger containers
+**Recommendation Impact:** 96% would recommend to friends, making it our highest-rated product.`,
+        agent: agentName,
+        sources: []
+      };
+    } else if (queryLower.includes("creatine")) {
+      return {
+        response: `📊 **Review Synthesis - Creatine Monohydrate Analysis**
 
-**💡 Customer Recommendations:**
-- Bundle deals are extremely popular (mentioned in 67% of reviews)
-- Subscription service loved by 89% of recurring customers
-- Free shipping threshold perfect at $75 (mentioned positively)
+After analyzing 1,892 customer reviews for Creatine Monohydrate (last 90 days), customers report 94% satisfaction with an average 4.7/5 star rating. The standout feature is rapid strength gains, with 87% reporting measurable improvements within just 2 weeks of consistent use.
 
-**🎯 Action Items:**
-- Consider larger container options for top products
-- Expand bundle offerings based on customer combinations
-- Highlight third-party testing more prominently
+**Key Highlights:**
+- **Effectiveness**: 94% report strength improvements within 2-4 weeks
+- **Purity**: 92% praise the unflavored, pure formulation
+- **Value**: 81% consider it "best value" compared to competitors
+- **Mixability**: 88% note it dissolves easily in any beverage
 
-Would you like me to dive deeper into any specific product or theme? 📊`,
-      agent: agentName,
-      sources: []
-    };
+**Top Customer Quotes:**
+- "Strength gains in just 2 weeks!" - Alex R.
+- "Pure, effective, great value" - Jessica L.
+- "No bloating like other creatine products" - Marcus T.
+
+**Minor Improvement Areas:**
+- 6% would prefer flavored options
+- 4% suggest smaller serving size options
+
+**Recommendation Impact:** 94% would recommend to friends.`,
+        agent: agentName,
+        sources: []
+      };
+    } else if (queryLower.includes("pre-workout") || queryLower.includes("preworkout")) {
+      return {
+        response: `📊 **Review Synthesis - Pre-Workout Complex Analysis**
+
+After analyzing 1,156 customer reviews for Ignite Pre-Workout (last 90 days), customers report 91% satisfaction with an average 4.6/5 star rating. The most valued benefit is sustained energy without the dreaded afternoon crash, mentioned by 78% of reviewers.
+
+**Key Highlights:**
+- **Energy**: 91% report excellent energy levels for 2-3 hour workouts
+- **Focus**: 84% mention improved mental clarity and workout focus
+- **No Crash**: 78% specifically praise "no crash" or jitters
+- **Taste**: 82% rate flavors positively (blue raspberry most popular)
+
+**Top Customer Quotes:**
+- "Perfect energy without the crash" - David P.
+- "Best focus I've had during workouts" - Emily R.
+- "Clean energy that lasts the whole session" - Brandon M.
+
+**Minor Improvement Areas:**
+- 18% desire more flavor options (tropical frequently requested)
+- 9% prefer lower caffeine alternative option
+
+**Recommendation Impact:** 91% would recommend to friends.`,
+        agent: agentName,
+        sources: []
+      };
+    } else if (queryLower.includes("fat") || queryLower.includes("burn") || queryLower.includes("weight loss")) {
+      return {
+        response: `📊 **Review Synthesis - Fat Burner Pro Analysis**
+
+After analyzing 756 customer reviews for Burn Elite Fat Burner (last 90 days), customers report 87% satisfaction with an average 4.6/5 star rating. The most effective reported benefit is appetite control, with 76% noting reduced cravings and better portion control.
+
+**Key Highlights:**
+- **Appetite Control**: 76% report significant reduction in cravings
+- **Energy**: 69% mention sustained energy without jitters
+- **Results**: 67% report 8-15 lbs weight loss over 8 weeks
+- **No Jitters**: 71% specifically note "clean energy" feeling
+
+**Top Customer Quotes:**
+- "Finally controls my cravings!" - Lisa M.
+- "Lost 12 lbs in 6 weeks with diet and exercise" - Tom R.
+- "Energy without the jitters" - Amanda S.
+
+**Minor Improvement Areas:**
+- 13% note mild stomach sensitivity when taken on empty stomach
+- 11% prefer capsule form over powder
+
+**Recommendation Impact:** 87% would recommend to friends.`,
+        agent: agentName,
+        sources: []
+      };
+    } else {
+      // Concise general overview - 2-3 sentences as requested
+      return {
+        response: `📊 **Review Synthesis Engine - Overall Summary**
+
+After analyzing 8,247 customer reviews across all products (last 90 days), APEX maintains a strong 4.6/5 star rating with 94% overall satisfaction. Customers consistently praise product quality, third-party testing transparency, and fast results, with top-rated products including Whey Protein Isolate (4.8/5 from 2,341 reviews) and Creatine Monohydrate (4.7/5 from 1,892 reviews). The most common improvement requests are expanded flavor options (23%) and larger container sizes (12%).
+
+Would you like me to dive deeper into a specific product's reviews? Just mention the product name.`,
+        agent: agentName,
+        sources: []
+      };
+    }
   }
 
   if (agentName === "financial_reports") {
