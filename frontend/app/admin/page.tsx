@@ -119,8 +119,10 @@ const sampleQueries = {
   ],
   'review_synthesis': [
     "Summarize customer reviews for Whey Protein",
-    "What are customers saying about our service?",
-    "Show me sentiment analysis for this month"
+    "What do customers say about Creatine?",
+    "Show me Pre-Workout reviews",
+    "Analyze Fat Burner customer feedback",
+    "Overall review summary"
   ],
   'financial_reports': [
     "How did Q2 compare to Q1 for subscriptions?",
